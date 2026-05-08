@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="Src\EnemyBase.cpp" />
     <ClCompile Include="Src\Fader.cpp" />
     <ClCompile Include="Src\SceneManager.cpp" />
     <ClCompile Include="Src\Application.cpp" />
@@ -29,10 +30,12 @@
     <ClCompile Include="Src\Manager\InputManager.cpp" />
     <ClCompile Include="Src\MatrixUtility.cpp" />
     <ClCompile Include="Src\Quaternion.cpp" />
+    <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="Src\EnemyBase.h" />
     <ClInclude Include="Src\Fader.h" />
     <ClInclude Include="Src\SceneManager.h" />
     <ClInclude Include="Src\Application.h" />
@@ -42,6 +45,7 @@
     <ClInclude Include="Src\Manager\InputManager.h" />
     <ClInclude Include="Src\MatrixUtility.h" />
     <ClInclude Include="Src\Quaternion.h" />
+    <ClInclude Include="Src\TitleScene.h" />
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="StDefine.h" />
   </ItemGroup>
