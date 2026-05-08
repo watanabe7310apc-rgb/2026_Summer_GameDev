@@ -24,7 +24,7 @@ bool Fader::SystemInit(void)
 //ゲーム起動・再開時に必ず呼び出す処理
 void Fader::GameInit(void)
 {
-	stat = E_STAT_FADE_NON;
+	stat = STATE::NONE;
 	alpha = 0.0f;
 	endFlg = true;
 }
@@ -35,24 +35,24 @@ void Fader::Update(void)
 	if (endFlg)return;
 
 	switch (stat) {
-	case E_STAT_FADE_NON:
+	case STATE::NONE:
 			return;
-		case E_STAT_FADE_OUT:
+	case STATE::FADE_OUT:
 			alpha += FADE_SPEED_ALPHA;
 			if (alpha > 255.0f) {
 				//フェードアウト終了
 				alpha = 255.0f;
 				endFlg = true;
-				stat = E_STAT_FADE_NON;
+				stat = STATE::NONE;
 			}
 			break;
-		case E_STAT_FADE_IN:
+	case STATE::FADE_IN:
 			alpha -= FADE_SPEED_ALPHA;
 			if (alpha < 0) {
 				//フェードイン終了
 				alpha = 0.0f;
 				endFlg = true;
-				stat = E_STAT_FADE_NON;
+				stat = STATE::NONE;
 			}
 			break;
 		default:
@@ -63,10 +63,10 @@ void Fader::Update(void)
 void Fader::Draw(void)
 {
 	switch (stat) {
-	case E_STAT_FADE_NON:
+	case STATE::NONE:
 		return;
-	case E_STAT_FADE_OUT:
-	case E_STAT_FADE_IN:
+	case STATE::FADE_OUT:
+	case STATE::FADE_IN:
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, (int)alpha);   //表示の際にα値をブレンドするモードに設定
 		DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
 			GetColor(0, 0, 0), true);   //透明度を変化させた板を表示するイメージ
@@ -83,10 +83,10 @@ bool Fader::Release(void)
 	return true;
 }
 
-void Fader::SetFade(E_FADE_STAT_ID id)
+void Fader::SetFade(STATE id)
 {
 	stat = id;
-	if (stat != E_STAT_FADE_NON) {
+	if (stat != STATE::NONE) {
 	endFlg = false;
 	}
 }

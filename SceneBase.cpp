@@ -11,14 +11,10 @@ SceneBase::~SceneBase(void)
 }
 
 //初期化処理(最初の1回のみ実行)
-void SceneBase::SystemInit(void)
+void SceneBase::Init(void)
 {
 }
 
-//ゲーム起動・再開時に必ず呼び出す処理
-void SceneBase::GameInit(void)
-{
-}
 
 //更新処理
 void SceneBase::Update(void)

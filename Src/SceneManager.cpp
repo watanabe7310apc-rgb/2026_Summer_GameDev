@@ -1,12 +1,17 @@
 #include <DxLib.h>
+#include"../Src/Application.h"
 #include "SceneManager.h"
+#include "Fader.h"
+#include"../SceneBase.h"
+
+SceneManager* SceneManager::instance_ = nullptr;
 
 //コンストラクタ
 SceneManager::SceneManager(void)
 {
-	fader = nullptr;
-
-	scene_ID = waitScene = E_SCENE_NON;
+	scene_Id = E_SCENE_ID::E_SCENE_NON;
+	waitScene = E_SCENE_ID::E_SCENE_NON;
+	isSceneChanging_ = false;
 }
 
 //デストラクタ
@@ -15,20 +20,36 @@ SceneManager::~SceneManager(void)
 
 }
 
-//初期化処理(最初の1回のみ実行)
-void SceneManager::SystemInit(void)
+void SceneManager::CreateInstance(void)
 {
+	if (instance_ == nullptr)
+	{
+		instance_ = new SceneManager();
+	}
+	instance_->Init();
+}
+
+//インスタンスの取得
+SceneManager& SceneManager::GetInstance(void)
+{
+	return*instance_;
+}
+
+
+//初期化処理(最初の1回のみ実行)
+void SceneManager::Init(void)
+{
+	scene_Id = E_SCENE_ID::E_SCENE_GAME;
 	fader = new Fader();
 
 	SetTransColor(0xff, 0x00, 0xff);
 
 	fader->SystemInit();
-}
 
-//ゲーム起動・再開時に必ず呼び出す処理
-void SceneManager::GameInit(void)
-{
+	isSceneChanging_ = false;
 
+	//初期シーンの設定
+	DoChangeScene(E_SCENE_ID::E_SCENE_GAME);
 }
 
 //更新処理
@@ -37,91 +58,95 @@ void SceneManager::Update(void)
 	fader->Update();
 	if (sceneChangeFlg)
 	{
-		//シーンチェンジ実行中
-		if (fader->IsEnd() && waitScene != E_SCENE_NON) {
-			//フェードアウトが終了
-			ChangeScene(waitScene);
-			waitScene = E_SCENE_NON;
-			fader->SetFade(E_STAT_FADE_IN);
-		}
-
-		else if (fader->IsEnd() && waitScene == E_SCENE_NON) {
-			//フェードインが終了
-			sceneChangeFlg = false;
-		}
+		Fade();
 	}
-	else {
-		E_SCENE_ID nextSceneID = scene_ID;
-		switch (scene_ID) {
-		case E_SCENE_TITLE:
-			break;
-		case E_SCENE_GAME:
-			break;
-		case E_SCENE_GAMEOVER:
-			break;
-		}
-		if (scene_ID != nextSceneID) {
-			sceneChangeFlg = true;
-			waitScene = nextSceneID;
-			fader->SetFade(E_STAT_FADE_OUT);
-		}
+	else
+	{
+		//更新
+		scene_->Update();
 	}
 }
 
 //描画処理
 void SceneManager::Draw(void)
 {
-	switch (scene_ID) {
-	case E_SCENE_TITLE:
-		break;
-	caseE_SCENE_GAME:
-		break;
-	case E_SCENE_GAMEOVER:
-		break;
-	}
+	//描画先グラフィック領域の指定
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	//画面を初期化
+	ClearDrawScreen();
+
+	//描画
+	scene_->Draw();
+
+	//最後
 	fader->Draw();
 }
 
 //解放処理(最後の1回のみ実行)
 void SceneManager::Release(void)
 {
-	ReleaseScene(E_SCENE_TITLE);
-	ReleaseScene(E_SCENE_GAME);
-	ReleaseScene(E_SCENE_GAMEOVER);
+	scene_->Release();
+	delete scene_;
 
-	fader->Release();
 	delete fader;
-	fader = nullptr;
+
+	delete instance_;
 }
 
-bool SceneManager::ChangeScene(E_SCENE_ID id)
+void SceneManager::ChangeScene(E_SCENE_ID id)
 {
+	//フェード処理が終わってからシーンを変える場合もあるため
+	//遷移先シーンをメンバ変数に保持
+	waitScene = id;
 
+	//フェードアウト(暗転)を開始する
+	fader->SetFade(Fader::STATE::FADE_OUT);
+	isSceneChanging_ = true;
+}
+
+void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
+{
 	//現在のシーンを解放
-	ReleaseScene(scene_ID);
+	if (scene_ != nullptr)
+	{
+		scene_->Release();
+		delete scene_;
+	}
 
-	//シーンIDを変更
-	scene_ID = id;
-
-	switch (scene_ID) {
-	case E_SCENE_TITLE:
+	//シーンを変更する
+	scene_Id = sceneId;
+	switch (scene_Id)
+	{
+	case E_SCENE_ID::E_SCENE_TITLE:
 		break;
-	case E_SCENE_GAME:
+	case E_SCENE_ID::E_SCENE_GAME:
 		break;
-	case E_SCENE_GAMEOVER:
+	case E_SCENE_ID::E_SCENE_GAMEOVER:
 		break;
 	}
-	return false;
+
+	//シーンの初期化
+	scene_->Init();
+
+	waitScene = E_SCENE_ID::E_SCENE_NON;
 }
 
-void SceneManager::ReleaseScene(E_SCENE_ID id)
+
+void SceneManager::Fade(void)
 {
-	switch (id) {
-	case E_SCENE_TITLE:
-		break;
-	case E_SCENE_GAME:
-		break;
-	case E_SCENE_GAMEOVER:
-		break;
+	//シーンチェンジ実行中
+	if (fader->IsEnd() && waitScene != E_SCENE_NON) {
+		//フェードアウトが終了
+		ChangeScene(waitScene);
+		waitScene = E_SCENE_NON;
+		fader->SetFade(Fader::STATE::FADE_IN);
 	}
+
+	else if (fader->IsEnd() && waitScene == E_SCENE_NON) {
+		//フェードインが終了
+		sceneChangeFlg = false;
+	}
+
 }
+

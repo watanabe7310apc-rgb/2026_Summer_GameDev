@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Fader.cpp" />
     <ClCompile Include="Src\SceneManager.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="Src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Fader.h" />
     <ClInclude Include="Src\SceneManager.h" />
