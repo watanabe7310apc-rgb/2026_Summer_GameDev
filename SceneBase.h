@@ -2,7 +2,6 @@
 
 class SceneBase
 {
-public:
 	//コンストラクタ
 	SceneBase(void);
 
@@ -10,7 +9,10 @@ public:
 	virtual ~SceneBase(void) = 0;
 
 	//初期化処理(最初の1回のみ実行)
-	virtual void Init(void) = 0;
+	virtual void SystemInit(void) = 0;
+
+	//ゲーム起動・再開時に必ず呼び出す処理
+	virtual void GameInit(void) = 0;
 
 	//更新処理
 	virtual void Update(void) = 0;
