@@ -74,7 +74,7 @@ void SceneManager::Draw(void)
 	switch (scene_ID) {
 	case E_SCENE_TITLE:
 		break;
-	caseE_SCENE_GAME:
+	case E_SCENE_GAME:
 		break;
 	case E_SCENE_GAMEOVER:
 		break;
