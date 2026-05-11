@@ -1,14 +1,11 @@
 #include <DxLib.h>
 #include <chrono>
 #include "SceneManager.h"
-<<<<<<< HEAD
 #include"../SceneBase.h"
-
-SceneManager* SceneManager::instance_ = nullptr;
-=======
 #include "../Src/Application.h"
 #include "../Src/Fader.h"
-#include "../SceneBase.h"
+
+SceneManager* SceneManager::instance_ = nullptr;
 
 //インスタンスの生成
 void SceneManager::CreateInstance(void)
@@ -26,21 +23,16 @@ SceneManager& SceneManager::GetInstance(void)
 	return*instance_;
 }
 
->>>>>>> origin/main
 
 //コンストラクタ
 SceneManager::SceneManager(void)
 {
 	scene_ID = waitScene = E_SCENE_ID::E_SCENE_NON;
 
-<<<<<<< HEAD
-	scene_ID = waitScene = E_SCENE_NON;
-
 	sceneChangeFlg = false;
-=======
 
 	fader = nullptr;
->>>>>>> origin/main
+
 }
 
 //デストラクタ
@@ -57,9 +49,6 @@ void SceneManager::CreateInstance(void)
 	}
 	instance_->SystemInit();
 }
-
-static SceneManager& GetInstance(void);
-
 
 //初期化処理(最初の1回のみ実行)
 void SceneManager::SystemInit(void)
@@ -99,10 +88,7 @@ void SceneManager::Update(void)
 	}
 	else
 	{
-<<<<<<< HEAD
 		//更新
-=======
->>>>>>> origin/main
 		scene_->Update();
 	}
 	
@@ -117,28 +103,19 @@ void SceneManager::Draw(void)
 	//画面を初期化
 	ClearDrawScreen();
 
-<<<<<<< HEAD
 	//描画
 	scene_->Draw();
 
 	//最後
-=======
-	//描画処理
-	scene_->Draw();
-
 	//暗転・明転
->>>>>>> origin/main
 	fader->Draw();
 }
 
 //解放処理(最後の1回のみ実行)
 void SceneManager::Release(void)
 {
-<<<<<<< HEAD
 
-=======
 	//シーンの開放
->>>>>>> origin/main
 	scene_->Release();
 	delete scene_;
 
@@ -150,7 +127,6 @@ void SceneManager::Release(void)
 	delete fader;
 	fader = nullptr;
 
-	delete instance_;
 }
 
 void SceneManager::ChangeScene(E_SCENE_ID id)
@@ -199,12 +175,6 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 	waitScene = E_SCENE_ID::E_SCENE_NON;
 }
 
-<<<<<<< HEAD
-void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
-{
-
-}
-=======
 //フェード処理
 void SceneManager::Fade(void)
 {
@@ -222,4 +192,3 @@ void SceneManager::Fade(void)
 	}
 }
 
->>>>>>> origin/main
