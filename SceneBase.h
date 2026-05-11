@@ -2,6 +2,7 @@
 
 class SceneBase
 {
+public:
 	//コンストラクタ
 	SceneBase(void);
 
