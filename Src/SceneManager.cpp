@@ -4,8 +4,31 @@
 #include"../SceneBase.h"
 #include "../Src/Application.h"
 #include "../Src/Fader.h"
+#include "../Src/TitleScene.h"
+#include "../GameScene.h"
+#include "../StDefine.h"
 
 SceneManager* SceneManager::instance_ = nullptr;
+
+
+//コンストラクタ
+SceneManager::SceneManager(void)
+{
+
+	sceneChangeFlg = false;
+
+	fader = nullptr;
+
+	scene_ = nullptr;
+
+}
+
+//デストラクタ
+SceneManager::~SceneManager(void)
+{
+
+}
+
 
 //インスタンスの生成
 void SceneManager::CreateInstance(void)
@@ -24,37 +47,11 @@ SceneManager& SceneManager::GetInstance(void)
 }
 
 
-//コンストラクタ
-SceneManager::SceneManager(void)
-{
-	scene_ID = waitScene = E_SCENE_ID::E_SCENE_NON;
-
-	sceneChangeFlg = false;
-
-	fader = nullptr;
-
-}
-
-//デストラクタ
-SceneManager::~SceneManager(void)
-{
-
-}
-
-void SceneManager::CreateInstance(void)
-{
-	if (instance_ == nullptr)
-	{
-		instance_ = new SceneManager();
-	}
-	instance_->SystemInit();
-}
-
 //初期化処理(最初の1回のみ実行)
 void SceneManager::SystemInit(void)
 {
-	scene_ID = E_SCENE_ID::E_SCENE_TITLE;
-	waitScene = E_SCENE_ID::E_SCENE_NON;
+	scene_ID = E_SCENE_GAME;
+	waitScene = E_SCENE_NON;
 
 	fader = new Fader();
 
@@ -62,8 +59,12 @@ void SceneManager::SystemInit(void)
 
 	fader->SystemInit();
 
+	scene_ = new TitleScene();
+	scene_->SystemInit();
+
 	//初期シーンの設定
-	DoChangeScene(E_SCENE_ID::E_SCENE_TITLE);
+	DoChangeScene(E_SCENE_ID::E_SCENE_GAME);
+
 }
 
 //ゲーム起動・再開時に必ず呼び出す処理
@@ -75,8 +76,7 @@ void SceneManager::GameInit(void)
 //更新処理
 void SceneManager::Update(void)
 {
-
-	if (scene_ == nullptr)
+	if(scene_ == nullptr)
 	{
 		return;
 	}
@@ -116,16 +116,22 @@ void SceneManager::Release(void)
 {
 
 	//シーンの開放
-	scene_->Release();
-	delete scene_;
+	if (scene_) {
+		scene_->Release();
+		delete scene_;
+		scene_ = nullptr;
+	}
+	//フェード機能の開放
+	if (fader) {
+		fader->Release();
+		delete fader;
+		fader = nullptr;
+	}
 
 	//インスタンスの開放
 	delete instance_;
+	instance_ = nullptr;
 
-	//フェード機能の開放
-	fader->Release();
-	delete fader;
-	fader = nullptr;
 
 }
 
@@ -141,7 +147,7 @@ void SceneManager::ChangeScene(E_SCENE_ID id)
 }
 
 //状態遷移
-E_SCENE_ID SceneManager::GetScene(E_SCENE_ID nextId)
+E_SCENE_ID SceneManager::GetScene(void)
 {
 	return scene_ID;
 }
@@ -162,8 +168,10 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 
 	switch (scene_ID) {
 	case E_SCENE_TITLE:
+		scene_ = new TitleScene();
 		break;
 	case E_SCENE_GAME:
+		scene_ = new GameScene();
 		break;
 	case E_SCENE_GAMEOVER:
 		break;
@@ -181,7 +189,7 @@ void SceneManager::Fade(void)
 	//シーンチェンジ実行中
 	if (fader->IsEnd() && waitScene != E_SCENE_NON) {
 		//フェードアウトが終了
-		ChangeScene(waitScene);
+		DoChangeScene(waitScene);
 		waitScene = E_SCENE_NON;
 		fader->SetFade(E_STAT_FADE_IN);
 	}

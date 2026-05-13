@@ -15,8 +15,6 @@ public:
 
 	//インスタンスの取得
 	static SceneManager& GetInstance(void);
-	void CreateInstance(void);   //インスタンスの生成
-	SceneManager& GetInstance(void);   //インスタンスの取得
 
 	void SystemInit(void);   //初期化処理(最初の1回のみ実行)
 	void GameInit(void);     //ゲーム起動・再開時に必ず呼び出す処理
@@ -26,18 +24,15 @@ public:
 
 	void ChangeScene(E_SCENE_ID id);
 
-	E_SCENE_ID GetScene(E_SCENE_ID nextId);   //状態遷移
+	E_SCENE_ID GetScene(void);   //状態遷移
 
 private:
 
 	//静的インスタンス
 	static SceneManager* instance_;
 
-	SceneManager(void);   //コンストラクタ
-	~SceneManager(void);  //デストラクタ
-
-	SceneBase* scene_;
-	SceneManager(const SceneManager& instance) = default;
+	SceneBase* scene_;   //各種シーン
+	SceneManager(void);
 	~SceneManager(void);  //デストラクタ
 
 
@@ -52,9 +47,4 @@ private:
 
 	//フェード処理
 	void Fade(void);
-	SceneBase* scene_;     //各種シーン
-
-	void DoChangeScene(E_SCENE_ID sceneId);   //シーン遷移
-
-	void Fade(void);   //フェード処理
 };

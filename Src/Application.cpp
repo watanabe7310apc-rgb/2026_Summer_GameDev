@@ -2,6 +2,7 @@
 #include"Manager/InputManager.h"
 #include"Application.h"
 #include"FpsControl/FpsControl.h"
+#include "SceneManager.h"
 
 Application* Application::instance_ = nullptr;
 
@@ -27,7 +28,7 @@ void Application::Init(void)
 	
 	//ウィンドウサイズ
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);
-	ChangeWindowMode(false);
+	ChangeWindowMode(true);
 
 	//DxLibの初期化
 	SetUseDirect3DVersion(DX_DIRECT3D_11);
@@ -52,12 +53,14 @@ void Application::Init(void)
 	//設定する数値によって、ランダムの出方が変わる
 	SRand(date.Year + date.Mon + date.Day + date.Hour + date.Min + date.Sec);
 
+	SceneManager::CreateInstance();
+
 }
 
 void Application :: Run(void)
 {
 	InputManager& inputManager = InputManager::GetInstance();
-	//SceneManager& sceneManager = SceneManager::GetInstance();
+	SceneManager& sceneManager = SceneManager::GetInstance();
 
 	//ゲームループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -67,9 +70,9 @@ void Application :: Run(void)
 		if (!fps_->UpdateFrameRate())continue;
 
 		inputManager.Update();
-		//sceneManager.Update();
+		sceneManager.Update();
 
-		//sceneManager.Draw();
+		sceneManager.Draw();
 
 		fps_->CalcFrameRate();   //フレームレート計算
 		fps_->DrawFrameRate();   //フレームレート描画
@@ -81,7 +84,7 @@ void Application :: Run(void)
 void Application::Destroy(void)
 {
 	//シーン解放処理
-	//SceneManager::GetInstace().Destroy();
+	SceneManager::GetInstance().Release();
 
 	//入力制御解放
 	InputManager::GetInstance().Destroy();
