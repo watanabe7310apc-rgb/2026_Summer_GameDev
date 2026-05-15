@@ -12,6 +12,14 @@ public:
 	static constexpr int SCREEN_SIZE_X = 1920;
 	static constexpr int SCREEN_SIZE_Y = 1080;
 
+	// データパス関連
+//-------------------------------------------
+	static const std::string PATH_IMAGE;
+	static const std::string PATH_IMG_PLAYER1;
+	static const std::string PATH_IMG_PLAYER2;
+//-------------------------------------------
+
+
 	//インスタンスを明示的に生成
 	static void CreateInstance(void);
 

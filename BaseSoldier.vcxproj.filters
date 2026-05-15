@@ -12,7 +12,6 @@
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Manager\InputManager.cpp" />
     <ClCompile Include="Src\MatrixUtility.cpp" />
-    <ClCompile Include="Src\Quaternion.cpp" />
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -32,7 +31,6 @@
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\Manager\InputManager.h" />
     <ClInclude Include="Src\MatrixUtility.h" />
-    <ClInclude Include="Src\Quaternion.h" />
     <ClInclude Include="Src\TitleScene.h" />
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="StDefine.h" />

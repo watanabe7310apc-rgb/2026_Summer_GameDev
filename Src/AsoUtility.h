@@ -24,5 +24,6 @@ public:
 	static int Round(float val);
 	static Vector2 Round(Vector2F val);
 
+
 private:
 };

@@ -34,6 +34,13 @@ std::vector<std::string>AsoUtility::Split(std::string& line, char delimiter)
 	}
 	return result;
 }
+
+int AsoUtility::Round(float val)
+{
+	return static_cast<int>(round(val));
+}
+
+
 /*
 *---------------------------------------------------
 * ŽlŽÌŒÜ“ü
@@ -51,3 +58,4 @@ Vector2 AsoUtility::Round(Vector2F val)
 
 	return rv;
 }
+

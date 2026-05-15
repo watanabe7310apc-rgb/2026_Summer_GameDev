@@ -6,6 +6,11 @@
 
 Application* Application::instance_ = nullptr;
 
+const std::string Application::PATH_IMAGE		= "image/";
+const std::string Application::PATH_IMG_PLAYER1 = PATH_IMAGE + "Player/P1/";
+const std::string Application::PATH_IMG_PLAYER2 = PATH_IMAGE + "Player/P2/";
+
+
 void Application::CreateInstance(void)
 {
 	if (instance_ == nullptr)
