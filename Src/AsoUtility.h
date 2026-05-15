@@ -23,6 +23,10 @@ public:
 	//ŽlŽÌŒÜ“ü
 	static int Round(float val);
 	static Vector2 Round(Vector2F val);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 
 private:
 };

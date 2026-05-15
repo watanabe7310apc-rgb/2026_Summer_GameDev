@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <DxLib.h>
 #include "GameScene.h"
 #include "Enemy.h"
@@ -160,6 +161,8 @@ void Enemy::SetAlive(bool alive)
 	isAlive_ = alive;
 }
 =======
+=======
+>>>>>>> origin/main
 //#include <DxLib.h>
 //#include "../Src/Vector2.h"
 //#include "../GameScene.h"
@@ -320,5 +323,9 @@ void Enemy::SetAlive(bool alive)
 //void Enemy::SetAlive(bool alive)
 //{
 //	isAlive_ = alive;
+<<<<<<< HEAD
 //}
 >>>>>>> 79644a602e60b40d70704628dc64a71ae4e8cb0a
+=======
+//}
+>>>>>>> origin/main
