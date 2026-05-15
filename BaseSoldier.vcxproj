@@ -19,13 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyBase.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
-=======
->>>>>>> origin/main
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Enemy.cpp" />
     <ClCompile Include="Src\EnemyBase.cpp" />
@@ -40,16 +36,12 @@
     <ClCompile Include="Src\Quaternion.cpp" />
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Src\Vector2F.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyBase.h" />
-<<<<<<< HEAD
     <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="PlayerFront.h" />
-=======
->>>>>>> origin/main
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Enemy.h" />
     <ClInclude Include="Src\EnemyBase.h" />
@@ -64,8 +56,8 @@
     <ClInclude Include="Src\Quaternion.h" />
     <ClInclude Include="Src\TitleScene.h" />
     <ClInclude Include="Src\Vector2.h" />
+    <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
-    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
