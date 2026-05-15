@@ -1,5 +1,4 @@
 #include <DxLib.h>
-#include "Vetor2F.h"
 #include "GameScene.h"
 #include "Enemy.h"
 
