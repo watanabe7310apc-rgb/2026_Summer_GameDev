@@ -18,7 +18,6 @@ std::vector<std::string>AsoUtility::Split(std::string& line, char delimiter)
 {
 	//動的配列の返り値を準備
 	std::vector<std::string>result;
-<<<<<<< HEAD
 
 	//文字操作用のクラスに置き換える
 	std::istringstream stream(line);
@@ -44,25 +43,24 @@ std::vector<std::string>AsoUtility::Split(std::string& line, char delimiter)
 *    int : 四捨五入した値
 *---------------------------------------------------
 */
-Vector2 AsoUtility::Round(Vector2F val)
-{
-=======
-
-	//文字操作用のクラスに置き換える
-	std::istringstream stream(line);
-
-	std::string field;
-
-	result.clear();
-
-	//streamを順に読み込み
-	//第3引数で指定された文字までを第2引数に返す
-	while (getline(stream, field, delimiter)) {
-		//動的配列に追加
-		result.push_back(field);
-	}
-	return result;
-}
+//Vector2 AsoUtility::Round(Vector2F val)
+//{
+//
+//	//文字操作用のクラスに置き換える
+//	std::istringstream stream(line);
+//
+//	std::string field;
+//
+//	result.clear();
+//
+//	//streamを順に読み込み
+//	//第3引数で指定された文字までを第2引数に返す
+//	while (getline(stream, field, delimiter)) {
+//		//動的配列に追加
+//		result.push_back(field);
+//	}
+//	return result;
+//}
 
 int AsoUtility::Round(float val)
 {
@@ -81,14 +79,9 @@ int AsoUtility::Round(float val)
 */
 Vector2 AsoUtility::Round(Vector2F val)
 {
->>>>>>> origin/main
 	Vector2 rv;
 	rv.x = static_cast<int>(round(val.x));
 	rv.y = static_cast<int>(round(val.y));
 
 	return rv;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main

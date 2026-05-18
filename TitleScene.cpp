@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include <time.h>
-#include "Application.h"
-#include "SceneManager.h"
+#include "Src/Application.h"
+#include "Src/SceneManager.h"
 #include "TitleScene.h"
 
 TitleScene::TitleScene(void) {
@@ -13,12 +13,10 @@ TitleScene::~TitleScene(void) {
 
 }
 
-bool TitleScene::SystemInit(void) {
+void TitleScene::SystemInit(void) {
 
 	img = LoadGraph("image/title.bmp");
-	if (img == -1)return false;
 
-	return true;
 }
 
 void TitleScene::GameInit(void) {
@@ -43,8 +41,7 @@ void TitleScene::Draw(void) {
 	DrawGraph(TITLE_SIZE_HIG / 2, TITLE_SIZE_HIG / 2, img, true);
 }
 
-bool TitleScene::Release(void) {
-	if (DeleteGraph(img) == -1)return false;
-
-	return true;
+void TitleScene::Release(void) 
+{
+	DeleteGraph(img);
 }

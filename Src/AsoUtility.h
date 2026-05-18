@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Vector2.h"
-#include "Vector2F.h"
+#include "../Vector2F.h"
 
 class AsoUtility
 {
@@ -23,10 +23,6 @@ public:
 	//ŽlŽÌŒÜ“ü
 	static int Round(float val);
 	static Vector2 Round(Vector2F val);
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
 
 private:
 };
