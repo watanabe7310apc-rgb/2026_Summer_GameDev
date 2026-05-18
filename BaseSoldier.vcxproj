@@ -36,8 +36,7 @@
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Vector2F.cpp" />
+    <ClCompile Include="Src\Vector2F.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBase.h" />
@@ -58,8 +57,7 @@
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Vector2F.h" />
+    <ClInclude Include="Src\Vector2F.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
