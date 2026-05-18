@@ -16,9 +16,8 @@
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
-    <ClCompile Include="Vector2F.cpp" />
+    <ClCompile Include="Src\Vector2F.cpp" />
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,9 +37,8 @@
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
-    <ClInclude Include="Vector2F.h" />
+    <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="GameScene.h" />
-    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="EnemyBase.h" />
   </ItemGroup>
 </Project>
