@@ -4,11 +4,7 @@
 #include"../SceneBase.h"
 #include "../Src/Application.h"
 #include "../Src/Fader.h"
-<<<<<<< HEAD
-#include "Src/TitleScene.h"
-=======
 #include "TitleScene.h"
->>>>>>> origin/main
 #include "../GameScene.h"
 #include "../StDefine.h"
 
