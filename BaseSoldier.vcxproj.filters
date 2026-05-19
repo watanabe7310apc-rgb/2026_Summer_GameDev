@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
+    <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Enemy.cpp" />
     <ClCompile Include="Src\EnemyBase.cpp" />
@@ -12,18 +15,15 @@
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Manager\InputManager.cpp" />
     <ClCompile Include="Src\MatrixUtility.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Src\Quaternion.cpp" />
-=======
->>>>>>> origin/main
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="PlayerBase.cpp" />
-    <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
+    <ClCompile Include="Src\GameOverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="PlayerBase.h" />
+    <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Enemy.h" />
     <ClInclude Include="Src\EnemyBase.h" />
@@ -35,16 +35,10 @@
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\Manager\InputManager.h" />
     <ClInclude Include="Src\MatrixUtility.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Src\Quaternion.h" />
-=======
->>>>>>> origin/main
     <ClInclude Include="Src\TitleScene.h" />
     <ClInclude Include="Src\Vector2.h" />
-    <ClInclude Include="StDefine.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="PlayerBase.h" />
-    <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="Src\Vector2F.h" />
+    <ClInclude Include="StDefine.h" />
+    <ClInclude Include="Src\GameOverScene.h" />
   </ItemGroup>
 </Project>

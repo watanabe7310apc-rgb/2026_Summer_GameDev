@@ -1,50 +1,56 @@
 #include <DxLib.h>
-#include <time.h>
 #include "Application.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
 
-TitleScene::TitleScene(void) {
-
-	img = -1;
+TitleScene::TitleScene(void)
+{
 }
 
-TitleScene::~TitleScene(void) {
-
+TitleScene::~TitleScene(void)
+{
 }
 
-bool TitleScene::SystemInit(void) {
-
-	img = LoadGraph("image/title.bmp");
-	if (img == -1)return false;
-
-	return true;
+void TitleScene::Init(void)
+{
+	imgTitle_ = LoadGraph("Image/UI/Title.png");
+	imgStart_ = LoadGraph("Image/UI/HitStartKey.png");
 }
 
-void TitleScene::GameInit(void) {
-
-	//次のシーンの初期設定
-	nextSceneID = E_SCENE_TITLE;
-
-	prevSpaceKey = nowSpaceKey = 0;
-}
-
-void TitleScene::Update(void) {
-	prevSpaceKey = nowSpaceKey;
-	nowSpaceKey = CheckHitKey(KEY_INPUT_SPACE);
-	//アップトリガーを判定
-	if (prevSpaceKey == 1 && nowSpaceKey == 0) {
-		nextSceneID = E_SCENE_GAME;
+void TitleScene::Update(void)
+{
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		//スペースキーが押下されたら、ゲームシーンへ遷移する
+		SceneManager::GetInstance().ChangeScene(SceneManager::SCENE_ID::GAME);
 	}
 }
 
-void TitleScene::Draw(void) {
+void TitleScene::Draw(void)
+{
 
-	DrawGraph(TITLE_SIZE_HIG / 2, TITLE_SIZE_HIG / 2, img, true);
+	//タイトル画像のサイズ 600×250
+	//画面真ん中のちょっと上
+	DrawGraph(
+		(Application::SCREEN_SIZE_X / 2) - (600 / 2),
+		(Application::SCREEN_SIZE_Y / 2) - (250 / 2) - 100,
+		imgTitle_,
+		true
+	);
+
+	//スタートキー画像のサイズ 337×53
+	//画面真ん中のちょっと下
+	DrawGraph(
+		(Application::SCREEN_SIZE_X / 2) - (337 / 2),
+		(Application::SCREEN_SIZE_Y / 2) - (53 / 2) + 100,
+		imgStart_,
+		true
+	);
+
 }
 
-bool TitleScene::Release(void) {
-	if (DeleteGraph(img) == -1)return false;
-
-	return true;
+void TitleScene::Release(void)
+{
+	DeleteGraph(imgTitle_);
+	DeleteGraph(imgStart_);
 }
