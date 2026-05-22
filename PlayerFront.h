@@ -24,8 +24,14 @@ public:
 	//DAMAGEモーションの最大アニメーション数
 	static constexpr int DAMAGE_ALL_NUM = 4;
 
+	//JUMPモーションの最大フレーム数
+	static constexpr int JUMP_ALL_NUM = 4;
+
 	//アニメーション速度
 	static constexpr float ANIM_SPEED = 0.1f;
+
+	//攻撃アニメーション速度
+	static constexpr float ATTACK_ANIM_SPEED = 0.3f;
 
 	// 移動速度の最大値
 	static constexpr float MAX_MOVE_SPEED = 100.0f;
@@ -37,20 +43,21 @@ public:
 	static constexpr float MOVE_DEC = 0.05f;
 
 	//最大ジャンプ力
-	static constexpr float MAX_JUMP_POW = 8.0f;
+	static constexpr float MAX_JUMP_POW = 15.0f;
 
 	//重力
 	static constexpr float GRAVITY = 0.45f;
 
 	//ジャンプキー入力を受け付けるフレーム数
-	static constexpr int INPUT_JUMP_FRAME = 1;
+	static constexpr int INPUT_JUMP_FRAME = 5;
 
 	//アニメーション状態
 	enum class ANIM_STATE
 	{
 		IDLE,
 		RUN,
-		JUMP,
+		JUMP_UP,
+		JUMP_DOWN,
 		DAMAGED,
 		ATTACK,
 		RUN_ATTACK,
@@ -86,6 +93,8 @@ private:
 	int Damageimages_[DAMAGE_ALL_NUM];
 	int Attackimages_[ATTACK_ALL_NUM];
 	int RunAttackimages_[ATTACK_ALL_NUM];
+	int JumpUpimages_[JUMP_ALL_NUM];
+	int JumpDownimages_[JUMP_ALL_NUM];
 
 	//座標
 	Vector2F pos_;
@@ -100,6 +109,9 @@ private:
 	//アニメーションカウンタ
 	float stepAnim_;
 
+	//攻撃アニメーションのカウンタ
+	float attackAnim_;
+
 	// 移動速度
 	float moveSpeed_;
 
@@ -108,6 +120,18 @@ private:
 
 	//ジャンプ中判定
 	bool isJump_;
+
+	//ジャンプ中の入力判定
+	bool isPutJumpKey_;
+
+	//攻撃中判定
+	bool isAttack_;
+
+	//現在の高度
+	float nowJumplength_;
+
+	//現在の最高高度
+	float maxJumplength_;
 
 	//ジャンプキーの入力カウント
 	int cntJumpInput_;
@@ -144,6 +168,9 @@ private:
 
 	//攻撃操作
 	void ProcessAttack(void);
+
+	//攻撃
+	void Attack(void);
 
 };
 

@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "GameScene.h"
 #include "Src/Application.h"
+#include "Src/Manager/InputManager.h"
 
 //コンストラクタ
 GameScene::GameScene(void)
@@ -31,6 +32,7 @@ void GameScene::GameInit(void)
 void GameScene::Update(void)
 {
 	front_->Update();
+
 }
 
 //描画処理

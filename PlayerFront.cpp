@@ -29,7 +29,7 @@ void PlayerFront::SystemInit(void)
 	stepAnim_ = 0;
 
 	//初期座標
-	pos_ = { 300.0f,380.0f };
+	pos_ = { 300.0f,800.0f };
 
 	//プレイヤーの向き
 	dir_ = AsoUtility::DIRECTION::E_DIR_RIGHT;
@@ -39,11 +39,20 @@ void PlayerFront::SystemInit(void)
 
 	//ジャンプ力
 	jumpPow_ = 0.0f;
-	isJump_ = true;
+	isJump_ = false;
+	isPutJumpKey_ = false;
+	isAttack_ = false;
 
 	//ジャンプキーのフレームの初期化
-	cntJumpInput_ = INPUT_JUMP_FRAME;
+	cntJumpInput_ = 0;
+
+	//ジャンプの高度の初期化
+	nowJumplength_ = maxJumplength_ = 0;
+
+	//攻撃判定の初期化
+	attackAnim_ = 0;
 }
+
 
 //ゲーム起動・再開時に必ず呼び出す処理
 void PlayerFront::GameInit(void)
@@ -54,38 +63,52 @@ void PlayerFront::GameInit(void)
 //更新処理
 void PlayerFront::Update(void)
 {
-	//モーションの初期化を行う
-	animState_ = ANIM_STATE::IDLE;
+	//何もしていない時だけIDLEモーション実行
+	if (!isAttack_ && !isJump_ && moveSpeed_ == 0)
+	{
+		animState_ = ANIM_STATE::IDLE;
+	}
 
-	//プレイヤーの移動操作
-	ProcessMove();
+	if (!isAttack_&&pos_.y<=800)
+	{
+		//プレイヤーの移動操作
+		ProcessMove();
 
-	//移動(実際の座標移動)
-	Move();
+		//移動(実際の座標移動)
+		Move();
+	}
+		//減速
+		Decelerate(MOVE_DEC);
 
-	//減速
-	Decelerate(MOVE_DEC);
 
+		//プレイヤーのジャンプ操作
+		ProcessJump();
 
-	//プレイヤーのジャンプ操作
-	ProcessJump();
+		//常に重力をかける
+		//(ジャンプ中でなくても落下する)
+		AddGravity();
 
-	//常に重力をかける
-	//(ジャンプ中でなくても落下する)
-	AddGravity();
+		//ジャンプ
+		Jump();
 
-	//ジャンプ
-	Jump();
-}
+	//プレイヤーの攻撃操作
+	ProcessAttack();
+
+	//攻撃
+	Attack();
+ }
 
 //描画処理
 void PlayerFront::Draw(void)
 {
-	if (isJump_)
-	{
-		animState_ = ANIM_STATE::JUMP;
-	}
-
+	//if (isJump_)
+	//{
+	//	animState_ = ANIM_STATE::JUMP_UP;
+	//}
+	//else if(isJump_==false&& pos_.y < 800)
+	//{
+	//	animState_ = ANIM_STATE::JUMP_DOWN;
+	//}
 
 	switch (animState_)
 	{
@@ -96,16 +119,30 @@ void PlayerFront::Draw(void)
 			DrawPlayer(Idleimages_[animIdx]);
 		}
 		break;
-		//case ANIM_STATE::JUMP:
-		//	DrawPlayer(images_[animState]);
-		//break;
+		case ANIM_STATE::JUMP_UP:
+		{
+			stepAnim_ += ANIM_SPEED;
+			int animIdx = AsoUtility::Round(stepAnim_) % JUMP_ALL_NUM;
+			DrawPlayer(JumpUpimages_[animIdx]);
+			break;
+		}
+
+		case ANIM_STATE::JUMP_DOWN:
+		{
+			stepAnim_ += ANIM_SPEED;
+			int animIdx = AsoUtility::Round(stepAnim_) % JUMP_ALL_NUM;
+			DrawPlayer(JumpDownimages_[animIdx]);
+			break;
+		}
+
 		case ANIM_STATE::RUN:
 		{
 			stepAnim_ += ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim_) % RUN_ALL_NUM;
 			DrawPlayer(Runimages_[animIdx]);
+			break;
 		}
-		break;
+
 		case ANIM_STATE::DAMAGED:
 		{
 			stepAnim_ += ANIM_SPEED;
@@ -115,14 +152,14 @@ void PlayerFront::Draw(void)
 		}
 		case ANIM_STATE::ATTACK:
 		{
-			stepAnim_ += ANIM_SPEED;
+			stepAnim_ += ATTACK_ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
 			DrawPlayer(Attackimages_[animIdx]);
 			break;
 		}
 		case ANIM_STATE::RUN_ATTACK:
 		{
-			stepAnim_ += ANIM_SPEED;
+			stepAnim_ += ATTACK_ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
 			DrawPlayer(RunAttackimages_[animIdx]);
 			break;
@@ -170,10 +207,24 @@ void PlayerFront::LoadImages(void)
 		false
 	);
 
-	// ジャンプ
-	//anim = static_cast<int>(ANIM_STATE::JUMP);
-	//images_[anim][atkNone][0] = LoadGraph((basePath + "Jump.png").c_str());
-	//images_[anim][atkShot][0] = LoadGraph((basePath + "JumpShot.png").c_str());
+	//ジャンプ
+	LoadDivGraph(
+		("Image/Knight/spr_knight_JumpUp.png"),
+		JUMP_ALL_NUM,
+		JUMP_ALL_NUM, 1,
+		SIZE_X, SIZE_Y,
+		JumpUpimages_,
+		false
+	);
+	//降下
+	LoadDivGraph(
+		("Image/Knight/spr_knight_JumpDown.png"),
+		JUMP_ALL_NUM,
+		JUMP_ALL_NUM, 1,
+		SIZE_X, SIZE_Y,
+		JumpDownimages_,
+		false
+	);
 
 	//ダメージ
 	LoadDivGraph(
@@ -315,10 +366,19 @@ void PlayerFront::LoadImages(void)
 	void PlayerFront::ProcessJump(void)
 	{
 		InputManager& inputIns = InputManager::GetInstance();
-
-		if ((inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
- 			&&cntJumpInput_<INPUT_JUMP_FRAME)
+		// 接地していないと、ジャンプを開始できないようにする
+		if (inputIns.IsTrgDown(KEY_INPUT_M))
 		{
+			isJump_ = true;
+			isPutJumpKey_ = true;
+		}
+
+
+		if (
+			(inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+			&& cntJumpInput_ < INPUT_JUMP_FRAME&&isPutJumpKey_)
+		{
+			//ジャンプカウンタを増やす
 			cntJumpInput_ += 1;
 
 			float pow =
@@ -326,12 +386,13 @@ void PlayerFront::LoadImages(void)
 			SetJumpPow(pow);
 
 			isJump_ = true;
+			isPutJumpKey_ = true;
 		}
 
-		if (inputIns.IsTrgUp(KEY_INPUT_SPACE) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+		if (inputIns.IsTrgUp(KEY_INPUT_M) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
 		{
 			//ジャンプの入力判定を強制的に終了させる
-			cntJumpInput_ = INPUT_JUMP_FRAME;
+			cntJumpInput_ =0;
 		}
 	}
 
@@ -339,14 +400,33 @@ void PlayerFront::LoadImages(void)
 	void PlayerFront::Jump(void)
 	{
 		pos_.y += jumpPow_;
+		
+		if (pos_.y < 800)
+		{
+			nowJumplength_ = pos_.y;
+		}
+		if (nowJumplength_ < maxJumplength_)
+		{
+			maxJumplength_ = nowJumplength_;
+			animState_ = ANIM_STATE::JUMP_UP;
+		}
+		else if (pos_.y < 800&&nowJumplength_ > maxJumplength_)
+		{
+			animState_ = ANIM_STATE::JUMP_DOWN;
+			nowJumplength_ = maxJumplength_ = pos_.y;
+		}
+
+
 
 		//仮の接地(衝突)判定
-		if (pos_.y > 380)
+		if (pos_.y > 800)
 		{
-			pos_.y = 900;
+			pos_.y = 800;
 
 			//地面についたのでジャンプをリセットする
 			isJump_ = false;
+			isPutJumpKey_ = false;
+
 			SetJumpPow(0.0f);
 		}
 	}
@@ -360,6 +440,7 @@ void PlayerFront::LoadImages(void)
 		//重力がかかりすぎるのを防ぐ
 		if (jumpPow_ > MAX_JUMP_POW) {
 			jumpPow_ = MAX_JUMP_POW;
+			isJump_ = false;
 		}
 	}
 
@@ -368,10 +449,30 @@ void PlayerFront::LoadImages(void)
 	{
 		InputManager& inputIns = InputManager::GetInstance();
 
-		if ((inputIns.IsNew(KEY_INPUT_F) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::LEFT)))
-		{
+		//攻撃中は新しい攻撃を受け付けない
+		if (isAttack_)return;
 
+		if ((inputIns.IsTrgDown(KEY_INPUT_F) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::LEFT)))
+		{
+				isAttack_ = true;
+				attackAnim_ = 0;
+				stepAnim_ = 0;
+				animState_ = ANIM_STATE::ATTACK;
 		}
+	}
+
+	//攻撃
+	void PlayerFront::Attack(void)
+	{
+		if (!isAttack_) return;
+
+			attackAnim_ += ATTACK_ANIM_SPEED;
+
+			if (attackAnim_ >= ATTACK_ALL_NUM)
+			{
+				isAttack_ = false;
+				attackAnim_ = 0;
+			}
 	}
 
 
