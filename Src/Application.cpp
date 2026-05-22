@@ -6,7 +6,7 @@
 
 Application* Application::instance_ = nullptr;
 
-const std::string Application::PATH_IMAGE		= "image/";
+const std::string Application::PATH_IMAGE		= "Image/";
 const std::string Application::PATH_IMG_PLAYER1 = PATH_IMAGE + "Player/P1/";
 const std::string Application::PATH_IMG_PLAYER2 = PATH_IMAGE + "Player/P2/";
 
@@ -33,7 +33,7 @@ void Application::Init(void)
 	
 	//ウィンドウサイズ
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);
-	ChangeWindowMode(false);
+	ChangeWindowMode(true);
 
 	//DxLibの初期化
 	SetUseDirect3DVersion(DX_DIRECT3D_11);

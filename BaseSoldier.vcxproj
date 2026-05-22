@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Enemy.cpp" />
@@ -37,10 +37,11 @@
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
+
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="GameScene.h" />
-    <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Enemy.h" />

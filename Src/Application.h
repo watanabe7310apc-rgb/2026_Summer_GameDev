@@ -11,8 +11,6 @@ public:
 	//スクリーンサイズ
 	static constexpr int SCREEN_SIZE_X = 1920;
 	static constexpr int SCREEN_SIZE_Y = 1080;
-<<<<<<< HEAD
-=======
 
 	// データパス関連
 //-------------------------------------------
@@ -21,7 +19,6 @@ public:
 	static const std::string PATH_IMG_PLAYER2;
 //-------------------------------------------
 
->>>>>>> origin/main
 
 	//インスタンスを明示的に生成
 	static void CreateInstance(void);
