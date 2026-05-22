@@ -29,18 +29,10 @@ void InputManager::Init(void)
 	InputManager::GetInstance().Add(KEY_INPUT_SPACE);
 	InputManager::GetInstance().Add(KEY_INPUT_N);
 	InputManager::GetInstance().Add(KEY_INPUT_Z);
-
-	InputManager::GetInstance().Add(KEY_INPUT_UP);
-	InputManager::GetInstance().Add(KEY_INPUT_DOWN);
-	InputManager::GetInstance().Add(KEY_INPUT_RIGHT);
 	InputManager::GetInstance().Add(KEY_INPUT_LEFT);
-
-	InputManager::GetInstance().Add(KEY_INPUT_W);
-	InputManager::GetInstance().Add(KEY_INPUT_A);
-	InputManager::GetInstance().Add(KEY_INPUT_S);
-	InputManager::GetInstance().Add(KEY_INPUT_D);
-	InputManager::GetInstance().Add(KEY_INPUT_Q);
-	InputManager::GetInstance().Add(KEY_INPUT_E);
+	InputManager::GetInstance().Add(KEY_INPUT_RIGHT);
+	InputManager::GetInstance().Add(KEY_INPUT_M);
+	InputManager::GetInstance().Add(KEY_INPUT_F);
 
 
 
@@ -101,7 +93,8 @@ void InputManager::Update(void)
 
 void InputManager::Destroy(void)
 {
-	// インスタンスのメモリ解放
+	keyInfos_.clear();
+	mouseInfos_.clear();
 	delete instance_;
 }
 
@@ -169,6 +162,10 @@ bool InputManager::IsTrgMouseRight(void) const
 InputManager::InputManager(void)
 {
 	mouseInput_ = -1;
+}
+
+InputManager::InputManager(const InputManager& manager)
+{
 }
 
 const InputManager::Info& InputManager::Find(int key) const
@@ -361,33 +358,6 @@ bool InputManager::IsPadBtnTrgDown(JOYPAD_NO no, JOYPAD_BTN btn) const
 bool InputManager::IsPadBtnTrgUp(JOYPAD_NO no, JOYPAD_BTN btn) const
 {
 	return padInfos_[static_cast<int>(no)].IsTrgUp[static_cast<int>(btn)];
-}
-
-VECTOR InputManager::GetDirectionXZAKey(int aKeyX, int aKeyY)
-{
-	VECTOR ret = { 0.0f,0.0f,0.0f };
-	
-	// スティックの入力値を-1.0～1.0に正規化
-	float dirX = static_cast<float>(aKeyX) / AKEY_VAL_MAX;
-	float dirZ = static_cast<float>(aKeyY) / AKEY_VAL_MAX;
-
-	// 平方根により、おおよその最大値が1.0となる
-	float len = sqrtf(dirX * dirX + dirZ * dirZ);
-
-	// しきい値より低いか？
-	if (len < THRESHOLD)
-	{
-		return ret;		// (0.0f, 0.0f, 0.0f)
-	}
-
-	float scale = (len - THRESHOLD) / (1.0 - THRESHOLD);
-	dirX = (dirX / len) * scale;
-	dirZ = (dirZ / len) * scale;
-
-	// Zは前に倒すとマイナス値が返ってくるので反転
-	ret = VNorm({ dirX,0.0f,-dirZ });
-
-	return ret;
 }
 
 
