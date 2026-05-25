@@ -51,6 +51,9 @@ public:
 	//ジャンプキー入力を受け付けるフレーム数
 	static constexpr int INPUT_JUMP_FRAME = 5;
 
+	//プレイヤーの最大HP
+	static constexpr int FRONT_HP = 100;
+
 	//アニメーション状態
 	enum class ANIM_STATE
 	{
@@ -85,6 +88,17 @@ public:
 	//解放処理(最後の1回のみ使用)
 	void Release(void);
 
+	//プレイヤーのHPの取得
+	int GetHp(void) { return hp; }
+
+	//プレイヤーの生存状態の取得
+	bool GetAlive(void) { return aliveFlg; }
+
+	//プレイヤーにダメージを与える
+	void SetDamage(int dp);
+
+	//プレイヤーの座標を取得
+	//Vector2F GetFrontPos(void) { return pos; }
 
 private:
 
@@ -137,6 +151,12 @@ private:
 
 	//ジャンプキーの入力カウント
 	int cntJumpInput_;
+
+	//プレイヤーのHP
+	int hp;
+
+	//生存フラグ
+	bool aliveFlg;
 
 	//画像の読み込み
 	void LoadImages(void);

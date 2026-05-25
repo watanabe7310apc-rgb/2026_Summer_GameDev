@@ -52,13 +52,19 @@ void PlayerFront::SystemInit(void)
 
 	//攻撃判定の初期化
 	attackAnim_ = 0;
+
+	//生存状態の初期化
+	aliveFlg = true;
+
+	//HPの初期化
+	hp = FRONT_HP;
+
 }
 
 
 //ゲーム起動・再開時に必ず呼び出す処理
 void PlayerFront::GameInit(void)
 {
-
 }
 
 //更新処理
@@ -478,6 +484,23 @@ void PlayerFront::LoadImages(void)
 				attackAnim_ = 0;
 			}
 	}
+
+	////プレイヤーのHPの取得
+	//int GetHp(void) { return hp; }
+
+	////プレイヤーの生存状態の取得
+	//bool GetAlive(void) { return aliveFlg; }
+
+	////プレイヤーにダメージを与える
+	//void PlayerFront::SetDamage(int dp)
+	//{
+	//	hp -= hp;
+	//	if (hp <= 0)
+	//	{
+	//		hp = 0;
+	//		aliveFlg = false;
+	//	}
+	//}
 
 
 
