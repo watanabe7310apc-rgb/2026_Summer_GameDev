@@ -23,7 +23,7 @@ void PlayerFront::SystemInit(void)
 	LoadImages();
 
 	//アニメーション状態
-	animState_ = ANIM_STATE::RUN;
+	animState_ = ANIM_STATE::IDLE;
 
 	//アニメーションカウンタ
 	stepAnim_ = 0;

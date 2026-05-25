@@ -171,7 +171,7 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 		scene_ = new TitleScene();
 		break;
 	case E_SCENE_GAME:
-		scene_ = new GameScene();
+  		scene_ = new GameScene();
 		break;
 	case E_SCENE_GAMEOVER:
 		break;

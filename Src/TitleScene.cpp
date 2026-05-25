@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
+#include "Manager/InputManager.h"
 
 TitleScene::TitleScene(void) {
 
@@ -21,31 +22,15 @@ void TitleScene::SystemInit(void) {
 
 void TitleScene::GameInit(void) {
 
-	// 次のシーンの初期設定
-	nextSceneID = E_SCENE_TITLE;
-
-	prevSpaceKey = nowSpaceKey = 0;
-
-	prevPadKey = nowPadKey = 0;
 }
 
 void TitleScene::Update(void) {
-	// スペースキー
-	prevSpaceKey = nowSpaceKey;
-	nowSpaceKey = CheckHitKey(KEY_INPUT_SPACE);
 
-	// ゲームパッドボタン
-	prevPadKey = nowPadKey;
-	nowPadKey = GetJoypadInputState(DX_INPUT_KEY_PAD1) & PAD_INPUT_1;
+	InputManager& inputIns = InputManager::GetInstance();
 
-	// スペースキーのアップトリガー
-	bool spaceUp = (prevSpaceKey == 1 && nowSpaceKey == 0);
-
-	// パッドボタンのアップトリガー
-	bool padUp = (prevPadKey != 0 && nowPadKey == 0);
-
-	if (spaceUp || padUp) {
-		nextSceneID = E_SCENE_GAME;
+	// スペースキーorAボタン
+	if (inputIns.IsNew(KEY_INPUT_SPACE) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN)) {
+		SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
 	}
 }
 

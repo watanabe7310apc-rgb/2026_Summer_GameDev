@@ -19,15 +19,10 @@ public:
 	void Draw(void) override;				        // 描画処理
 	void Release(void) override;				    // 解放処理(最後の１回のみ実行)
 
-	E_SCENE_ID GetNextSceneID(void) { return nextSceneID; }
 
 private:
 	int imgTitle_;			                // タイトル画像
 
 	int imgStart_;                          // スタート画画像
 	
-	E_SCENE_ID nextSceneID;			       // 次に遷移するシーンのID
-	int prevSpaceKey, nowSpaceKey;		   // スペースキーの状態
-
-	int prevPadKey, nowPadKey;             // ゲームパッド対応
 };
