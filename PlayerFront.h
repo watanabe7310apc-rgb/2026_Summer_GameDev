@@ -37,7 +37,7 @@ public:
 	static constexpr float MAX_MOVE_SPEED = 100.0f;
 
 	// 加速(accelerator=アクセレレーター)
-	static constexpr float MOVE_ACC = 9.0f;
+	static constexpr float MOVE_ACC = 10.0f;
 
 	// 減速(decelerate=ディセラレイト)
 	static constexpr float MOVE_DEC = 0.05f;
@@ -46,7 +46,7 @@ public:
 	static constexpr float MAX_JUMP_POW = 15.0f;
 
 	//重力
-	static constexpr float GRAVITY = 0.45f;
+	static constexpr float GRAVITY = 0.6f;
 
 	//ジャンプキー入力を受け付けるフレーム数
 	static constexpr int INPUT_JUMP_FRAME = 5;
@@ -126,6 +126,8 @@ private:
 
 	//攻撃中判定
 	bool isAttack_;
+	//ダッシュ攻撃判定
+	bool isDashAttack_;
 
 	//現在の高度
 	float nowJumplength_;

@@ -42,6 +42,7 @@ void PlayerFront::SystemInit(void)
 	isJump_ = false;
 	isPutJumpKey_ = false;
 	isAttack_ = false;
+	isDashAttack_ = false;
 
 	//ジャンプキーのフレームの初期化
 	cntJumpInput_ = 0;
@@ -69,47 +70,41 @@ void PlayerFront::Update(void)
 		animState_ = ANIM_STATE::IDLE;
 	}
 
-	if (!isAttack_&&pos_.y<=800)
+	if (!isAttack_)
 	{
 		//プレイヤーの移動操作
 		ProcessMove();
-
-		//移動(実際の座標移動)
-		Move();
 	}
-		//減速
-		Decelerate(MOVE_DEC);
+	//移動(実際の座標移動)
+	Move();
+
+	//減速
+	Decelerate(MOVE_DEC);
 
 
-		//プレイヤーのジャンプ操作
-		ProcessJump();
+	//プレイヤーのジャンプ操作
+	ProcessJump();
 
-		//常に重力をかける
-		//(ジャンプ中でなくても落下する)
-		AddGravity();
 
-		//ジャンプ
-		Jump();
+	//常に重力をかける
+	//(ジャンプ中でなくても落下する)
+	AddGravity();
 
-	//プレイヤーの攻撃操作
-	ProcessAttack();
+	//ジャンプ
+	Jump();
+	if (!isJump_)
+	{
+		//プレイヤーの攻撃操作
+		ProcessAttack();
 
-	//攻撃
-	Attack();
- }
+		//攻撃
+		Attack();
+	}
+}
 
 //描画処理
 void PlayerFront::Draw(void)
 {
-	//if (isJump_)
-	//{
-	//	animState_ = ANIM_STATE::JUMP_UP;
-	//}
-	//else if(isJump_==false&& pos_.y < 800)
-	//{
-	//	animState_ = ANIM_STATE::JUMP_DOWN;
-	//}
-
 	switch (animState_)
 	{
 		case ANIM_STATE::IDLE:
@@ -261,7 +256,7 @@ void PlayerFront::LoadImages(void)
 		("Image/Knight/spr_knight_rangedattack.png"),
 		ATTACK_ALL_NUM,
 		ATTACK_ALL_NUM, 1,
-		SIZE_X, SIZE_Y,
+		192, SIZE_Y,
 		RunAttackimages_,
 		false
 	);
@@ -367,15 +362,17 @@ void PlayerFront::LoadImages(void)
 	{
 		InputManager& inputIns = InputManager::GetInstance();
 		// 接地していないと、ジャンプを開始できないようにする
-		if (inputIns.IsTrgDown(KEY_INPUT_M))
+		if (inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
 		{
 			isJump_ = true;
 			isPutJumpKey_ = true;
 		}
+		if (inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+		{
+		}
 
 
-		if (
-			(inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+		if ((inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
 			&& cntJumpInput_ < INPUT_JUMP_FRAME&&isPutJumpKey_)
 		{
 			//ジャンプカウンタを増やす
@@ -451,13 +448,19 @@ void PlayerFront::LoadImages(void)
 
 		//攻撃中は新しい攻撃を受け付けない
 		if (isAttack_)return;
-
 		if ((inputIns.IsTrgDown(KEY_INPUT_F) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::LEFT)))
 		{
 				isAttack_ = true;
 				attackAnim_ = 0;
 				stepAnim_ = 0;
 				animState_ = ANIM_STATE::ATTACK;
+		}
+		if ((inputIns.IsTrgDown(KEY_INPUT_E) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::TOP)))
+		{
+				isAttack_ = true;
+				attackAnim_ = 0;
+				stepAnim_ = 0;
+				animState_ = ANIM_STATE::RUN_ATTACK;
 		}
 	}
 
@@ -470,6 +473,7 @@ void PlayerFront::LoadImages(void)
 
 			if (attackAnim_ >= ATTACK_ALL_NUM)
 			{
+				SetJumpPow(0.0f);
 				isAttack_ = false;
 				attackAnim_ = 0;
 			}
