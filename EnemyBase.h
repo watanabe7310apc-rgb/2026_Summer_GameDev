@@ -19,13 +19,7 @@ public:
 	// 敵の種類
 	enum class TYPE
 	{
-		SLIME,
-		FIRE,
-		LIZARD,
-		BAT,
-		DRAGON,
-		BOSS,
-		MAX
+		
 	};
 
 	// コンストラクタ

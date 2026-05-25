@@ -50,7 +50,7 @@ SceneManager& SceneManager::GetInstance(void)
 //‰Šú‰»ˆ—(Å‰‚Ì1‰ñ‚Ì‚İÀs)
 void SceneManager::SystemInit(void)
 {
-	scene_ID = E_SCENE_GAME;
+	scene_ID = E_SCENE_TITLE;
 	waitScene = E_SCENE_NON;
 
 	fader = new Fader();
@@ -63,7 +63,7 @@ void SceneManager::SystemInit(void)
 	scene_->SystemInit();
 
 	//‰ŠúƒV[ƒ“‚Ìİ’è
-	DoChangeScene(E_SCENE_ID::E_SCENE_GAME);
+	DoChangeScene(E_SCENE_ID::E_SCENE_TITLE);
 
 }
 

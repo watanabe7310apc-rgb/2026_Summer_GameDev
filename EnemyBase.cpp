@@ -34,7 +34,7 @@ void EnemyBase::Init(GameScene* scene)
 
   const int margin = 20;
  
-    pos_.x = mapW + margin;           ¶‚Ì‰æ–ÊŠO
+    pos_.x = mapW + margin;          // ¶‚Ì‰æ–ÊŠO
     pos_.y= static_cast<float>(GetRand(mapH - size_.y) + size_.y / 2);
     
 	// Œü‚«
