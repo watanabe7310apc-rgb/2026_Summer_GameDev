@@ -19,7 +19,10 @@ public:
 	// 敵の種類
 	enum class TYPE
 	{
-		
+		SLIME
+		ZOMBIE
+		SOLDIER
+
 	};
 
 	// コンストラクタ

@@ -30,7 +30,7 @@ void EnemyBase::Init(GameScene* scene)
 
 	// ‰ŠúˆÊ’u(¶‰Eƒ‰ƒ“ƒ_ƒ€)
 	int mapW = gameScene_->GetMapWidth();
-  int mapH = gameScene_->GetMapHeight();	
+    int mapH = gameScene_->GetMapHeight();	
 
   const int margin = 20;
  
