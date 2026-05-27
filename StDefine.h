@@ -21,6 +21,7 @@ enum E_FADE_STAT_ID {
 	E_STAT_FADE_MAX,
 };
 
+
 //ç\ë¢ëÃÇÃó·
 struct POSITION
 {

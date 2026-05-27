@@ -98,7 +98,7 @@ public:
 	void SetDamage(int dp);
 
 	//プレイヤーの座標を取得
-	//Vector2F GetFrontPos(void) { return pos; }
+	Vector2F GetFrontPos(void) { return pos; }
 
 private:
 
@@ -157,6 +157,9 @@ private:
 
 	//生存フラグ
 	bool aliveFlg;
+
+	//プレイヤー表示座標
+	Vector2 pos;
 
 	//画像の読み込み
 	void LoadImages(void);

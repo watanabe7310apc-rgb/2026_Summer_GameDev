@@ -29,7 +29,7 @@ void PlayerFront::SystemInit(void)
 	stepAnim_ = 0;
 
 	//初期座標
-	pos_ = { 300.0f,800.0f };
+	pos_ = { 300.0f,900.0f };
 
 	//プレイヤーの向き
 	dir_ = AsoUtility::DIRECTION::E_DIR_RIGHT;
@@ -196,7 +196,6 @@ void PlayerFront::LoadImages(void)
 	for (int i = 0; i < ATTACK_ALL_NUM; i++) RunAttackimages_[i] = -1;
 	for (int i = 0; i < DAMAGE_ALL_NUM; i++) Damageimages_[i] = -1;
 
-	int anim = 0;
 
 	//待機
 	LoadDivGraph(
@@ -284,7 +283,7 @@ void PlayerFront::LoadImages(void)
 		//描画(座標、拡大率、回転、ハンドルID、透過フラグ、横反転、縦反転)
 		DrawRotaGraph(
 			pos.x, pos.y,
-			1.0, 0.0, handleId, true,
+			1.5, 0.0, handleId, true,
 			isLeftDir
 		);
 	}
@@ -404,7 +403,7 @@ void PlayerFront::LoadImages(void)
 	{
 		pos_.y += jumpPow_;
 		
-		if (pos_.y < 800)
+		if (pos_.y < 900)
 		{
 			nowJumplength_ = pos_.y;
 		}
@@ -413,7 +412,7 @@ void PlayerFront::LoadImages(void)
 			maxJumplength_ = nowJumplength_;
 			animState_ = ANIM_STATE::JUMP_UP;
 		}
-		else if (pos_.y < 800&&nowJumplength_ > maxJumplength_)
+		else if (pos_.y < 900&&nowJumplength_ > maxJumplength_)
 		{
 			animState_ = ANIM_STATE::JUMP_DOWN;
 			nowJumplength_ = maxJumplength_ = pos_.y;
@@ -422,9 +421,9 @@ void PlayerFront::LoadImages(void)
 
 
 		//仮の接地(衝突)判定
-		if (pos_.y > 800)
+		if (pos_.y > 900)
 		{
-			pos_.y = 800;
+			pos_.y = 900;
 
 			//地面についたのでジャンプをリセットする
 			isJump_ = false;
@@ -485,22 +484,18 @@ void PlayerFront::LoadImages(void)
 			}
 	}
 
-	////プレイヤーのHPの取得
-	//int GetHp(void) { return hp; }
 
-	////プレイヤーの生存状態の取得
-	//bool GetAlive(void) { return aliveFlg; }
 
-	////プレイヤーにダメージを与える
-	//void PlayerFront::SetDamage(int dp)
-	//{
-	//	hp -= hp;
-	//	if (hp <= 0)
-	//	{
-	//		hp = 0;
-	//		aliveFlg = false;
-	//	}
-	//}
+	//プレイヤーにダメージを与える
+	void PlayerFront::SetDamage(int dp)
+	{
+		hp -= hp;
+		if (hp <= 0)
+		{
+			hp = 0;
+			aliveFlg = false;
+		}
+	}
 
 
 

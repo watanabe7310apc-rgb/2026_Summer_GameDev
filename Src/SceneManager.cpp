@@ -59,9 +59,6 @@ void SceneManager::SystemInit(void)
 
 	fader->SystemInit();
 
-	scene_ = new TitleScene();
-	scene_->SystemInit();
-
 	//‰ŠúƒV[ƒ“‚ÌÝ’è
 	DoChangeScene(E_SCENE_ID::E_SCENE_TITLE);
 
@@ -164,6 +161,7 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 	{
 		scene_->Release();
 		delete scene_;
+		scene_ = nullptr;
 	}
 
 	switch (scene_ID) {
