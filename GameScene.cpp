@@ -4,6 +4,7 @@
 #include "Src/Manager/InputManager.h"
 #include "EnemyBase.h"
 #include "EnemyDragon.h"
+#include "Src/SceneManager.h"
 
 //コンストラクタ
 GameScene::GameScene(void)
@@ -24,6 +25,12 @@ void GameScene::SystemInit(void)
 	front_->SystemInit();
 
 	img_ = LoadGraph("image/ゲーム背景(城壁).jpg");
+
+	BaseCounter = BASE_HP_MAX;
+
+	spoanCounter_ = 0;
+
+	clearCounter = 0;
 }
 
 //ゲーム起動・再開時に必ず呼び出す処理
@@ -37,38 +44,78 @@ void GameScene::Update(void)
 {
 	front_->Update();
 
-	size_t size = enemys.size();               //敵のテーブルの要素数を取得
-	for (auto e : enemys) {
-		e->Update();
-	}
-	//エンカウンター
-	enCounter++;
-	if (enCounter > ENCOUNT) {
+		size_t size = enemys.size();               //敵のテーブルの要素数を取得
+		for (auto e : enemys) {
+			e->Update();
+		}
+		if (spoanCounter_ < 30) {
+			//エンカウンター
+			enCounter++;
+			if (enCounter > ENCOUNT) {
 
-		//敵の生成
-		EnemyBase* e = nullptr;
+				spoanCounter_++;
 
-		//ランダムに種別を決める
-		int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID::E_TYPE_MAX) - 1);
-		EnemyBase::E_ENEMY_ID type = static_cast<EnemyBase::E_ENEMY_ID>(rr);
-		type = EnemyBase::E_ENEMY_ID::E_TYPE_DRAGON;   //デバック用
+				//敵の生成
+				EnemyBase* e = nullptr;
 
-		//種別に対応した派生クラスのインスタンスを生成
-		switch (type) {
-		case EnemyBase::E_ENEMY_ID::E_TYPE_DRAGON:
-			e = new EnemyDragon();
-			break;
+				//ランダムに種別を決める
+				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID::E_TYPE_MAX) - 1);
+				EnemyBase::E_ENEMY_ID type = static_cast<EnemyBase::E_ENEMY_ID>(rr);
+
+				//種別に対応した派生クラスのインスタンスを生成
+				switch (type) {
+				case EnemyBase::E_ENEMY_ID::E_TYPE_DRAGON:
+					e = new EnemyDragon();
+					break;
+				}
+
+				if (e != nullptr) {
+					e->enemyType = type;
+					e->SystemInit(this);
+					e->GameInit();
+					//可変長配列に要素を追加する
+					enemys.push_back(e);
+					enCounter = 0;           //エンカウンターをリセット
+				}
+			}
+		}
+		if (front_->GetAlive()) {
+			//死亡した敵データを消去する
+			size_t size = enemys.size();   //敵のテーブルの要素数を取得
+			std::vector<EnemyBase*>::iterator eitr;
+			for (int ii = (int)size; ii > 0; ii--) {
+				eitr = enemys.begin() + (ii - 1);
+				if (!(*eitr)->GetAlive()) {
+					(*eitr)->Release();
+					delete(*eitr);
+					enemys.erase(eitr);
+				}
+			}
 		}
 
-		if (e != nullptr) {
-			e->enemyType = type;
-			e->SystemInit(this);
-			e->GameInit();
-			//可変長配列に要素を追加する
-			enemys.push_back(e);
-			enCounter = 0;           //エンカウンターをリセット
+
+		//衝突判定
+		CollisionCheck();
+		if (front_->GetAlive() && BaseCounter > 0&&clearCounter<30) {
+			//死亡した敵データを消去する
+			size_t size = enemys.size();   //敵のテーブルの要素数を取得
+			std::vector<EnemyBase*>::iterator eitr;
+			for (int ii = (int)size; ii > 0; ii--) {
+				eitr = enemys.begin() + (ii - 1);
+				if (!(*eitr)->GetAlive()) {
+					(*eitr)->Release();
+					delete(*eitr);
+					enemys.erase(eitr);
+				}
+			}
 		}
-	}
+		else  {
+			EraseEnemys();
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+
+		}
+
+
 }
 
 
@@ -86,7 +133,13 @@ void GameScene::Draw(void)
 	for (auto e:enemys) {
 		e->Draw();
 	}
+	int php = front_->GetHp();
 
+	DrawFormatString(32, 0, GetColor(0xff, 0xff, 0xff), "プレイヤーHP : %3d", php);
+
+	DrawFormatString(32, 15, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/10", BaseCounter);
+
+	DrawFormatString((Application::SCREEN_SIZE_X/2)-32, 0, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
 }
 
 //解放処理(最後の1回のみ使用)
@@ -103,11 +156,60 @@ void GameScene::Release(void)
 //当たり判定処理
 void GameScene::CollisionCheck(void)
 {
+	Vector2F Pos;
+
 	//プレイヤーの情報
 	//プレイヤーの座標を取得
-	Vector2 pPos = front_->GetFrontPos();
+	Vector2 pPos = front_->GetFrontPos(); // 左上
 	//前衛のサイズ
 	Vector2 pSize = { PlayerFront::SIZE_X,PlayerFront::SIZE_Y };
+	//プレイヤーの攻撃範囲
+	Vector2F pos = front_->GetFrontPos();
+	Vector2 aPos = AsoUtility::Round(front_->GetFrontAttackPos());
+	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
+
+	//防衛地点の情報
+	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X * 0.75,Application::SCREEN_SIZE_Y / 3 });
+	Vector2 bSize = { 700, Application::SCREEN_SIZE_Y };
+
+
+	//敵の数だけチェックを行う
+	size_t size = enemys.size();
+	for (int ii = 0; ii < size; ii++) {
+		Pos = enemys[ii]->GetEnemyPos();
+		if (!enemys[ii]->GetAlive())continue;
+
+		Vector2 ePos = AsoUtility::Round(Pos);
+		Vector2 eSize = enemys[ii]->GetEnemySize();
+
+		//敵とプレイヤーの衝突判定
+		if (CollisionChackRectCenter(pPos, pSize, ePos, eSize)) {
+			front_->SetDamage(1); 
+			//プレイヤーにダメージを与える
+		}
+		if (!front_->GetAlive()) {
+			break;
+		}
+
+		//敵とプレイヤーの弾の衝突判定
+		if (front_->GetAttackFlg()) {
+			//弾を発射している
+			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize)) {
+				enemys[ii]->SetDamage(10);   //敵にダメージを与える
+				clearCounter++;
+				}
+		}
+
+		if (CollisionChackRectCenter(bPos, bSize, ePos, eSize)) {
+			BaseCounter-=1;
+			enemys[ii]->SetDamage(10);   //敵にダメージを与える
+			clearCounter++;
+
+		}
+
+		if (!enemys[ii]->GetAlive())continue;
+	}
+
 }
 
 //中心座標から衝突安定を行う
@@ -139,10 +241,10 @@ bool GameScene::CollisionChackRectCenter(Vector2 cPos1, Vector2 size1, Vector2 c
 		stPos1.y>edPos2.y ||
 		edPos1.y < stPos2.y)
 	{
-		return true;
+		return false;
 	}
 
-	return false;
+	return true;
 }
 
 /*

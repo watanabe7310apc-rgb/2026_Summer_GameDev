@@ -7,7 +7,7 @@ void EnemyDragon::SetEnemyParam(void)
 	size = { 64,64 };
 
 	//初期位置
-	pos = { 0.0f,900.0f };
+	pos = { 0.0f,850.0f };
 
 	//敵の移動速度
 	speed = 1.5f;

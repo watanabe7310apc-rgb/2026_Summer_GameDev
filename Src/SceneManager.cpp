@@ -6,6 +6,7 @@
 #include "../Src/Fader.h"
 #include "TitleScene.h"
 #include "../GameScene.h"
+#include "../GameOverScene.h"
 #include "../StDefine.h"
 
 SceneManager* SceneManager::instance_ = nullptr;
@@ -172,6 +173,7 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
   		scene_ = new GameScene();
 		break;
 	case E_SCENE_GAMEOVER:
+		scene_ = new GameOverScene();
 		break;
 	}
 

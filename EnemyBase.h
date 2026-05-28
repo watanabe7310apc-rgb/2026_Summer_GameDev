@@ -67,6 +67,9 @@ public:
 
 protected:
 
+	//ゲームシーンのインスタンスのポインタ
+	GameScene* gInst;
+
 	//画像の読み込み
 	void LoadImages(void);
 

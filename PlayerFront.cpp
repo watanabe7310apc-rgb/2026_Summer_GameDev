@@ -29,10 +29,12 @@ void PlayerFront::SystemInit(void)
 	stepAnim_ = 0;
 
 	//初期座標
-	pos_ = { 300.0f,900.0f };
+	pos_ = { 800.0f,900.0f };
+
+	apos_ = { 0.0f,0.0f };
 
 	//プレイヤーの向き
-	dir_ = AsoUtility::DIRECTION::E_DIR_RIGHT;
+	dir_ = AsoUtility::DIRECTION::E_DIR_LEFT;
 
 	//移動速度の初期化
 	moveSpeed_ = 0.0f;
@@ -106,6 +108,21 @@ void PlayerFront::Update(void)
 		//攻撃
 		Attack();
 	}
+	//プレイヤーの左端のチェック
+	if (pos_.x < 0) {
+		pos_.x = 0;
+	}
+
+	//プレイヤーの右端のチェック
+	if (pos_.x >= Application::SCREEN_SIZE_X - SIZE_X) {
+		pos_.x = Application::SCREEN_SIZE_X - SIZE_X;
+	}
+
+	//プレイヤーの上端のチェック
+	if (pos_.y < 0) {
+		pos_.y = 0;
+	}
+
 }
 
 //描画処理
@@ -367,18 +384,9 @@ void PlayerFront::LoadImages(void)
 	{
 		InputManager& inputIns = InputManager::GetInstance();
 		// 接地していないと、ジャンプを開始できないようにする
-		if (inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
-		{
-			isJump_ = true;
-			isPutJumpKey_ = true;
-		}
-		if (inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
-		{
-		}
 
-
-		if ((inputIns.IsNew(KEY_INPUT_M) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
-			&& cntJumpInput_ < INPUT_JUMP_FRAME&&isPutJumpKey_)
+		if ((inputIns.IsNew(KEY_INPUT_SPACE) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+			&& cntJumpInput_ < INPUT_JUMP_FRAME)
 		{
 			//ジャンプカウンタを増やす
 			cntJumpInput_ += 1;
@@ -391,7 +399,7 @@ void PlayerFront::LoadImages(void)
 			isPutJumpKey_ = true;
 		}
 
-		if (inputIns.IsTrgUp(KEY_INPUT_M) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+		if (inputIns.IsTrgUp(KEY_INPUT_SPACE) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
 		{
 			//ジャンプの入力判定を強制的に終了させる
 			cntJumpInput_ =0;
@@ -476,6 +484,17 @@ void PlayerFront::LoadImages(void)
 
 			attackAnim_ += ATTACK_ANIM_SPEED;
 
+			if (dir_ == AsoUtility::DIRECTION::E_DIR_LEFT)
+			{
+				apos_.x = pos_.x - (SIZE_X / 2);
+				apos_.y = pos_.y;
+			}
+			else if(dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT)
+			{
+				apos_.x = pos_.x ;
+				apos_.y = pos_.y;
+			}
+
 			if (attackAnim_ >= ATTACK_ALL_NUM)
 			{
 				SetJumpPow(0.0f);
@@ -489,7 +508,7 @@ void PlayerFront::LoadImages(void)
 	//プレイヤーにダメージを与える
 	void PlayerFront::SetDamage(int dp)
 	{
-		hp -= hp;
+		hp -= dp;
 		if (hp <= 0)
 		{
 			hp = 0;

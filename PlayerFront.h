@@ -52,7 +52,11 @@ public:
 	static constexpr int INPUT_JUMP_FRAME = 5;
 
 	//プレイヤーの最大HP
-	static constexpr int FRONT_HP = 100;
+	static constexpr int FRONT_HP = 1000;
+
+	//プレイヤーの攻撃範囲
+	static constexpr int ATTACK_RANGE_X = 75;
+	static constexpr int ATTACK_RANGE_Y = 126;
 
 	//アニメーション状態
 	enum class ANIM_STATE
@@ -98,7 +102,16 @@ public:
 	void SetDamage(int dp);
 
 	//プレイヤーの座標を取得
-	Vector2F GetFrontPos(void) { return pos; }
+	Vector2F GetFrontPos(void) { return pos_; }
+
+	Vector2F GetFrontAttackPos(void) { return apos_; }
+
+	void SetPlayerPos(Vector2 mPos) { pos_ = mPos; }
+
+
+	//攻撃中判定
+	bool GetAttackFlg(void) { return isAttack_; }
+
 
 private:
 
@@ -112,6 +125,9 @@ private:
 
 	//座標
 	Vector2F pos_;
+
+	//攻撃座標
+	Vector2F apos_;
 
 	//アニメーション状態
 	ANIM_STATE animState_;
@@ -140,6 +156,7 @@ private:
 
 	//攻撃中判定
 	bool isAttack_;
+
 	//ダッシュ攻撃判定
 	bool isDashAttack_;
 
@@ -158,8 +175,10 @@ private:
 	//生存フラグ
 	bool aliveFlg;
 
-	//プレイヤー表示座標
-	Vector2 pos;
+	//ジャンプカウンタ
+	int JumpCnt_;
+
+
 
 	//画像の読み込み
 	void LoadImages(void);

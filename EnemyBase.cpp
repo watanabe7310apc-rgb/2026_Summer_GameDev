@@ -38,10 +38,12 @@
 	//更新処理
 	void EnemyBase::Update(void)
 	{
+
 		if (stepAnim > 10 * 10)stepAnim = 0;
 
 		//座標に移動量を加える
 		pos.x += speed;
+
 	}
 
 	//描画処理

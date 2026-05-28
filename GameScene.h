@@ -4,13 +4,17 @@
 #include "SceneBase.h"
 #include "PlayerFront.h"
 #include "EnemyBase.h"
+
 class GameScene :
     public SceneBase
 {
 public:
 
 	//エンカウント(値が大きいと出現する間隔が長くなる)
-	static constexpr int ENCOUNT = 180;
+	static constexpr int ENCOUNT = 100;
+
+	//防衛地点の耐久値
+	static constexpr int BASE_HP_MAX = 10;
 
 	//コンストラクタ
 	GameScene(void);
@@ -33,6 +37,9 @@ public:
 	//解放処理(最後の1回のみ使用)
 	void Release(void)override;
 
+	PlayerFront* GetLpPlayer(void) { return front_; }
+
+
 private:
 	int img_;   //背景のハンドル番号
 
@@ -48,6 +55,15 @@ private:
 
 	//敵の発生頻度用のカウンター
 	int enCounter;
+
+	//敵の侵入数
+	int BaseCounter;
+
+	//敵の出現数
+	int spoanCounter_;
+
+	//敵撃破または通過数
+	int clearCounter;
 
 	void EraseEnemys(void);   //敵のデータテーブルを空にする
 
