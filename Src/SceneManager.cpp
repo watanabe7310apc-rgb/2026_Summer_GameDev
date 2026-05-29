@@ -6,6 +6,7 @@
 #include "../Src/Fader.h"
 #include "TitleScene.h"
 #include "../GameScene.h"
+#include "../GameOverScene.h"
 #include "../StDefine.h"
 
 SceneManager* SceneManager::instance_ = nullptr;
@@ -58,9 +59,6 @@ void SceneManager::SystemInit(void)
 	SetTransColor(0xff, 0x00, 0xff);
 
 	fader->SystemInit();
-
-	scene_ = new TitleScene();
-	scene_->SystemInit();
 
 	//‰ŠúƒV[ƒ“‚ÌÝ’è
 	DoChangeScene(E_SCENE_ID::E_SCENE_TITLE);
@@ -164,6 +162,7 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 	{
 		scene_->Release();
 		delete scene_;
+		scene_ = nullptr;
 	}
 
 	switch (scene_ID) {
@@ -174,6 +173,7 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
   		scene_ = new GameScene();
 		break;
 	case E_SCENE_GAMEOVER:
+		scene_ = new GameOverScene();
 		break;
 	}
 
