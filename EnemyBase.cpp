@@ -1,3 +1,4 @@
+/*
 #include <DxLib.h>
 #include "GameScene.h"
 #include "EnemyBase.h"
@@ -163,3 +164,4 @@ void EnemyBase::SetAnimDir(Vector2F direction)
 		}
 	}
 }
+*/

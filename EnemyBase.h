@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include <string>
 #pragma once
@@ -22,7 +23,6 @@ public:
 		SLIME
 		ZOMBIE
 		SOLDIER
-
 	};
 
 	// コンストラクタ
@@ -108,3 +108,5 @@ protected:
 	// 画像の向きを変える
 	void SetAnimDir(Vector2F direction);
 };
+
+*/

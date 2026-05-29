@@ -30,5 +30,9 @@ private:
 	int img_;   //”wŒi‚Ìƒnƒ“ƒhƒ‹”Ô†
 
 	PlayerFront* front_;
+
+	////“–‚½‚è”»’èˆ—
+	//void CollisionCheck(void);
+	//bool CollisionChackRectCenter(Vector2 cPos1, Vector2 size1, Vector2 cPos2, Vector2 size2);
 };
 
