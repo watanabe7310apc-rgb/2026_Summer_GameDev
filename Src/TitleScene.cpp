@@ -16,7 +16,7 @@ TitleScene::~TitleScene(void) {
 
 void TitleScene::SystemInit(void) {
 
-	imgTitle_ = LoadGraph("image/UI/title.png");
+	imgTitle_ = LoadGraph("Image/Title.PNG");
 
 }
 

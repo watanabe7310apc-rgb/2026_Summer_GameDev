@@ -15,7 +15,7 @@ GameOverScene::~GameOverScene(void) {
 
 void GameOverScene::SystemInit(void) {
 
-	img_ = LoadGraph("image/UI/title.png");
+	img_ = LoadGraph("image/GameOver.png");
 
 }
 
