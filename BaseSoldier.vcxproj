@@ -57,6 +57,10 @@
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Enemy\Soldier\Soldier_Army.png" />
+    <Image Include="..\Enemy\Swordman\Swordsman_Purple.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

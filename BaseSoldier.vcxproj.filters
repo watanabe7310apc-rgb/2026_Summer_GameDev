@@ -39,4 +39,8 @@
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="GameOverScene.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Enemy\Soldier\Soldier_Army.png" />
+    <Image Include="..\Enemy\Swordman\Swordsman_Purple.png" />
+  </ItemGroup>
 </Project>
