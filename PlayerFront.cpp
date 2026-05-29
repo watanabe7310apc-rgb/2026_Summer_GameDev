@@ -491,7 +491,7 @@ void PlayerFront::LoadImages(void)
 			}
 			else if(dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT)
 			{
-				apos_.x = pos_.x ;
+				apos_.x = pos_.x+(SIZE_X/2) ;
 				apos_.y = pos_.y;
 			}
 

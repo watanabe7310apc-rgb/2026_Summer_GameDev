@@ -44,10 +44,6 @@ void GameScene::Update(void)
 {
 	front_->Update();
 
-		size_t size = enemys.size();               //敵のテーブルの要素数を取得
-		for (auto e : enemys) {
-			e->Update();
-		}
 		if (spoanCounter_ < 30) {
 			//エンカウンター
 			enCounter++;
@@ -92,6 +88,11 @@ void GameScene::Update(void)
 				}
 			}
 		}
+		size_t size = enemys.size();               //敵のテーブルの要素数を取得
+		for (auto e : enemys) {
+			e->Update();
+		}
+
 
 
 		//衝突判定
@@ -125,7 +126,7 @@ void GameScene::Draw(void)
 	DrawGraph(0,0, img_, false);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-	DrawBox(Application::SCREEN_SIZE_X*0.75, Application::SCREEN_SIZE_Y/3, 1100, Application::SCREEN_SIZE_Y,
+	DrawBox(1000, Application::SCREEN_SIZE_Y/3, 590, Application::SCREEN_SIZE_Y,
 		GetColor(100, 100, 100), true);
 
 	front_->Draw();
@@ -169,8 +170,8 @@ void GameScene::CollisionCheck(void)
 	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
-	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X * 0.75,Application::SCREEN_SIZE_Y / 3 });
-	Vector2 bSize = { 700, Application::SCREEN_SIZE_Y };
+	Vector2 bPos = AsoUtility::Round({ 800,Application::SCREEN_SIZE_Y / 3 });
+	Vector2 bSize = { 300, Application::SCREEN_SIZE_Y };
 
 
 	//敵の数だけチェックを行う

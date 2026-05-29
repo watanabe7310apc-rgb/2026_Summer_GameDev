@@ -65,6 +65,9 @@ public:
 	//敵の種類
 	int enemyType;
 
+	//敵の出現位置
+	int enemySpoanPoint;
+
 protected:
 
 	//ゲームシーンのインスタンスのポインタ
@@ -96,6 +99,13 @@ protected:
 
 	//敵の移動速度
 	float speed;
+
+	//敵の向き
+	AsoUtility::DIRECTION dir_;
+
+	//プレイヤーの向きと描画
+	void DrawEnemy(int handleId);
+
 
 };
 
