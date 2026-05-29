@@ -1,4 +1,4 @@
-/*
+
 #pragma once
 
 #include "Src/Vector2.h"
@@ -14,21 +14,12 @@ public:
 	//謨ｵ縺ｮ遞ｮ鬘・
 	enum E_ENEMY_ID {
 		E_TYPE_DRAGON,
+		E_TYPE_MAX
+	};
 
-<<<<<<< HEAD
 	// 方向ごとのアニメーション数
 	static constexpr int NUM_ANIM = 4;
 
-	// 敵の種類
-	enum class TYPE
-	{
-		SLIME
-		ZOMBIE
-		SOLDIER
-=======
-		E_TYPE_MAX
->>>>>>> 5b8fe38ba78d9f329a0dfa22c3e4cfe2274292b1
-	};
 
 	//繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ騾溷ｺｦ
 	static constexpr float ANIM_SPEED = 0.1f;
@@ -121,15 +112,3 @@ protected:
 
 
 };
-
-<<<<<<< HEAD
-	// 生存判定
-	bool isAlive_;
-
-	// 画像の向きを変える
-	void SetAnimDir(Vector2F direction);
-};
-
-*/
-=======
->>>>>>> 5b8fe38ba78d9f329a0dfa22c3e4cfe2274292b1
