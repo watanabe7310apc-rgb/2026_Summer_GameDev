@@ -24,7 +24,4 @@ private:
 	// スタート画像
 	int imgStart_;
 
-	//再スタート
-	int prevKey_, nowKey_;  //	スペースキー
-	int prevPad_, nowPad_; //　ゲームパッド
 };
