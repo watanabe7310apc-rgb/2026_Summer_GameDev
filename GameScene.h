@@ -14,7 +14,7 @@ public:
 	static constexpr int ENCOUNT = 70;
 
 	//防衛地点の耐久値
-	static constexpr int BASE_HP_MAX = 10;
+	static constexpr int BASE_HP_MAX = 1;
 
 	//コンストラクタ
 	GameScene(void);
@@ -42,6 +42,7 @@ public:
 
 private:
 	int img_;   //背景のハンドル番号
+	int imgtower;//拠点のハンドル番号
 
 	PlayerFront* front_;
 	EnemyBase* enemy_;

@@ -4,6 +4,7 @@
 #include "Src/Manager/InputManager.h"
 #include "EnemyBase.h"
 #include "EnemyDragon.h"
+#include "EnemyGoast.h"
 #include "Src/SceneManager.h"
 
 //コンストラクタ
@@ -24,7 +25,8 @@ void GameScene::SystemInit(void)
 	front_ = new PlayerFront();
 	front_->SystemInit();
 
-	img_ = LoadGraph("image/ゲーム背景(城壁).jpg");
+	img_ = LoadGraph("Image/ゲーム背景(城壁).jpg");
+	imgtower = LoadGraph("Image/Tower.png");
 
 	BaseCounter = BASE_HP_MAX;
 
@@ -62,6 +64,9 @@ void GameScene::Update(void)
 				switch (type) {
 				case EnemyBase::E_ENEMY_ID::E_TYPE_DRAGON:
 					e = new EnemyDragon();
+					break;
+				case EnemyBase::E_ENEMY_ID::E_TYPE_GOAST:
+					e = new EnemyGoast();
 					break;
 				}
 
@@ -125,9 +130,7 @@ void GameScene::Draw(void)
 {
 	DrawGraph(0,0, img_, false);
 
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-	DrawBox(1000, Application::SCREEN_SIZE_Y/3, 590, Application::SCREEN_SIZE_Y,
-		GetColor(100, 100, 100), true);
+	DrawGraph(Application::SCREEN_SIZE_X / 2 - 176 , Application::SCREEN_SIZE_Y - 650, imgtower, false);
 
 	front_->Draw();
 
@@ -138,9 +141,9 @@ void GameScene::Draw(void)
 
 	DrawFormatString(32, 0, GetColor(0xff, 0xff, 0xff), "プレイヤーHP : %3d", php);
 
-	DrawFormatString(32, 15, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/10", BaseCounter);
+	DrawFormatString(32, 20, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/1", BaseCounter);
 
-	DrawFormatString((Application::SCREEN_SIZE_X/2)-32, 0, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
+	DrawFormatString(32, 40, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
 }
 
 //解放処理(最後の1回のみ使用)
@@ -170,8 +173,8 @@ void GameScene::CollisionCheck(void)
 	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
-	Vector2 bPos = AsoUtility::Round({ 800,Application::SCREEN_SIZE_Y / 3 });
-	Vector2 bSize = { 300, Application::SCREEN_SIZE_Y };
+	Vector2 bPos = AsoUtility::Round({ 1000, Application::SCREEN_SIZE_Y - 650 });
+	Vector2 bSize = { 372, Application::SCREEN_SIZE_Y };
 
 
 	//敵の数だけチェックを行う

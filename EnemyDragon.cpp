@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "EnemyDragon.h"
+#include "Src/Application.h"
 
 void EnemyDragon::SetEnemyParam(void)
 {
@@ -10,14 +11,14 @@ void EnemyDragon::SetEnemyParam(void)
 
 		switch (enemySpoanPoint) {
 		case 0:
-			pos = { -64.0f,750.0f };
+			pos = { -64.0f,850.0f };
 			break;
 		case 1:
-			pos = { 1500.0f,750.0f };
+			pos = { Application::SCREEN_SIZE_X,850.0f };
 			break;
 		}
 	//敵の移動速度
-	speed = 1.5f;
+	speed = 2.0f;
 	//ヒットポイント
 	hp = hpMax = 10;
 }

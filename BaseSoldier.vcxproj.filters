@@ -18,6 +18,7 @@
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="EnemyDragon.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="EnemyGoast.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
@@ -38,9 +39,6 @@
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="GameOverScene.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Enemy\Soldier\Soldier_Army.png" />
-    <Image Include="..\Enemy\Swordman\Swordsman_Purple.png" />
+    <ClInclude Include="EnemyGoast.h" />
   </ItemGroup>
 </Project>

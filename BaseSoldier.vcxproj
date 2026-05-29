@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="EnemyDragon.cpp" />
+    <ClCompile Include="EnemyGoast.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyDragon.h" />
+    <ClInclude Include="EnemyGoast.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="PlayerFront.h" />
@@ -56,10 +58,6 @@
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Enemy\Soldier\Soldier_Army.png" />
-    <Image Include="..\Enemy\Swordman\Swordsman_Purple.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

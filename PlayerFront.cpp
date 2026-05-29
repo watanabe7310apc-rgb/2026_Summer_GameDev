@@ -29,7 +29,7 @@ void PlayerFront::SystemInit(void)
 	stepAnim_ = 0;
 
 	//初期座標
-	pos_ = { 800.0f,800.0f };
+	pos_ = { 800.0f,900.0f };
 
 	apos_ = { 0.0f,0.0f };
 
@@ -411,7 +411,7 @@ void PlayerFront::LoadImages(void)
 	{
 		pos_.y += jumpPow_;
 		
-		if (pos_.y < 800)
+		if (pos_.y < 900)
 		{
 			nowJumplength_ = pos_.y;
 		}
@@ -420,7 +420,7 @@ void PlayerFront::LoadImages(void)
 			maxJumplength_ = nowJumplength_;
 			animState_ = ANIM_STATE::JUMP_UP;
 		}
-		else if (pos_.y < 800&&nowJumplength_ > maxJumplength_)
+		else if (pos_.y < 900&&nowJumplength_ > maxJumplength_)
 		{
 			animState_ = ANIM_STATE::JUMP_DOWN;
 			nowJumplength_ = maxJumplength_ = pos_.y;
@@ -429,9 +429,9 @@ void PlayerFront::LoadImages(void)
 
 
 		//仮の接地(衝突)判定
-		if (pos_.y > 800)
+		if (pos_.y > 900)
 		{
-			pos_.y = 800;
+			pos_.y = 900;
 
 			//地面についたのでジャンプをリセットする
 			isJump_ = false;

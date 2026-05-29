@@ -67,9 +67,18 @@
 		switch (enemyType)
 		{
 		case E_ENEMY_ID::E_TYPE_DRAGON:
+		{
 			stepAnim += ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim) % 4;
 			DrawEnemy(imgDragon_[animIdx]);
+		}
+			break;
+		case E_ENEMY_ID::E_TYPE_GOAST:
+		{
+			stepAnim += ANIM_SPEED;
+			int animIdx = AsoUtility::Round(stepAnim) % 3;
+			DrawEnemy(imgGoast_[animIdx]);
+		}
 			break;
 		}
 	}
@@ -79,6 +88,8 @@
 	{
 		for (int i = 0; i < 4; i++)
 			if (imgDragon_[i] != -1) DeleteGraph(imgDragon_[i]);
+		for (int i = 0; i < 4; i++)
+			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 
 	}
 
@@ -86,11 +97,19 @@
 	void EnemyBase::LoadImages(void)
 	{
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
+		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
 
 		//ドラゴン
 		LoadDivGraph(
 			("Image/Enemy/enemy6.png"),
 			4, 4, 1, size.x, size.y, imgDragon_,
+			false
+		);
+
+		//ドラゴン
+		LoadDivGraph(
+			("Image/Enemy/Enemy 15-3.png"),
+			3, 3, 1, size.x, size.y, imgGoast_,
 			false
 		);
 	}

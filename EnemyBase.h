@@ -14,6 +14,7 @@ public:
 	//敵の種顁E
 	enum E_ENEMY_ID {
 		E_TYPE_DRAGON,
+		E_TYPE_GOAST,
 		E_TYPE_MAX
 	};
 
@@ -82,6 +83,9 @@ protected:
 
 	//敵画像�Eハンドル番号
 	int imgDragon_[4];
+
+	//敵画像�Eハンドル番号
+	int imgGoast_[3];
 
 	//敵表示座樁E
 	Vector2F pos;
