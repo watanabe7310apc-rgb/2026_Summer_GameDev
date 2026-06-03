@@ -62,7 +62,7 @@
 	//描画処琁E
 	void EnemyBase::Draw(void)
 	{
-
+		DrawBox(pos.x - (size.x / 2), pos.y - (size.y / 2), pos.x + (size.x / 2), pos.y + (size.y / 2), GetColor(200, 0, 0), false);
 
 		switch (enemyType)
 		{
@@ -71,6 +71,7 @@
 			stepAnim += ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim) % 4;
 			DrawEnemy(imgDragon_[animIdx]);
+
 		}
 			break;
 		case E_ENEMY_ID::E_TYPE_GOAST:

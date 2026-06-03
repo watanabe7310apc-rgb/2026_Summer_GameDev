@@ -130,7 +130,9 @@ void GameScene::Draw(void)
 {
 	DrawGraph(0,0, img_, false);
 
-	DrawGraph(Application::SCREEN_SIZE_X / 2 - 176 , Application::SCREEN_SIZE_Y - 650, imgtower, false);
+
+	DrawGraph(Application::SCREEN_SIZE_X / 2- 176 , Application::SCREEN_SIZE_Y - 650, imgtower, false);
+	DrawBox(Application::SCREEN_SIZE_X / 2 - 176, Application::SCREEN_SIZE_Y - 650, (Application::SCREEN_SIZE_X / 2 - 176) + 352, (Application::SCREEN_SIZE_Y - 650) + 500, GetColor(255, 255, 255), false);
 
 	front_->Draw();
 
@@ -173,8 +175,8 @@ void GameScene::CollisionCheck(void)
 	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
-	Vector2 bPos = AsoUtility::Round({ 1000, Application::SCREEN_SIZE_Y - 650 });
-	Vector2 bSize = { 372, Application::SCREEN_SIZE_Y };
+	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X/2, Application::SCREEN_SIZE_Y - 400 });
+	Vector2 bSize = { 352, 500 };
 
 
 	//敵の数だけチェックを行う
@@ -195,7 +197,7 @@ void GameScene::CollisionCheck(void)
 			break;
 		}
 
-		//敵とプレイヤーの弾の衝突判定
+		//敵とプレイヤーの攻撃の衝突判定
 		if (front_->GetAttackFlg()) {
 			//弾を発射している
 			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize)) {
@@ -204,6 +206,7 @@ void GameScene::CollisionCheck(void)
 				}
 		}
 
+		//敵と防衛地点の当たり判定
 		if (CollisionChackRectCenter(bPos, bSize, ePos, eSize)) {
 			BaseCounter-=1;
 			enemys[ii]->SetDamage(10);   //敵にダメージを与える
