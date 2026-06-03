@@ -33,6 +33,8 @@ void GameScene::SystemInit(void)
 	spoanCounter_ = 0;
 
 	clearCounter = 0;
+
+	Damage_ = false;
 }
 
 //ゲーム起動・再開時に必ず呼び出す処理
@@ -131,8 +133,8 @@ void GameScene::Draw(void)
 	DrawGraph(0,0, img_, false);
 
 
-	DrawGraph(Application::SCREEN_SIZE_X / 2- 176 , Application::SCREEN_SIZE_Y - 650, imgtower, false);
-	DrawBox(Application::SCREEN_SIZE_X / 2 - 176, Application::SCREEN_SIZE_Y - 650, (Application::SCREEN_SIZE_X / 2 - 176) + 352, (Application::SCREEN_SIZE_Y - 650) + 500, GetColor(255, 255, 255), false);
+	DrawGraph(Application::SCREEN_SIZE_X / 2- 160 , Application::SCREEN_SIZE_Y - 600, imgtower, true);
+	DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
 
 	front_->Draw();
 
@@ -175,8 +177,8 @@ void GameScene::CollisionCheck(void)
 	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
-	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X/2, Application::SCREEN_SIZE_Y - 400 });
-	Vector2 bSize = { 352, 500 };
+	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X/2, Application::SCREEN_SIZE_Y - 380 });
+	Vector2 bSize = { 320, 480 };
 
 
 	//敵の数だけチェックを行う
@@ -248,9 +250,10 @@ bool GameScene::CollisionChackRectCenter(Vector2 cPos1, Vector2 size1, Vector2 c
 		stPos1.y>edPos2.y ||
 		edPos1.y < stPos2.y)
 	{
+		Damage_ = true;
 		return false;
 	}
-
+	Damage_ = false;
 	return true;
 }
 

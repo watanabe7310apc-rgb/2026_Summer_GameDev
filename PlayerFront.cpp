@@ -4,6 +4,7 @@
 #include "Src/Application.h"
 #include "Src/AsoUtility.h"
 #include "Src/Manager/InputManager.h"
+#include "GameScene.h"
 
 //コンストラクタ
 PlayerFront::PlayerFront(void)
@@ -128,8 +129,8 @@ void PlayerFront::Update(void)
 //描画処理
 void PlayerFront::Draw(void)
 {
+	
 	DrawBox(pos_.x-(SIZE_X/2), pos_.y-(SIZE_Y/2), pos_.x + (SIZE_X/2), pos_.y + (SIZE_Y/2), GetColor(0, 200, 0), false);
-	DrawBox(pos_.x-(SIZE_X/2), pos_.y-(SIZE_Y/2), pos_.x +ATTACK_RANGE_X, pos_.y + ATTACK_RANGE_Y, GetColor(0, 200, 0), false);
 
 	switch (animState_)
 	{

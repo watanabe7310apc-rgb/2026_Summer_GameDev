@@ -39,6 +39,7 @@ public:
 
 	PlayerFront* GetLpPlayer(void) { return front_; }
 
+	bool GetDamageFlg(void) { return Damage_; }
 
 private:
 	int img_;   //背景のハンドル番号
@@ -71,5 +72,9 @@ private:
 	//当たり判定処理
 	void CollisionCheck(void);
 	bool CollisionChackRectCenter(Vector2 cPos1, Vector2 size1, Vector2 cPos2, Vector2 size2);
+
+	//ダメージフラグ
+	bool Damage_;
+
 };
 
