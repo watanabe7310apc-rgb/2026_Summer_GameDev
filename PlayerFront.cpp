@@ -48,7 +48,7 @@ void PlayerFront::SystemInit(void)
 	isDashAttack_ = false;
 
 	//ジャンプキーのフレームの初期化
-	cntJumpInput_ = 0;
+	cntJumpInput_ = INPUT_JUMP_FRAME;
 
 	//ジャンプの高度の初期化
 	nowJumplength_ = maxJumplength_ = 0;
@@ -131,6 +131,10 @@ void PlayerFront::Draw(void)
 {
 	
 	DrawBox(pos_.x-(SIZE_X/2), pos_.y-(SIZE_Y/2), pos_.x + (SIZE_X/2), pos_.y + (SIZE_Y/2), GetColor(0, 200, 0), false);
+
+	if (isAttack_) {
+		DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+	}
 
 	switch (animState_)
 	{
@@ -401,13 +405,12 @@ void PlayerFront::LoadImages(void)
 			SetJumpPow(pow);
 
 			isJump_ = true;
-			isPutJumpKey_ = true;
 		}
 
 		if (inputIns.IsTrgUp(KEY_INPUT_SPACE) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
 		{
 			//ジャンプの入力判定を強制的に終了させる
-			cntJumpInput_ =0;
+			cntJumpInput_ =INPUT_JUMP_FRAME;
 		}
 	}
 
@@ -443,6 +446,9 @@ void PlayerFront::LoadImages(void)
 			isPutJumpKey_ = false;
 
 			SetJumpPow(0.0f);
+
+			cntJumpInput_ = 0;
+
 		}
 	}
 
@@ -455,7 +461,6 @@ void PlayerFront::LoadImages(void)
 		//重力がかかりすぎるのを防ぐ
 		if (jumpPow_ > MAX_JUMP_POW) {
 			jumpPow_ = MAX_JUMP_POW;
-			isJump_ = false;
 		}
 	}
 

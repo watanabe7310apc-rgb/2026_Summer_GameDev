@@ -143,11 +143,13 @@ void GameScene::Draw(void)
 	}
 	int php = front_->GetHp();
 
-	DrawFormatString(32, 0, GetColor(0xff, 0xff, 0xff), "プレイヤーHP : %3d", php);
+	DrawBox(170, 0, 200+php, 30, GetColor(0, 255, 0), true);
 
-	DrawFormatString(32, 20, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/1", BaseCounter);
+	DrawFormatString(32, 7, GetColor(255, 255, 255), "プレイヤーHP : ");
 
-	DrawFormatString(32, 40, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
+	DrawFormatString(32, 27, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/1", BaseCounter);
+
+	DrawFormatString(32, 47, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
 }
 
 //解放処理(最後の1回のみ使用)

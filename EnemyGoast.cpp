@@ -5,7 +5,7 @@
 void EnemyGoast::SetEnemyParam(void)
 {
 	//敵の画像サイズ
-	size = { 32,32 };
+	size = { 64,64 };
 	//初期位置
 	enemySpoanPoint = GetRand(1);
 

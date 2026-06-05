@@ -5,7 +5,7 @@
 void EnemyDragon::SetEnemyParam(void)
 {
 	//敵の画像サイズ
-	size = { 64,64 };
+	size = { 128,128 };
 	//初期位置
 	enemySpoanPoint = GetRand(1);
 
