@@ -52,7 +52,7 @@ public:
 	static constexpr int INPUT_JUMP_FRAME = 5;
 
 	//プレイヤーの最大HP
-	static constexpr int FRONT_HP = 1000;
+	static constexpr int FRONT_HP = 100;
 
 	//プレイヤーの攻撃範囲
 	static constexpr int ATTACK_RANGE_X = 75;

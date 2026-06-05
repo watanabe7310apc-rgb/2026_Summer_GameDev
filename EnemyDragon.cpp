@@ -18,7 +18,10 @@ void EnemyDragon::SetEnemyParam(void)
 			break;
 		}
 	//敵の移動速度
-	speed = 2.0f;
+	speed = 3.0f;
 	//ヒットポイント
 	hp = hpMax = 10;
+
+	//ダメージを受けたときののけぞる最大時間
+	DamageTime_ = 60;
 }

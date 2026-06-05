@@ -117,12 +117,10 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		else  {
+		else {
 			EraseEnemys();
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
-
 		}
-
 
 }
 
@@ -143,13 +141,22 @@ void GameScene::Draw(void)
 	}
 	int php = front_->GetHp();
 
-	DrawBox(170, 0, 200+php, 30, GetColor(0, 255, 0), true);
+	SetFontSize(25);
 
-	DrawFormatString(32, 7, GetColor(255, 255, 255), "プレイヤーHP : ");
+	DrawBox(250, 10, 250+(php*3), 10+30, GetColor(0, 255, 0), true);
 
-	DrawFormatString(32, 27, GetColor(0xff, 0xff, 0xff), "防衛地点 %3d/1", BaseCounter);
+	DrawFormatString(32, 7, GetColor(0, 0, 0), "プレイヤーHP : ");
 
-	DrawFormatString(32, 47, GetColor(0xff, 0xff, 0xff), "Enemy :  %3d/30", clearCounter);
+	SetFontSize(64);
+
+	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %3d/1\n\n\n　　守れ!!", BaseCounter);
+
+	SetFontSize(32);
+
+	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %3d/30", clearCounter);
+
+	SetFontSize(25);
+
 }
 
 //解放処理(最後の1回のみ使用)
@@ -203,7 +210,7 @@ void GameScene::CollisionCheck(void)
 
 		//敵とプレイヤーの攻撃の衝突判定
 		if (front_->GetAttackFlg()) {
-			//弾を発射している
+			//攻撃している
 			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize)) {
 				enemys[ii]->SetDamage(10);   //敵にダメージを与える
 				clearCounter++;

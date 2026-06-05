@@ -21,5 +21,9 @@ void EnemyGoast::SetEnemyParam(void)
 	speed = 1.5f;
 	//ヒットポイント
 	hp = hpMax = 10;
+
+	//ダメージを受けたときののけぞる最大時間
+	DamageTime_ = 30;
+
 }
 

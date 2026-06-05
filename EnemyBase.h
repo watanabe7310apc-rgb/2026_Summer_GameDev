@@ -25,6 +25,7 @@ public:
 	//繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ騾溷ｺｦ
 	static constexpr float ANIM_SPEED = 0.1f;
 
+
 	//繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ
 	EnemyBase(void);
 
@@ -113,6 +114,15 @@ protected:
 
 	//繝励Ξ繧､繝､繝ｼ縺ｮ蜷代″縺ｨ謠冗判
 	void DrawEnemy(int handleId);
+
+	//のけぞる時間
+	float Damage_;
+
+	//ダメージを受けたときののけぞる最大時間
+	float DamageTime_;
+
+	//のけぞり中かを判断するフラグ
+	bool DamageFlg_;
 
 
 };
