@@ -46,6 +46,7 @@ void PlayerFront::SystemInit(void)
 	isPutJumpKey_ = false;
 	isAttack_ = false;
 	isDashAttack_ = false;
+	AtkHit_ = true;
 
 	//ジャンプキーのフレームの初期化
 	cntJumpInput_ = INPUT_JUMP_FRAME;
@@ -62,6 +63,8 @@ void PlayerFront::SystemInit(void)
 	//HPの初期化
 	hp = FRONT_HP;
 
+	//ノックバック速度
+	knockBackSpeed_ = 0.0f;
 }
 
 
@@ -73,6 +76,19 @@ void PlayerFront::GameInit(void)
 //更新処理
 void PlayerFront::Update(void)
 {
+	if (fabs(knockBackSpeed_) > 0.01f)
+	{
+		pos_.x += knockBackSpeed_;
+		knockBackSpeed_ *= KNOCKBACK_DEC;
+
+		//止まったら終了
+		if (fabs(knockBackSpeed_) < 0.1f)
+		{
+			knockBackSpeed_ = 0.0f;
+		}
+		return;
+	}
+
 	//何もしていない時だけIDLEモーション実行
 	if (!isAttack_ && !isJump_ && moveSpeed_ == 0)
 	{
@@ -474,6 +490,7 @@ void PlayerFront::LoadImages(void)
 		if ((inputIns.IsTrgDown(KEY_INPUT_F) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::LEFT)))
 		{
 				isAttack_ = true;
+				AtkHit_ = false;
 				attackAnim_ = 0;
 				stepAnim_ = 0;
 				animState_ = ANIM_STATE::ATTACK;
@@ -481,6 +498,7 @@ void PlayerFront::LoadImages(void)
 		if ((inputIns.IsTrgDown(KEY_INPUT_E) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::TOP)))
 		{
 				isAttack_ = true;
+				AtkHit_ = false;
 				attackAnim_ = 0;
 				stepAnim_ = 0;
 				animState_ = ANIM_STATE::RUN_ATTACK;
@@ -525,6 +543,19 @@ void PlayerFront::LoadImages(void)
 			aliveFlg = false;
 		}
 	}
+
+	//ノックバック中
+	void PlayerFront::AddKnockBack(float power,float enemyX)
+	{
+		//敵の向きに応じて方向を決める
+		float dir = (enemyX<pos_.x) ? 1.0f : -1.0f;
+		//敵ごとに違う値を渡せる
+		knockBackSpeed_ = power * dir;
+
+		//ダメージアニメーション
+		animState_= ANIM_STATE::DAMAGED;
+	}
+
 
 
 

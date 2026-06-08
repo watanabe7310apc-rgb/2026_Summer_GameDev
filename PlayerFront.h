@@ -3,6 +3,7 @@
 #include <map>
 #include "Src/Vector2F.h"
 #include "Src/AsoUtility.h"
+#include"EnemyBase.h"
 
 class PlayerFront
 {
@@ -58,6 +59,9 @@ public:
 	static constexpr int ATTACK_RANGE_X = 75;
 	static constexpr int ATTACK_RANGE_Y = 126;
 
+	//ノックバック中の減速率
+	static constexpr float KNOCKBACK_DEC = 0.9f;
+
 	//アニメーション状態
 	enum class ANIM_STATE
 	{
@@ -112,6 +116,17 @@ public:
 	//攻撃中判定
 	bool GetAttackFlg(void) { return isAttack_; }
 
+	//攻撃ヒット判定
+	bool GetAttackHit() const { return AtkHit_; }
+
+	void SetAttackHit(bool hit) { AtkHit_ = hit; }
+
+	//ノックバックを開始する
+	void AddKnockBack(float power,float enemyX);
+
+	//ノックバック中
+	bool IsKnockBack()const { return knockBackSpeed_ != 0.0f; }
+
 
 private:
 
@@ -134,7 +149,6 @@ private:
 
 	// プレイヤーの向き
 	AsoUtility::DIRECTION dir_;
-
 
 	//アニメーションカウンタ
 	float stepAnim_;
@@ -178,7 +192,11 @@ private:
 	//ジャンプカウンタ
 	int JumpCnt_;
 
+	//一回の攻撃ごとに一度だけ判定を取る
+	bool AtkHit_;
 
+	//ノックバック速度
+	float knockBackSpeed_;
 
 	//画像の読み込み
 	void LoadImages(void);

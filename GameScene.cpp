@@ -82,19 +82,6 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		if (front_->GetAlive()) {
-			//死亡した敵データを消去する
-			size_t size = enemys.size();   //敵のテーブルの要素数を取得
-			std::vector<EnemyBase*>::iterator eitr;
-			for (int ii = (int)size; ii > 0; ii--) {
-				eitr = enemys.begin() + (ii - 1);
-				if (!(*eitr)->GetAlive()) {
-					(*eitr)->Release();
-					delete(*eitr);
-					enemys.erase(eitr);
-				}
-			}
-		}
 		size_t size = enemys.size();               //敵のテーブルの要素数を取得
 		for (auto e : enemys) {
 			e->Update();
@@ -114,6 +101,7 @@ void GameScene::Update(void)
 					(*eitr)->Release();
 					delete(*eitr);
 					enemys.erase(eitr);
+					clearCounter++;
 				}
 			}
 		}
@@ -149,7 +137,8 @@ void GameScene::Draw(void)
 
 	SetFontSize(64);
 
-	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %3d/1\n\n\n　　守れ!!", BaseCounter);
+	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %3d/1", BaseCounter);
+	DrawFormatString(Application::SCREEN_SIZE_X/2-80, 350, GetColor(200, 0, 0), "守れ!!\n ↓");
 
 	SetFontSize(32);
 
@@ -201,19 +190,25 @@ void GameScene::CollisionCheck(void)
 
 		//敵とプレイヤーの衝突判定
 		if (CollisionChackRectCenter(pPos, pSize, ePos, eSize)) {
-			front_->SetDamage(1); 
 			//プレイヤーにダメージを与える
+			front_->SetDamage(1); 
+
+			front_->AddKnockBack(10.0f,ePos.x);
 		}
 		if (!front_->GetAlive()) {
 			break;
 		}
 
 		//敵とプレイヤーの攻撃の衝突判定
-		if (front_->GetAttackFlg()) {
+		if (front_->GetAttackFlg()&&!front_->GetAttackHit()) {
 			//攻撃している
 			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize)) {
-				enemys[ii]->SetDamage(10);   //敵にダメージを与える
-				clearCounter++;
+				enemys[ii]->SetDamage(5);   //敵にダメージを与える
+
+				//敵ごとにノックバック距離を変える
+				enemys[ii]->AddKnockBack(enemys[ii]->GetKnockBackPower());
+
+				front_->SetAttackHit(true);
 				}
 		}
 

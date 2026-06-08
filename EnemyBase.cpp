@@ -30,11 +30,14 @@
 		//逕溷ｭ倥ヵ繝ｩ繧ｰ縺ｮ蛻晄悄蛹・
 		aliveFlg = true;
 
-		//のけぞり中かを判断するフラグ
-		DamageFlg_ = false;
+		//ノックバック速度
+		knockBackSpeed_ = 0.0f;
 
-		//のけぞり中
-		Damage_ = 0;
+		//ノックバックの減衰率
+		knockBackDec_ = 0.85f;
+
+		//ノックバックのデフォルト値
+		knockBackPower_ = 20.0f;
 
 	}
 
@@ -50,15 +53,19 @@
 
 		if (stepAnim > 10 * 10)stepAnim = 0;
 
-		if (DamageFlg_)
+		if (fabs(knockBackSpeed_) > 0.01f)
 		{
-			speed = 0;
-			Damage_--;
-			if (Damage_ == 0)
+			pos.x -= knockBackSpeed_;
+			knockBackSpeed_ *= knockBackDec_;
+
+			//止まったら終了
+			if (fabs(knockBackSpeed_) < 0.1f)
 			{
-				DamageFlg_ = false;
+				knockBackSpeed_ = 0.0f;
 			}
+			return;
 		}
+
 			switch (enemySpoanPoint)
 			{
 			case 0:
@@ -74,13 +81,13 @@
 				break;
 			}
 
-
 	}
 
 	//謠冗判蜃ｦ逅・
 	void EnemyBase::Draw(void)
 	{
 		DrawBox(pos.x - (size.x / 2), pos.y - (size.y / 2), pos.x + (size.x / 2), pos.y + (size.y / 2), GetColor(200, 0, 0), false);
+		DrawBox(pos.x-50, pos.y - 100, pos.x + (hp * 5), pos.y - 70, GetColor(0, 0, 255), true);
 
 		switch (enemyType)
 		{
@@ -170,9 +177,6 @@
 	{
 		hp -= dp;
 
-		DamageFlg_ = true;
-		Damage_ = DamageTime_;
-
 		if (hp <= 0) {
 			hp = 0;
 			aliveFlg = false;
@@ -191,5 +195,14 @@
 	int EnemyBase::GetEnemyFootPosY(void)
 	{
 		return static_cast<int>(pos.y + size.y / 2);
+	}
+
+	//ノックバック中
+	void EnemyBase::AddKnockBack(float power)
+	{
+		//敵の向きに応じて方向を決める
+		float dir = (dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT) ? 1.0f : -1.0f;
+		//敵ごとに違う値を渡せる
+		knockBackSpeed_ = power * dir;
 	}
 

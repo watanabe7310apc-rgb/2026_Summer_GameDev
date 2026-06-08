@@ -18,12 +18,18 @@ void EnemyGoast::SetEnemyParam(void)
 		break;
 	}
 	//敵の移動速度
-	speed = 1.5f;
+	speed = 1.0f;
 	//ヒットポイント
 	hp = hpMax = 10;
 
-	//ダメージを受けたときののけぞる最大時間
-	DamageTime_ = 30;
-
+	//ノックバック距離
+	switch (enemySpoanPoint) {
+	case 0:
+		SetKnockBackPower(15.0f);
+		break;
+	case 1:
+		SetKnockBackPower(-15.0f);
+		break;
+	}
 }
 

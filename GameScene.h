@@ -11,7 +11,7 @@ class GameScene :
 public:
 
 	//エンカウント(値が大きいと出現する間隔が長くなる)
-	static constexpr int ENCOUNT = 70;
+	static constexpr int ENCOUNT = 130;
 
 	//防衛地点の耐久値
 	static constexpr int BASE_HP_MAX = 1;
