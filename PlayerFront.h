@@ -116,6 +116,9 @@ public:
 	//攻撃中判定
 	bool GetAttackFlg(void) { return isAttack_; }
 
+	//突き攻撃中判定
+	bool GetStrikeFlg(void) { return isStrikeAttack_; }
+
 	//攻撃ヒット判定
 	bool GetAttackHit() const { return AtkHit_; }
 
@@ -127,6 +130,11 @@ public:
 	//ノックバック中
 	bool IsKnockBack()const { return knockBackSpeed_ != 0.0f; }
 
+	//ノックバックの威力を設定する
+	void SetKnockBackPower(float p) { knockBackPower_ = p; }
+
+	//ノックバックのパワーを取得する
+	float GetKnockBackPower()const { return knockBackPower_; }
 
 private:
 
@@ -172,7 +180,7 @@ private:
 	bool isAttack_;
 
 	//ダッシュ攻撃判定
-	bool isDashAttack_;
+	bool isStrikeAttack_;
 
 	//現在の高度
 	float nowJumplength_;
@@ -197,6 +205,9 @@ private:
 
 	//ノックバック速度
 	float knockBackSpeed_;
+
+	//ノックバックのデフォルト値
+	float knockBackPower_;
 
 	//画像の読み込み
 	void LoadImages(void);
@@ -233,6 +244,9 @@ private:
 
 	//攻撃
 	void Attack(void);
+
+	//突き攻撃
+	void StrikeAttack(void);
 
 };
 

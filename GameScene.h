@@ -14,7 +14,11 @@ public:
 	static constexpr int ENCOUNT = 130;
 
 	//防衛地点の耐久値
-	static constexpr int BASE_HP_MAX = 1;
+	static constexpr int BASE_HP_MAX = 3;
+
+	//スロー表示する時間(フレーム数)
+	static constexpr int SLOW_DISP_TIME = 30;
+
 
 	//コンストラクタ
 	GameScene(void);
@@ -75,6 +79,13 @@ private:
 
 	//ダメージフラグ
 	bool Damage_;
+
+	//スロー表示用のカウンター
+	int slowCounter;
+
+	//画面振動用の一時的な描画領域
+	int tempScreen;
+
 
 };
 

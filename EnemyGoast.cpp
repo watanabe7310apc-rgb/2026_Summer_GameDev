@@ -22,14 +22,5 @@ void EnemyGoast::SetEnemyParam(void)
 	//ヒットポイント
 	hp = hpMax = 10;
 
-	//ノックバック距離
-	switch (enemySpoanPoint) {
-	case 0:
-		SetKnockBackPower(15.0f);
-		break;
-	case 1:
-		SetKnockBackPower(-15.0f);
-		break;
-	}
 }
 

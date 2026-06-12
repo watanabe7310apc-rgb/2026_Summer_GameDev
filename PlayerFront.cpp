@@ -45,7 +45,7 @@ void PlayerFront::SystemInit(void)
 	isJump_ = false;
 	isPutJumpKey_ = false;
 	isAttack_ = false;
-	isDashAttack_ = false;
+	isStrikeAttack_ = false;
 	AtkHit_ = true;
 
 	//ジャンプキーのフレームの初期化
@@ -65,6 +65,10 @@ void PlayerFront::SystemInit(void)
 
 	//ノックバック速度
 	knockBackSpeed_ = 0.0f;
+
+	//ノックバックのデフォルト値
+	knockBackPower_ = 20.0f;
+
 }
 
 
@@ -90,25 +94,24 @@ void PlayerFront::Update(void)
 	}
 
 	//何もしていない時だけIDLEモーション実行
-	if (!isAttack_ && !isJump_ && moveSpeed_ == 0)
+	if (!isAttack_ &&!isStrikeAttack_ && !isJump_ && moveSpeed_ == 0)
 	{
 		animState_ = ANIM_STATE::IDLE;
 	}
 
-	if (!isAttack_)
+	if (!isStrikeAttack_ &&!isAttack_)
 	{
 		//プレイヤーの移動操作
 		ProcessMove();
+		//プレイヤーのジャンプ操作
+		ProcessJump();
+
 	}
 	//移動(実際の座標移動)
 	Move();
 
 	//減速
 	Decelerate(MOVE_DEC);
-
-
-	//プレイヤーのジャンプ操作
-	ProcessJump();
 
 
 	//常に重力をかける
@@ -124,6 +127,10 @@ void PlayerFront::Update(void)
 
 		//攻撃
 		Attack();
+
+		//突き攻撃
+		StrikeAttack();
+
 	}
 	//プレイヤーの左端のチェック
 	if (pos_.x < 0) {
@@ -150,6 +157,10 @@ void PlayerFront::Draw(void)
 
 	if (isAttack_) {
 		DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+	}
+	else if (isStrikeAttack_) {
+		DrawBox(apos_.x - (ATTACK_RANGE_X ), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X ), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+
 	}
 
 	switch (animState_)
@@ -312,8 +323,21 @@ void PlayerFront::LoadImages(void)
 	//プレイヤーの向きと描画
 	void PlayerFront::DrawPlayer(int handleId)
 	{
-		// 座標変換
-		Vector2 pos = pos_.ToVector2();
+			// 座標変換
+			Vector2 pos = pos_.ToVector2();
+
+			if (isStrikeAttack_)
+			{
+				switch (dir_)
+				{
+				case AsoUtility::DIRECTION::E_DIR_RIGHT:
+					pos.x = pos.x * 1.05;
+					break;
+				case AsoUtility::DIRECTION::E_DIR_LEFT:
+					pos.x = pos.x / 1.07;
+					break;
+				}
+			}
 
 		//プレイヤーの向き
 		bool isLeftDir = true;
@@ -486,22 +510,26 @@ void PlayerFront::LoadImages(void)
 		InputManager& inputIns = InputManager::GetInstance();
 
 		//攻撃中は新しい攻撃を受け付けない
-		if (isAttack_)return;
+		if (isAttack_||isStrikeAttack_)return;
 		if ((inputIns.IsTrgDown(KEY_INPUT_F) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::LEFT)))
 		{
 				isAttack_ = true;
-				AtkHit_ = false;
 				attackAnim_ = 0;
 				stepAnim_ = 0;
 				animState_ = ANIM_STATE::ATTACK;
+				//ノックバック距離
+				SetKnockBackPower(10.0f);
 		}
 		if ((inputIns.IsTrgDown(KEY_INPUT_E) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::TOP)))
 		{
-				isAttack_ = true;
+				isStrikeAttack_ = true;
 				AtkHit_ = false;
 				attackAnim_ = 0;
 				stepAnim_ = 0;
 				animState_ = ANIM_STATE::RUN_ATTACK;
+				//ノックバック距離
+				SetKnockBackPower(15.0f);
+
 		}
 	}
 
@@ -509,6 +537,7 @@ void PlayerFront::LoadImages(void)
 	void PlayerFront::Attack(void)
 	{
 		if (!isAttack_) return;
+
 
 			attackAnim_ += ATTACK_ANIM_SPEED;
 
@@ -527,6 +556,33 @@ void PlayerFront::LoadImages(void)
 			{
 				SetJumpPow(0.0f);
 				isAttack_ = false;
+				attackAnim_ = 0;
+			}
+	}
+
+	//突き攻撃
+	void PlayerFront::StrikeAttack(void)
+	{
+		if (!isStrikeAttack_) return;
+
+
+			attackAnim_ += ATTACK_ANIM_SPEED;
+
+			if (dir_ == AsoUtility::DIRECTION::E_DIR_LEFT)
+			{
+				apos_.x = pos_.x - SIZE_X;
+				apos_.y = pos_.y;
+			}
+			else if(dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT)
+			{
+				apos_.x = pos_.x+SIZE_X ;
+				apos_.y = pos_.y;
+			}
+
+			if (attackAnim_ >= ATTACK_ALL_NUM)
+			{
+				SetJumpPow(0.0f);
+				isStrikeAttack_ = false;
 				attackAnim_ = 0;
 			}
 	}

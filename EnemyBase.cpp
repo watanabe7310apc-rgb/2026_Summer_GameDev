@@ -36,8 +36,6 @@
 		//ノックバックの減衰率
 		knockBackDec_ = 0.85f;
 
-		//ノックバックのデフォルト値
-		knockBackPower_ = 20.0f;
 
 	}
 
