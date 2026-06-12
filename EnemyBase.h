@@ -74,17 +74,14 @@ public:
 	//ノックバック中
 	bool IsKnockBack()const { return knockBackSpeed_ != 0.0f; }
 
-	//ノックバックのパワーを取得する
-	float GetKnockBackPower()const { return knockBackPower_; }
-
-	//ノックバックの威力を設定する
-	void SetKnockBackPower(float p) { knockBackPower_ = p; }
-
 	//謨ｵ縺ｮ遞ｮ鬘・
 	int enemyType;
 
 	//謨ｵ縺ｮ蜃ｺ迴ｾ菴咲ｽｮ
 	int enemySpoanPoint;
+
+	//攻撃がヒットしたかを判定する
+	bool hitThisAttack_;
 
 protected:
 
@@ -133,6 +130,4 @@ protected:
 	//ノックバックの減衰率
 	float knockBackDec_;
 
-	//ノックバックのデフォルト値
-	float knockBackPower_;
 };

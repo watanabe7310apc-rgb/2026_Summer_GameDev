@@ -35,6 +35,7 @@ void GameScene::SystemInit(void)
 	clearCounter = 0;
 
 	Damage_ = false;
+
 }
 
 //ゲーム起動・再開時に必ず呼び出す処理
@@ -47,6 +48,12 @@ void GameScene::GameInit(void)
 void GameScene::Update(void)
 {
 	front_->Update();
+
+	//ヒットスロー
+	if (slowCounter > 0)
+	{
+		slowCounter--;
+	}
 
 		if (spoanCounter_ < 30) {
 			//エンカウンター
@@ -86,7 +93,11 @@ void GameScene::Update(void)
 		for (auto e : enemys) {
 			e->Update();
 		}
-
+		if (!front_->GetAttackFlg()) {
+			for (auto e : enemys) {
+				e->hitThisAttack_ = false;
+			}
+		}
 
 
 		//衝突判定
@@ -117,6 +128,32 @@ void GameScene::Update(void)
 void GameScene::Draw(void)
 {
 	DrawGraph(0,0, img_, false);
+	//振動
+	if (slowCounter > 0)
+	{
+		//描画先スクリーンを再設定
+		SetDrawScreen(DX_SCREEN_BACK);
+		//0or1
+		int shake = (slowCounter / 5) % 2;
+		//0or2
+		shake *= 2;
+		//-1or1
+		shake -= 1;
+		//-5or5
+		shake *= 5;
+
+		DrawGraph(shake, shake, tempScreen, true);
+
+		//slowCounterが減るほど薄くなる
+		int alpha = 200 * slowCounter / SLOW_DISP_TIME;
+		if (alpha > 200)alpha = 255;
+		if (alpha < 0)alpha = 0;
+
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
+		DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
+			GetColor(200, 0, 0), true);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	}
 
 
 	DrawGraph(Application::SCREEN_SIZE_X / 2- 160 , Application::SCREEN_SIZE_Y - 600, imgtower, true);
@@ -137,7 +174,7 @@ void GameScene::Draw(void)
 
 	SetFontSize(64);
 
-	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %3d/1", BaseCounter);
+	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %d/%d", BaseCounter,BASE_HP_MAX);
 	DrawFormatString(Application::SCREEN_SIZE_X/2-80, 350, GetColor(200, 0, 0), "守れ!!\n ↓");
 
 	SetFontSize(32);
@@ -167,12 +204,18 @@ void GameScene::CollisionCheck(void)
 	//プレイヤーの情報
 	//プレイヤーの座標を取得
 	Vector2 pPos = front_->GetFrontPos(); // 左上
+
 	//前衛のサイズ
 	Vector2 pSize = { PlayerFront::SIZE_X,PlayerFront::SIZE_Y };
+
 	//プレイヤーの攻撃範囲
 	Vector2F pos = front_->GetFrontPos();
 	Vector2 aPos = AsoUtility::Round(front_->GetFrontAttackPos());
 	Vector2 aSize = { PlayerFront::ATTACK_RANGE_X,PlayerFront::ATTACK_RANGE_Y };
+
+	//プレイヤーの突きの攻撃範囲
+	Vector2 sPos = AsoUtility::Round(front_->GetFrontAttackPos());
+	Vector2 sSize = { PlayerFront::ATTACK_RANGE_X*2,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
 	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X/2, Application::SCREEN_SIZE_Y - 380 });
@@ -191,7 +234,7 @@ void GameScene::CollisionCheck(void)
 		//敵とプレイヤーの衝突判定
 		if (CollisionChackRectCenter(pPos, pSize, ePos, eSize)) {
 			//プレイヤーにダメージを与える
-			front_->SetDamage(1); 
+			front_->SetDamage(10); 
 
 			front_->AddKnockBack(10.0f,ePos.x);
 		}
@@ -200,13 +243,26 @@ void GameScene::CollisionCheck(void)
 		}
 
 		//敵とプレイヤーの攻撃の衝突判定
-		if (front_->GetAttackFlg()&&!front_->GetAttackHit()) {
+		if (front_->GetAttackFlg()) {
 			//攻撃している
-			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize)) {
+			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize) && !enemys[ii]->hitThisAttack_) {
 				enemys[ii]->SetDamage(5);   //敵にダメージを与える
 
+				//攻撃の種類ごとにノックバック距離を変える
+				enemys[ii]->AddKnockBack(front_->GetKnockBackPower());
+
+				enemys[ii]->hitThisAttack_ = true;
+				}
+		}
+
+		//敵とプレイヤーの突き攻撃の衝突判定
+		if (front_->GetStrikeFlg()&&!front_->GetAttackHit()) {
+			//攻撃している
+			if (CollisionChackRectCenter(sPos, sSize, ePos, eSize)) {
+				enemys[ii]->SetDamage(3);   //敵にダメージを与える
+
 				//敵ごとにノックバック距離を変える
-				enemys[ii]->AddKnockBack(enemys[ii]->GetKnockBackPower());
+				enemys[ii]->AddKnockBack(front_->GetKnockBackPower());
 
 				front_->SetAttackHit(true);
 				}
@@ -217,7 +273,7 @@ void GameScene::CollisionCheck(void)
 			BaseCounter-=1;
 			enemys[ii]->SetDamage(10);   //敵にダメージを与える
 			clearCounter++;
-
+			slowCounter = SLOW_DISP_TIME;
 		}
 
 		if (!enemys[ii]->GetAlive())continue;
