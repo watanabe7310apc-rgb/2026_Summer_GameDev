@@ -19,6 +19,9 @@ public:
 	//スロー表示する時間(フレーム数)
 	static constexpr int SLOW_DISP_TIME = 30;
 
+	//敵のスポーンする数
+	static constexpr int ENEMY_SPOAN_MAX = 20;
+
 
 	//コンストラクタ
 	GameScene(void);
@@ -44,6 +47,8 @@ public:
 	PlayerFront* GetLpPlayer(void) { return front_; }
 
 	bool GetDamageFlg(void) { return Damage_; }
+
+	bool GetClearFlg(void){ return Clear_; }
 
 private:
 	int img_;   //背景のハンドル番号
@@ -86,6 +91,11 @@ private:
 	//画面振動用の一時的な描画領域
 	int tempScreen;
 
+	//ステージクリア判定
+	bool Clear_;
+
+	//SE
+	int SE_BaseDamage_;
 
 };
 

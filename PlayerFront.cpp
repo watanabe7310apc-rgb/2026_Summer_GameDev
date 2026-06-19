@@ -69,6 +69,11 @@ void PlayerFront::SystemInit(void)
 	//ノックバックのデフォルト値
 	knockBackPower_ = 20.0f;
 
+
+	SE_Slash_ = LoadSoundMem("Image/Sound/Slash.mp3");
+	SE_Strike_ = LoadSoundMem("Image/Sound/Strike.mp3");
+	SE_Damage_ = LoadSoundMem("Image/Sound/Damage.mp3");
+
 }
 
 
@@ -239,6 +244,10 @@ void PlayerFront::Release(void)
 
 		for (int i = 0; i < DAMAGE_ALL_NUM; i++)
 			if (Damageimages_[i] != -1) DeleteGraph(Damageimages_[i]);
+
+		DeleteSoundMem(SE_Damage_);
+		DeleteSoundMem(SE_Slash_);
+		DeleteSoundMem(SE_Strike_);
 }
 
 void PlayerFront::LoadImages(void)
@@ -519,6 +528,8 @@ void PlayerFront::LoadImages(void)
 				animState_ = ANIM_STATE::ATTACK;
 				//ノックバック距離
 				SetKnockBackPower(10.0f);
+				PlaySoundMem(SE_Slash_, DX_PLAYTYPE_BACK, true);
+
 		}
 		if ((inputIns.IsTrgDown(KEY_INPUT_E) || inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::TOP)))
 		{
@@ -529,7 +540,7 @@ void PlayerFront::LoadImages(void)
 				animState_ = ANIM_STATE::RUN_ATTACK;
 				//ノックバック距離
 				SetKnockBackPower(15.0f);
-
+				PlaySoundMem(SE_Strike_, DX_PLAYTYPE_BACK,true);
 		}
 	}
 
@@ -593,6 +604,8 @@ void PlayerFront::LoadImages(void)
 	void PlayerFront::SetDamage(int dp)
 	{
 		hp -= dp;
+		PlaySoundMem(SE_Damage_, DX_PLAYTYPE_BACK, true);
+
 		if (hp <= 0)
 		{
 			hp = 0;

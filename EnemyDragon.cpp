@@ -19,6 +19,7 @@ void EnemyDragon::SetEnemyParam(void)
 		}
 	//敵の移動速度
 	speed = 1.5f;
+
 	//ヒットポイント
 	hp = hpMax = 10;
 

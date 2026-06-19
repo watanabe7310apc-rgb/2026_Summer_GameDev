@@ -6,6 +6,7 @@
 #include "../Src/Fader.h"
 #include "TitleScene.h"
 #include "../GameScene.h"
+#include "../GameClear.h"
 #include "../GameOverScene.h"
 #include "../StDefine.h"
 
@@ -168,13 +169,19 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 	switch (scene_ID) {
 	case E_SCENE_TITLE:
 		scene_ = new TitleScene();
+		PlaySoundFile("Image/Sound/TitleBGM.mp3", DX_PLAYTYPE_LOOP);
 		break;
 	case E_SCENE_GAME:
   		scene_ = new GameScene();
+		PlaySoundFile("Image/Sound/FightBGM.mp3", DX_PLAYTYPE_LOOP);
+
 		break;
 	case E_SCENE_GAMEOVER:
 		scene_ = new GameOverScene();
+		PlaySoundFile("Image/Sound/GameOver.mp3", DX_PLAYTYPE_LOOP);
 		break;
+	case E_SCENE_CLEAR:
+		scene_ = new GameClear();
 	}
 
 	//äeÉVÅ[ÉìÇÃèâä˙âª

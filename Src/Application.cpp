@@ -18,6 +18,7 @@ void Application::CreateInstance(void)
 		instance_ = new Application();
 	}
 	instance_->Init();
+
 }
 
 Application& Application::GetInstance(void)
@@ -60,6 +61,7 @@ void Application::Init(void)
 
 	SceneManager::CreateInstance();
 
+	Game_=true;
 }
 
 void Application :: Run(void)
@@ -68,7 +70,7 @@ void Application :: Run(void)
 	SceneManager& sceneManager = SceneManager::GetInstance();
 
 	//ゲームループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && Game_)
 	{
 		//フレームレート更新
 		//1/60秒超過していないなら再ループさせる
@@ -121,4 +123,9 @@ Application::Application(void)
 {
 	isInitFail_ = false;
 	isReleaseFail_ = false;
+}
+
+void Application::SetGame(int game)
+{
+	Game_ = game;
 }

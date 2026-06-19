@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneBase.h"
+
 class GameOverScene :public SceneBase
 {
 public:
@@ -18,7 +19,7 @@ public:
 
 
 private:
-	int img_;			                // タイトル画像
 
+	int imgGameOver_;			                // ゲームオーバー画像
 };
 

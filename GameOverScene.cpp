@@ -6,7 +6,7 @@
 
 GameOverScene::GameOverScene(void) {
 
-	img_ = -1;
+	imgGameOver_ = -1;
 }
 
 GameOverScene::~GameOverScene(void) {
@@ -15,8 +15,7 @@ GameOverScene::~GameOverScene(void) {
 
 void GameOverScene::SystemInit(void) {
 
-	img_ = LoadGraph("image/GameOver.png");
-
+	imgGameOver_ = LoadGraph("image/GameOver.png");
 }
 
 void GameOverScene::GameInit(void) {
@@ -35,20 +34,15 @@ void GameOverScene::Update(void) {
 
 void GameOverScene::Draw(void)
 {
-	// タイトル画像を画面中央に描画
-	int w, h;
-	GetGraphSize(img_, &w, &h);
+		DrawGraph(0, 0, imgGameOver_, true);
+		SetFontSize(64);
 
-	int x = (Application::SCREEN_SIZE_X - w) / 2;
-	int y = (Application::SCREEN_SIZE_Y - h) / 2;
+		DrawFormatString(Application::SCREEN_SIZE_X / 2 - 550, 900, GetColor(255, 0, 0), "SPACEキー/Aボタンを押してタイトルへ");
 
-	DrawGraph(x, y, img_, true);
-
-	// テキスト表示
-	DrawString(x, y + h + 20, "Press SPACE to Start", GetColor(255, 255, 255));
 }
+
 
 void GameOverScene::Release(void)
 {
-	DeleteGraph(img_);
+	DeleteGraph(imgGameOver_);
 }

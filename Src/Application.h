@@ -42,6 +42,11 @@ public:
 	//解放成功/失敗の判定
 	bool IsReleaseFail(void)const;
 
+	//ゲーム続行のフラグの取得
+	bool GetGameFlg(void) { return Game_; }
+
+	void SetGame(int game);
+
 private:
 
 	//静的インスタンス
@@ -65,4 +70,7 @@ private:
 
 	//FPS
 	FpsControl* fps_;
+
+	//ゲーム続行
+	bool Game_;
 };

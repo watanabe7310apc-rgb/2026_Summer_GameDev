@@ -19,6 +19,7 @@
     <ClCompile Include="EnemyDragon.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
+    <ClCompile Include="GameClear.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
@@ -40,5 +41,6 @@
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="EnemyGoast.h" />
+    <ClInclude Include="GameClear.h" />
   </ItemGroup>
 </Project>

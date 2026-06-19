@@ -27,6 +27,7 @@ void GameScene::SystemInit(void)
 
 	img_ = LoadGraph("Image/ゲーム背景(城壁).jpg");
 	imgtower = LoadGraph("Image/Tower.png");
+	SE_BaseDamage_ = LoadSoundMem("Image/Sound/BaseDamage.mp3");
 
 	BaseCounter = BASE_HP_MAX;
 
@@ -35,6 +36,9 @@ void GameScene::SystemInit(void)
 	clearCounter = 0;
 
 	Damage_ = false;
+
+	Clear_ = false;
+
 
 }
 
@@ -47,6 +51,8 @@ void GameScene::GameInit(void)
 //更新処理
 void GameScene::Update(void)
 {
+
+
 	front_->Update();
 
 	//ヒットスロー
@@ -55,7 +61,7 @@ void GameScene::Update(void)
 		slowCounter--;
 	}
 
-		if (spoanCounter_ < 30) {
+		if (spoanCounter_ < ENEMY_SPOAN_MAX) {
 			//エンカウンター
 			enCounter++;
 			if (enCounter > ENCOUNT) {
@@ -102,7 +108,7 @@ void GameScene::Update(void)
 
 		//衝突判定
 		CollisionCheck();
-		if (front_->GetAlive() && BaseCounter > 0&&clearCounter<30) {
+		if (front_->GetAlive() && BaseCounter > 0&&clearCounter< ENEMY_SPOAN_MAX) {
 			//死亡した敵データを消去する
 			size_t size = enemys.size();   //敵のテーブルの要素数を取得
 			std::vector<EnemyBase*>::iterator eitr;
@@ -116,10 +122,21 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		else {
+		else
+		{
 			EraseEnemys();
-			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+
+			if (!front_->GetAlive() || BaseCounter <= 0)
+			{
+				SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+			}
+			else
+			{
+				SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
+			}
+		
 		}
+
 
 }
 
@@ -179,7 +196,7 @@ void GameScene::Draw(void)
 
 	SetFontSize(32);
 
-	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %3d/30", clearCounter);
+	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %d/%d", clearCounter,ENEMY_SPOAN_MAX);
 
 	SetFontSize(25);
 
@@ -194,6 +211,9 @@ void GameScene::Release(void)
 	delete front_;
 
 	EraseEnemys();
+
+	DeleteSoundMem(SE_BaseDamage_);
+
 }
 
 //当たり判定処理
@@ -236,7 +256,7 @@ void GameScene::CollisionCheck(void)
 			//プレイヤーにダメージを与える
 			front_->SetDamage(10); 
 
-			front_->AddKnockBack(10.0f,ePos.x);
+			front_->AddKnockBack(15.0f,ePos.x);
 		}
 		if (!front_->GetAlive()) {
 			break;
@@ -246,7 +266,7 @@ void GameScene::CollisionCheck(void)
 		if (front_->GetAttackFlg()) {
 			//攻撃している
 			if (CollisionChackRectCenter(aPos, aSize, ePos, eSize) && !enemys[ii]->hitThisAttack_) {
-				enemys[ii]->SetDamage(5);   //敵にダメージを与える
+				enemys[ii]->SetDamage(7);   //敵にダメージを与える
 
 				//攻撃の種類ごとにノックバック距離を変える
 				enemys[ii]->AddKnockBack(front_->GetKnockBackPower());
@@ -270,10 +290,11 @@ void GameScene::CollisionCheck(void)
 
 		//敵と防衛地点の当たり判定
 		if (CollisionChackRectCenter(bPos, bSize, ePos, eSize)) {
-			BaseCounter-=1;
+			BaseCounter--;
 			enemys[ii]->SetDamage(10);   //敵にダメージを与える
-			clearCounter++;
 			slowCounter = SLOW_DISP_TIME;
+			PlaySoundMem(SE_BaseDamage_, DX_PLAYTYPE_BACK,true);
+
 		}
 
 		if (!enemys[ii]->GetAlive())continue;

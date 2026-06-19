@@ -209,6 +209,11 @@ private:
 	//ノックバックのデフォルト値
 	float knockBackPower_;
 
+	//SE
+	int SE_Slash_;
+	int SE_Strike_;
+	int SE_Damage_;
+
 	//画像の読み込み
 	void LoadImages(void);
 
