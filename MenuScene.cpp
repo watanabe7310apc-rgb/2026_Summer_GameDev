@@ -1,32 +1,32 @@
+#include "MenuScene.h"
 #include <DxLib.h>
 #include <time.h>
-#include "Application.h"
-#include "SceneManager.h"
-#include "TitleScene.h"
-#include "Manager/InputManager.h"
+#include "Src/Application.h"
+#include "Src/SceneManager.h"
+#include "Src/Manager/InputManager.h"
 
-TitleScene::TitleScene(void) {
-
-}
-
-TitleScene::~TitleScene(void) {
+MenuScene::MenuScene(void) {
 
 }
 
-void TitleScene::SystemInit(void) {
+MenuScene::~MenuScene(void) {
 
-	imgTitle_ = LoadGraph("Image/Title2.PNG");
-	imgStart_ = LoadGraph("Image/Start.png");
+}
+
+void MenuScene::SystemInit(void) {
+
+	imgSelect_ = LoadGraph("Image/LevelSelect.PNG");
+	imgHaikei_ = LoadGraph("Image/SelectHaikei.jpg");
 
 	Select_ = 0;
 
 }
 
-void TitleScene::GameInit(void) {
+void MenuScene::GameInit(void) {
 
 }
 
-void TitleScene::Update(void) {
+void MenuScene::Update(void) {
 
 	InputManager& inputIns = InputManager::GetInstance();
 	Application::GetInstance();
@@ -36,9 +36,9 @@ void TitleScene::Update(void) {
 		Select_--;
 		if (Select_ < 0)Select_ = 1;
 	}
-	if (inputIns.IsTrgDown(KEY_INPUT_DOWN)) {
+ 	if (inputIns.IsTrgDown(KEY_INPUT_DOWN)) {
 		Select_++;
-		if (Select_ > 1)Select_ = 0;
+		if (Select_ > 2)Select_ = 0;
 	}
 
 	//決定
@@ -46,12 +46,12 @@ void TitleScene::Update(void) {
 		if (Select_ == 1) {
 
 			//back
-			Application::GetInstance().SetGame(false);
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_TITLE);
 		}
-		else if(Select_==0){
+		else if (Select_ == 0) {
 			PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
 			//ステージ番号をゲームへ渡す
-			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_SELECT);
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
 		}
 	}
 
@@ -62,16 +62,16 @@ void TitleScene::Update(void) {
 
 }
 
-void TitleScene::Draw(void) 
+void MenuScene::Draw(void)
 {
 	// タイトル画像を画面中央に描画
 	int w, h;
-	GetGraphSize(imgTitle_, &w, &h);
+	GetGraphSize(imgHaikei_, &w, &h);
 
 	int x = (Application::SCREEN_SIZE_X - w) / 2;
 	int y = (Application::SCREEN_SIZE_Y - h) / 2;
 
-	DrawGraph(x, y, imgTitle_, true);
+	DrawGraph(x, y, imgHaikei_, true);
 
 	switch (Select_)
 	{
@@ -82,15 +82,13 @@ void TitleScene::Draw(void)
 		DrawBox(((Application::SCREEN_SIZE_X - START_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - 400) + 155, (Application::SCREEN_SIZE_X - START_SIZE_X) / 2 + START_SIZE_X + 10, (Application::SCREEN_SIZE_Y - 400) + 238, GetColor(255, 255, 0), true);
 		break;
 	}
-	
-	DrawGraph((Application::SCREEN_SIZE_X - START_SIZE_X) / 2, Application::SCREEN_SIZE_Y - 400, imgStart_, true);
 
+	DrawGraph((Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2, Application::SCREEN_SIZE_Y - TITLE_SIZE_Y-(TITLE_SIZE_Y/2), imgSelect_, true);
 
 }
 
-void TitleScene::Release(void) 
+void MenuScene::Release(void)
 {
-	DeleteGraph(imgTitle_);
-	DeleteGraph(imgStart_);
+	DeleteGraph(imgHaikei_);
+	DeleteGraph(imgSelect_);
 }
-
