@@ -24,6 +24,7 @@ void GameScene::SystemInit(void)
 {
 	front_ = new PlayerFront();
 	front_->SystemInit();
+	player2_ = new Player2();
 
 	img_ = LoadGraph("Image/ƒQ[ƒ€”wŒi(é•Ç).jpg");
 	imgtower = LoadGraph("Image/Tower.png");
@@ -54,6 +55,7 @@ void GameScene::Update(void)
 
 
 	front_->Update();
+	player2_->Update();
 
 	//ƒqƒbƒgƒXƒ[
 	if (slowCounter > 0)
@@ -177,6 +179,7 @@ void GameScene::Draw(void)
 	DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
 
 	front_->Draw();
+	player2_->Draw();
 
 	for (auto e:enemys) {
 		e->Draw();
@@ -209,6 +212,9 @@ void GameScene::Release(void)
 
 	front_->Release();
 	delete front_;
+
+	delete player2_;
+	player2_ = nullptr;
 
 	EraseEnemys();
 

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="EnemyDragon.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Fader.cpp" />
+    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Src\SceneManager.cpp" />
     <ClCompile Include="Src\Application.cpp" />
     <ClCompile Include="Src\AsoUtility.cpp" />
@@ -40,6 +42,7 @@
     <ClCompile Include="Src\Vector2F.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="EnemyGoast.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Fader.h" />
+    <ClInclude Include="Player2.h" />
     <ClInclude Include="Src\SceneManager.h" />
     <ClInclude Include="Src\Application.h" />
     <ClInclude Include="Src\AsoUtility.h" />

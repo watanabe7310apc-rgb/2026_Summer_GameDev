@@ -3,6 +3,7 @@
 #include <list>
 #include "SceneBase.h"
 #include "PlayerFront.h"
+#include "Player2.h"
 #include "EnemyBase.h"
 
 class GameScene :
@@ -55,6 +56,7 @@ private:
 	int imgtower;//拠点のハンドル番号
 
 	PlayerFront* front_;
+	Player2* player2_;
 	EnemyBase* enemy_;
 
 	//Enemyクラスのインスタンスのポインタの可変長テーブル

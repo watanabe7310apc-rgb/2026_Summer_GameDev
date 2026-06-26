@@ -20,6 +20,8 @@
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
     <ClCompile Include="GameClear.cpp" />
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Player2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
@@ -42,5 +44,7 @@
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="EnemyGoast.h" />
     <ClInclude Include="GameClear.h" />
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Player2.h" />
   </ItemGroup>
 </Project>
