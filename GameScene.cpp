@@ -163,6 +163,7 @@ void GameScene::Draw(void)
 		//-5or5
 		shake *= 5;
 
+
 		DrawGraph(shake, shake, tempScreen, true);
 
 		//slowCounter‚ªŒ¸‚é‚Ù‚Ç”–‚­‚È‚é
@@ -176,12 +177,12 @@ void GameScene::Draw(void)
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 
+	player2_->Draw();
 
 	DrawGraph(Application::SCREEN_SIZE_X / 2- 160 , Application::SCREEN_SIZE_Y - 600, imgtower, true);
 	DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
 
 	front_->Draw();
-	player2_->Draw();
 
 	for (auto e:enemys) {
 		e->Draw();

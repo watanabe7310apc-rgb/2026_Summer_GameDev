@@ -6,9 +6,9 @@ Player2::Player2()
 {
     // 座標
     pos.x = 960;
-    pos.y = 420;
+    pos.y = 470;
 
-    image = -1;
+    image = LoadGraph("Image/Archer/Archer.png");
 
     isRight = true;
 
@@ -76,23 +76,31 @@ void Player2::Update()
 
 void Player2::Draw()
 {
-    // 仮のプレイヤー2（青い四角）
-    DrawBox(
-        pos.x - 25,
-        pos.y - 25,
-        pos.x + 40,
-        pos.y + 60,
-        GetColor(0, 0, 255),
-        TRUE);
+    double scale = 2.0; // 好きな倍率
 
     if (isRight)
     {
-        DrawGraph(pos.x, pos.y, image, TRUE);
+        DrawRotaGraph(
+            pos.x,
+            pos.y,
+            scale,
+            0.0,
+            image,
+            TRUE,
+            FALSE
+        );
     }
     else
     {
-        DrawRotaGraph(pos.x, pos.y, 1.0, 0.0, image, TRUE, TRUE);
-
+        DrawRotaGraph(
+            pos.x,
+            pos.y,
+            scale,
+            0.0,
+            image,
+            TRUE,
+            TRUE
+        );
     }
 
     for (int i = 0; i < ARROW_MAX; i++)
@@ -103,5 +111,7 @@ void Player2::Draw()
 
 void Player2::Release()
 {
+    DeleteGraph(image);
+
     DeleteSoundMem(shotSE);
 }

@@ -51,7 +51,7 @@ void Arrow::Draw()
     DrawRotaGraph(
         pos.x,
         pos.y,
-        1.0,
+        1.5,
         angle,
         image,
         TRUE
