@@ -15,6 +15,8 @@ Player2::Player2()
     oldMouse = false;
 
     shotCoolTime = 0;
+
+    shotSE = LoadSoundMem("Image/Sound/Arrow.mp3");
 }
 
 void Player2::Update()
@@ -52,6 +54,8 @@ void Player2::Update()
             if (!arrow[i].isAlive)
             {
                 arrow[i].Shot(pos, target);
+
+                PlaySoundMem(shotSE, DX_PLAYTYPE_BACK);
 
                 shotCoolTime = SHOT_INTERVAL;
 
@@ -95,4 +99,9 @@ void Player2::Draw()
     {
         arrow[i].Draw();
     }
+}
+
+void Player2::Release()
+{
+    DeleteSoundMem(shotSE);
 }

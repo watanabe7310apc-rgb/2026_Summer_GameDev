@@ -21,4 +21,19 @@ public:
 
     void Draw();
 
+    // 矢の座標を取得
+    Vector2 GetPos()
+    {
+        return pos;
+    }
+
+    // 矢を消す
+    void Destroy()
+    {
+        isAlive = false;
+    }
+
+    // 矢の当たり判定サイズ
+    static const int SIZE_X = 20;
+    static const int SIZE_Y = 8;
 };

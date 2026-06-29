@@ -22,10 +22,19 @@ public:
 
     void Draw();
 
+    void Release();
+
+    Arrow* GetArrow()
+    {
+        return arrow;
+    }
+
 private:
 
     bool oldMouse;
 
     int shotCoolTime;
     static const int SHOT_INTERVAL = 30;
+
+    int shotSE;
 };

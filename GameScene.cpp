@@ -29,6 +29,7 @@ void GameScene::SystemInit(void)
 	img_ = LoadGraph("Image/ゲーム背景(城壁).jpg");
 	imgtower = LoadGraph("Image/Tower.png");
 	SE_BaseDamage_ = LoadSoundMem("Image/Sound/BaseDamage.mp3");
+	scopeImage = LoadGraph("Image/Archer/Scope.png");
 
 	BaseCounter = BASE_HP_MAX;
 
@@ -40,6 +41,7 @@ void GameScene::SystemInit(void)
 
 	Clear_ = false;
 
+	SetMouseDispFlag(FALSE);
 
 }
 
@@ -203,6 +205,18 @@ void GameScene::Draw(void)
 
 	SetFontSize(25);
 
+	//マウス標準フレーム
+	int mx, my;
+	GetMousePoint(&mx, &my);
+
+	DrawRotaGraph(
+		mx,
+		my,
+		0.3,
+		0.0,
+		scopeImage,
+		TRUE
+	);
 }
 
 //解放処理(最後の1回のみ使用)
@@ -213,12 +227,15 @@ void GameScene::Release(void)
 	front_->Release();
 	delete front_;
 
+	player2_->Release();
 	delete player2_;
 	player2_ = nullptr;
 
 	EraseEnemys();
 
 	DeleteSoundMem(SE_BaseDamage_);
+
+	DeleteGraph(scopeImage);
 
 }
 
@@ -306,6 +323,36 @@ void GameScene::CollisionCheck(void)
 		if (!enemys[ii]->GetAlive())continue;
 	}
 
+	Arrow* arrows = player2_->GetArrow();
+
+	for (int i = 0; i < Player2::ARROW_MAX; i++)
+	{
+		if (!arrows[i].isAlive)
+			continue;
+
+		Vector2 aPos = arrows[i].GetPos();
+
+		for (auto e : enemys)
+		{
+			if (!e->GetAlive())
+				continue;
+
+			Vector2 ePos = AsoUtility::Round(e->GetEnemyPos());
+			Vector2 eSize = e->GetEnemySize();
+
+			// 当たり判定
+			if (CollisionChackRectCenter(
+				aPos,
+				{ 32,32 },      // 矢の当たり判定サイズ
+				ePos,
+				eSize))
+			{
+				e->SetDamage(3);      // ダメージ
+				arrows[i].Destroy();  // 矢を消す
+				break;
+			}
+		}
+	}
 }
 
 //中心座標から衝突安定を行う

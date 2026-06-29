@@ -99,5 +99,7 @@ private:
 	//SE
 	int SE_BaseDamage_;
 
+	//マウス標準
+	int scopeImage;
 };
 
