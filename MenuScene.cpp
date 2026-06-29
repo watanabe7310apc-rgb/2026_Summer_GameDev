@@ -76,10 +76,13 @@ void MenuScene::Draw(void)
 	switch (Select_)
 	{
 	case 0:
-		DrawBox(((Application::SCREEN_SIZE_X - START_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - 400) - 10, (Application::SCREEN_SIZE_X - START_SIZE_X) / 2 + START_SIZE_X + 10, (Application::SCREEN_SIZE_Y - 400) + 73, GetColor(255, 255, 0), true);
+		DrawBox(((Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)) - 10, (Application::SCREEN_SIZE_X - TITLE_SIZE_X)/2+TITLE_SIZE_X + 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)) + 113, GetColor(255, 255, 0), true);
 		break;
 	case 1:
-		DrawBox(((Application::SCREEN_SIZE_X - START_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - 400) + 155, (Application::SCREEN_SIZE_X - START_SIZE_X) / 2 + START_SIZE_X + 10, (Application::SCREEN_SIZE_Y - 400) + 238, GetColor(255, 255, 0), true);
+		DrawBox(((Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)+148) - 10, (Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2 + TITLE_SIZE_X + 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)) + 257, GetColor(255, 255, 0), true);
+		break;
+	case 2:
+		DrawBox(((Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2) - 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)+302) - 10, (Application::SCREEN_SIZE_X - TITLE_SIZE_X) / 2 + TITLE_SIZE_X + 10, (Application::SCREEN_SIZE_Y - TITLE_SIZE_Y - (TITLE_SIZE_Y / 2)) + 412, GetColor(255, 255, 0), true);
 		break;
 	}
 
