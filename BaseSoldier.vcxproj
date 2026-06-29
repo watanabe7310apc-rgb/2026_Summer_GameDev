@@ -26,6 +26,7 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Fader.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Fader.h" />

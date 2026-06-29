@@ -6,6 +6,7 @@
 enum E_SCENE_ID {
 	E_SCENE_NON,
 	E_SCENE_TITLE,                      //タイトル画面
+	E_SCENE_SELECT,                     //レベル選択画面
 	E_SCENE_GAME,                       //ゲームプレイ画面
 	E_SCENE_GAMEOVER,                   //ゲームオーバー画面
 	E_SCENE_CLEAR,						//ゲームクリア画面

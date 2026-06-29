@@ -9,6 +9,7 @@
 #include "../GameClear.h"
 #include "../GameOverScene.h"
 #include "../StDefine.h"
+#include "../MenuScene.h"
 
 SceneManager* SceneManager::instance_ = nullptr;
 
@@ -169,6 +170,10 @@ void SceneManager::DoChangeScene(E_SCENE_ID sceneId)
 	switch (scene_ID) {
 	case E_SCENE_TITLE:
 		scene_ = new TitleScene();
+		PlaySoundFile("Image/Sound/TitleBGM.mp3", DX_PLAYTYPE_LOOP);
+		break;
+	case E_SCENE_SELECT:
+		scene_ = new MenuScene();
 		PlaySoundFile("Image/Sound/TitleBGM.mp3", DX_PLAYTYPE_LOOP);
 		break;
 	case E_SCENE_GAME:

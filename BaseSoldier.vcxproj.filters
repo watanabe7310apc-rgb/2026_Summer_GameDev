@@ -20,8 +20,12 @@
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
     <ClCompile Include="GameClear.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Player2.cpp" />
+=======
+    <ClCompile Include="MenuScene.cpp" />
+>>>>>>> f33da6a (メニューシーンクラス追加(不具合あり))
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
@@ -44,7 +48,11 @@
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="EnemyGoast.h" />
     <ClInclude Include="GameClear.h" />
+<<<<<<< HEAD
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Player2.h" />
+=======
+    <ClInclude Include="MenuScene.h" />
+>>>>>>> f33da6a (メニューシーンクラス追加(不具合あり))
   </ItemGroup>
 </Project>
