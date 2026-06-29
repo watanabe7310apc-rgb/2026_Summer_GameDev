@@ -5,6 +5,7 @@
 #include "EnemyBase.h"
 #include "EnemyDragon.h"
 #include "EnemyGoast.h"
+#include "Boar.h"
 #include "Src/SceneManager.h"
 
 //コンストラクタ
@@ -86,6 +87,9 @@ void GameScene::Update(void)
 					break;
 				case EnemyBase::E_ENEMY_ID::E_TYPE_GOAST:
 					e = new EnemyGoast();
+					break;
+				case EnemyBase::E_ENEMY_ID::E_TYPE_BOAR:
+					e = new Boar();
 					break;
 				}
 

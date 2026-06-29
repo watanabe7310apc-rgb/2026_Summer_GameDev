@@ -11,10 +11,10 @@ void EnemyDragon::SetEnemyParam(void)
 
 		switch (enemySpoanPoint) {
 		case 0:
-			pos = { -64.0f,850.0f };
+			pos = { -64.0f,500.0f };
 			break;
 		case 1:
-			pos = { Application::SCREEN_SIZE_X,850.0f };
+			pos = { Application::SCREEN_SIZE_X,500.0f };
 			break;
 		}
 	//敵の移動速度

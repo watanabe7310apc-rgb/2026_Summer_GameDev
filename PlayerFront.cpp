@@ -41,18 +41,10 @@ void PlayerFront::SystemInit(void)
 	moveSpeed_ = 0.0f;
 
 	//ジャンプ力
-	jumpPow_ = 0.0f;
-	isJump_ = false;
-	isPutJumpKey_ = false;
 	isAttack_ = false;
 	isStrikeAttack_ = false;
 	AtkHit_ = true;
 
-	//ジャンプキーのフレームの初期化
-	cntJumpInput_ = INPUT_JUMP_FRAME;
-
-	//ジャンプの高度の初期化
-	nowJumplength_ = maxJumplength_ = 0;
 
 	//攻撃判定の初期化
 	attackAnim_ = 0;
@@ -99,44 +91,31 @@ void PlayerFront::Update(void)
 	}
 
 	//何もしていない時だけIDLEモーション実行
-	if (!isAttack_ &&!isStrikeAttack_ && !isJump_ && moveSpeed_ == 0)
+	if (!isAttack_ &&!isStrikeAttack_&& moveSpeed_ == 0)
 	{
 		animState_ = ANIM_STATE::IDLE;
 	}
 
-	if (!isStrikeAttack_ &&!isAttack_)
+	if (!isAttack_&&!isStrikeAttack_)
 	{
 		//プレイヤーの移動操作
 		ProcessMove();
-		//プレイヤーのジャンプ操作
-		ProcessJump();
 
+		//移動(実際の座標移動)
+		Move();
 	}
-	//移動(実際の座標移動)
-	Move();
-
 	//減速
 	Decelerate(MOVE_DEC);
 
+	//プレイヤーの攻撃操作
+	ProcessAttack();
 
-	//常に重力をかける
-	//(ジャンプ中でなくても落下する)
-	AddGravity();
+	//攻撃
+	Attack();
 
-	//ジャンプ
-	Jump();
-	if (!isJump_)
-	{
-		//プレイヤーの攻撃操作
-		ProcessAttack();
+	//突き攻撃
+	StrikeAttack();
 
-		//攻撃
-		Attack();
-
-		//突き攻撃
-		StrikeAttack();
-
-	}
 	//プレイヤーの左端のチェック
 	if (pos_.x < 0) {
 		pos_.x = 0;
@@ -147,10 +126,6 @@ void PlayerFront::Update(void)
 		pos_.x = Application::SCREEN_SIZE_X - SIZE_X;
 	}
 
-	//プレイヤーの上端のチェック
-	if (pos_.y < 0) {
-		pos_.y = 0;
-	}
 
 }
 
@@ -177,21 +152,6 @@ void PlayerFront::Draw(void)
 			DrawPlayer(Idleimages_[animIdx]);
 		}
 		break;
-		case ANIM_STATE::JUMP_UP:
-		{
-			stepAnim_ += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % JUMP_ALL_NUM;
-			DrawPlayer(JumpUpimages_[animIdx]);
-			break;
-		}
-
-		case ANIM_STATE::JUMP_DOWN:
-		{
-			stepAnim_ += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % JUMP_ALL_NUM;
-			DrawPlayer(JumpDownimages_[animIdx]);
-			break;
-		}
 
 		case ANIM_STATE::RUN:
 		{
@@ -269,24 +229,6 @@ void PlayerFront::LoadImages(void)
 		false
 	);
 
-	//ジャンプ
-	LoadDivGraph(
-		("Image/Knight/spr_knight_JumpUp.png"),
-		JUMP_ALL_NUM,
-		JUMP_ALL_NUM, 1,
-		SIZE_X, SIZE_Y,
-		JumpUpimages_,
-		false
-	);
-	//降下
-	LoadDivGraph(
-		("Image/Knight/spr_knight_JumpDown.png"),
-		JUMP_ALL_NUM,
-		JUMP_ALL_NUM, 1,
-		SIZE_X, SIZE_Y,
-		JumpDownimages_,
-		false
-	);
 
 	//ダメージ
 	LoadDivGraph(
@@ -429,89 +371,6 @@ void PlayerFront::LoadImages(void)
 		pos_.x += moveSpeed_;
 	}
 
-	//重力をかける
-	void PlayerFront::AddGravity(void)
-	{
-		//現在のジャンプ力に重力を加える
-		float pow = jumpPow_ + GRAVITY;
-		SetJumpPow(pow);
-	}
-
-	//プレイヤーのジャンプ操作
-	void PlayerFront::ProcessJump(void)
-	{
-		InputManager& inputIns = InputManager::GetInstance();
-		// 接地していないと、ジャンプを開始できないようにする
-
-		if ((inputIns.IsNew(KEY_INPUT_SPACE) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
-			&& cntJumpInput_ < INPUT_JUMP_FRAME)
-		{
-			//ジャンプカウンタを増やす
-			cntJumpInput_ += 1;
-
-			float pow =
-				jumpPow_ - (MAX_JUMP_POW / static_cast<float>(INPUT_JUMP_FRAME));
-			SetJumpPow(pow);
-
-			isJump_ = true;
-		}
-
-		if (inputIns.IsTrgUp(KEY_INPUT_SPACE) || inputIns.IsPadBtnTrgUp(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
-		{
-			//ジャンプの入力判定を強制的に終了させる
-			cntJumpInput_ =INPUT_JUMP_FRAME;
-		}
-	}
-
-	//ジャンプ
-	void PlayerFront::Jump(void)
-	{
-		pos_.y += jumpPow_;
-		
-		if (pos_.y < 900)
-		{
-			nowJumplength_ = pos_.y;
-		}
-		if (nowJumplength_ < maxJumplength_)
-		{
-			maxJumplength_ = nowJumplength_;
-			animState_ = ANIM_STATE::JUMP_UP;
-		}
-		else if (pos_.y < 900&&nowJumplength_ > maxJumplength_)
-		{
-			animState_ = ANIM_STATE::JUMP_DOWN;
-			nowJumplength_ = maxJumplength_ = pos_.y;
-		}
-
-
-
-		//仮の接地(衝突)判定
-		if (pos_.y > 900)
-		{
-			pos_.y = 900;
-
-			//地面についたのでジャンプをリセットする
-			isJump_ = false;
-			isPutJumpKey_ = false;
-
-			SetJumpPow(0.0f);
-
-			cntJumpInput_ = 0;
-
-		}
-	}
-
-	//ジャンプ力の設定
-	void PlayerFront::SetJumpPow(float pow)
-	{
-		//ジャンプ力を設定
-		jumpPow_ = pow;
-
-		//重力がかかりすぎるのを防ぐ
-		if (jumpPow_ > MAX_JUMP_POW) {
-			jumpPow_ = MAX_JUMP_POW;
-		}
-	}
 
 	//攻撃操作
 	void PlayerFront::ProcessAttack(void)
@@ -565,7 +424,6 @@ void PlayerFront::LoadImages(void)
 
 			if (attackAnim_ >= ATTACK_ALL_NUM)
 			{
-				SetJumpPow(0.0f);
 				isAttack_ = false;
 				attackAnim_ = 0;
 			}
@@ -592,7 +450,6 @@ void PlayerFront::LoadImages(void)
 
 			if (attackAnim_ >= ATTACK_ALL_NUM)
 			{
-				SetJumpPow(0.0f);
 				isStrikeAttack_ = false;
 				attackAnim_ = 0;
 			}

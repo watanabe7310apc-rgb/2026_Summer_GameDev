@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="EnemyBase.cpp" />
+    <ClCompile Include="EnemyDragon.cpp" />
+    <ClCompile Include="EnemyGoast.cpp" />
+    <ClCompile Include="GameClear.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="PlayerFront.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Src\Fader.cpp" />
+    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Src\SceneManager.cpp" />
     <ClCompile Include="Src\Application.cpp" />
     <ClCompile Include="Src\AsoUtility.cpp" />
@@ -14,24 +23,21 @@
     <ClCompile Include="Src\TitleScene.cpp" />
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="EnemyBase.cpp" />
-    <ClCompile Include="EnemyDragon.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
-    <ClCompile Include="EnemyGoast.cpp" />
-    <ClCompile Include="GameClear.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Arrow.cpp" />
-    <ClCompile Include="Player2.cpp" />
-=======
-    <ClCompile Include="MenuScene.cpp" />
->>>>>>> f33da6a (メニューシーンクラス追加(不具合あり))
+    <ClCompile Include="Boar.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="EnemyBase.h" />
+    <ClInclude Include="EnemyDragon.h" />
+    <ClInclude Include="EnemyGoast.h" />
+    <ClInclude Include="GameClear.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerFront.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Src\Fader.h" />
+    <ClInclude Include="Player2.h" />
     <ClInclude Include="Src\SceneManager.h" />
     <ClInclude Include="Src\Application.h" />
     <ClInclude Include="Src\AsoUtility.h" />
@@ -43,16 +49,6 @@
     <ClInclude Include="Src\Vector2.h" />
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
-    <ClInclude Include="EnemyBase.h" />
-    <ClInclude Include="EnemyDragon.h" />
-    <ClInclude Include="GameOverScene.h" />
-    <ClInclude Include="EnemyGoast.h" />
-    <ClInclude Include="GameClear.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Arrow.h" />
-    <ClInclude Include="Player2.h" />
-=======
-    <ClInclude Include="MenuScene.h" />
->>>>>>> f33da6a (メニューシーンクラス追加(不具合あり))
+    <ClInclude Include="Boar.h" />
   </ItemGroup>
 </Project>

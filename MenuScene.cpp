@@ -19,7 +19,7 @@ void MenuScene::SystemInit(void) {
 	imgHaikei_ = LoadGraph("Image/SelectHaikei.jpg");
 
 	Select_ = 0;
-
+	Slide_ = false;
 }
 
 void MenuScene::GameInit(void) {
@@ -31,18 +31,33 @@ void MenuScene::Update(void) {
 	InputManager& inputIns = InputManager::GetInstance();
 	Application::GetInstance();
 
+	InputManager::JOYPAD_IN_STATE state =
+		inputIns.GetJPadInputState(InputManager::JOYPAD_NO::PAD1);
+
+	int analogKeyY = state.AKeyLY;
+
 	//è„â∫ÉLÅ[Ç≈ëIë
-	if (inputIns.IsTrgDown(KEY_INPUT_UP)) {
+	if (inputIns.IsTrgDown(KEY_INPUT_UP) || analogKeyY < 0 && !Slide_) {
 		Select_--;
 		if (Select_ < 0)Select_ = 1;
 	}
- 	if (inputIns.IsTrgDown(KEY_INPUT_DOWN)) {
+ 	if (inputIns.IsTrgDown(KEY_INPUT_DOWN) || analogKeyY > 0 && !Slide_) {
 		Select_++;
 		if (Select_ > 2)Select_ = 0;
 	}
 
+	if (analogKeyY < 0 || analogKeyY > 0 && !Slide_)
+	{
+		Slide_ = true;
+	}
+
+	else if (analogKeyY == 0 && Slide_)
+	{
+		Slide_ = false;
+	}
+
 	//åàíË
-	if (inputIns.IsTrgDown(KEY_INPUT_SPACE)) {
+	if (inputIns.IsTrgDown(KEY_INPUT_SPACE)|| inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN)) {
 		if (Select_ == 1) {
 
 			//back

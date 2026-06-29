@@ -29,5 +29,7 @@ private:
 
 	int Select_;
 
+	bool Slide_;							//カーソルの移動管理フラグ
+
 };
 
