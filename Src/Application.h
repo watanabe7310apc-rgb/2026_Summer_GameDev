@@ -47,6 +47,9 @@ public:
 
 	void SetGame(int game);
 
+	//レベル設定
+	static int Level_;
+
 private:
 
 	//静的インスタンス
@@ -73,4 +76,5 @@ private:
 
 	//ゲーム続行
 	bool Game_;
+
 };

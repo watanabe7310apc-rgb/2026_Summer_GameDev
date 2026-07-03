@@ -7,6 +7,7 @@
 #include "EnemyGoast.h"
 #include "Boar.h"
 #include "Src/SceneManager.h"
+#include "MenuScene.h"
 
 //コンストラクタ
 GameScene::GameScene(void)
@@ -21,8 +22,9 @@ GameScene::~GameScene(void)
 }
 
 //初期化処理(最初の1回のみ実行)
-void GameScene::SystemInit(void)
+void GameScene::SystemInit()
 {
+
 	front_ = new PlayerFront();
 	front_->SystemInit();
 	player2_ = new Player2();
@@ -42,6 +44,10 @@ void GameScene::SystemInit(void)
 
 	Clear_ = false;
 
+	SpoanMax_ = Application::Level_ * 10;
+
+	Wave_ = Application::Level_;
+
 	SetMouseDispFlag(FALSE);
 
 }
@@ -56,7 +62,6 @@ void GameScene::GameInit(void)
 void GameScene::Update(void)
 {
 
-
 	front_->Update();
 	player2_->Update();
 
@@ -66,7 +71,7 @@ void GameScene::Update(void)
 		slowCounter--;
 	}
 
-		if (spoanCounter_ < ENEMY_SPOAN_MAX) {
+		if (spoanCounter_ < SpoanMax_) {
 			//エンカウンター
 			enCounter++;
 			if (enCounter > ENCOUNT) {
@@ -116,7 +121,7 @@ void GameScene::Update(void)
 
 		//衝突判定
 		CollisionCheck();
-		if (front_->GetAlive() && BaseCounter > 0&&clearCounter< ENEMY_SPOAN_MAX) {
+		if (front_->GetAlive() && BaseCounter > 0&&clearCounter< SpoanMax_) {
 			//死亡した敵データを消去する
 			size_t size = enemys.size();   //敵のテーブルの要素数を取得
 			std::vector<EnemyBase*>::iterator eitr;
@@ -206,7 +211,7 @@ void GameScene::Draw(void)
 
 	SetFontSize(32);
 
-	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %d/%d", clearCounter,ENEMY_SPOAN_MAX);
+	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %d/%d", clearCounter,SpoanMax_);
 
 	SetFontSize(25);
 

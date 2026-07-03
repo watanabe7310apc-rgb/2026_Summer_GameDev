@@ -6,6 +6,8 @@
 #include "Player2.h"
 #include "EnemyBase.h"
 
+class MenuScene;
+
 class GameScene :
     public SceneBase
 {
@@ -31,7 +33,7 @@ public:
 	~GameScene(void);
 
 	//初期化処理(最初の1回のみ実行)
-	void SystemInit(void)override;
+	void SystemInit()override;
 
 	//ゲーム起動・再開時に必ず呼び出す処理
 	void GameInit(void)override;
@@ -51,13 +53,18 @@ public:
 
 	bool GetClearFlg(void){ return Clear_; }
 
+
 private:
 	int img_;   //背景のハンドル番号
 	int imgtower;//拠点のハンドル番号
 
 	PlayerFront* front_;
+
 	Player2* player2_;
+
 	EnemyBase* enemy_;
+
+	MenuScene* menu_;
 
 	//Enemyクラスのインスタンスのポインタの可変長テーブル
 	//複数の敵を動的に管理する
@@ -101,5 +108,12 @@ private:
 
 	//マウス標準
 	int scopeImage;
+
+
+	//敵の出現量
+	int SpoanMax_;
+
+	//ウェーブ
+	int Wave_;
 };
 
