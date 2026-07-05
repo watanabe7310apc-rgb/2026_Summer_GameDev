@@ -480,6 +480,9 @@ void PlayerFront::LoadImages(void)
 
 		//ダメージアニメーション
 		animState_= ANIM_STATE::DAMAGED;
+
+		attackAnim_ = 0;
+
 	}
 
 

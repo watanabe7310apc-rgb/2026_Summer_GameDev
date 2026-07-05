@@ -113,7 +113,10 @@ private:
 	//敵の出現量
 	int SpoanMax_;
 
-	//ウェーブ
-	int Wave_;
+	//ウェーブ数
+	int WaveMax_;
+
+	//今のウェーブ数
+	int nowWave_;
 };
 

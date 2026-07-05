@@ -46,7 +46,9 @@ void GameScene::SystemInit()
 
 	SpoanMax_ = Application::Level_ * 10;
 
-	Wave_ = Application::Level_;
+	WaveMax_ = Application::Level_;
+
+	nowWave_ = 1;
 
 	SetMouseDispFlag(FALSE);
 
@@ -108,6 +110,15 @@ void GameScene::Update(void)
 				}
 			}
 		}
+		if (clearCounter >= SpoanMax_)
+		{
+			spoanCounter_ = 0;
+			enCounter = 0;
+			clearCounter = 0;
+			nowWave_++;
+		}
+
+
 		size_t size = enemys.size();               //敵のテーブルの要素数を取得
 		for (auto e : enemys) {
 			e->Update();
@@ -117,6 +128,7 @@ void GameScene::Update(void)
 				e->hitThisAttack_ = false;
 			}
 		}
+
 
 
 		//衝突判定
@@ -135,7 +147,8 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		else
+		
+		if(BaseCounter <= 0 || nowWave_>WaveMax_)
 		{
 			EraseEnemys();
 
@@ -149,7 +162,6 @@ void GameScene::Update(void)
 			}
 		
 		}
-
 
 }
 
@@ -207,6 +219,7 @@ void GameScene::Draw(void)
 	SetFontSize(64);
 
 	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %d/%d", BaseCounter,BASE_HP_MAX);
+	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 60, GetColor(0, 0, 0), "ウェーブ %d/%d", nowWave_,WaveMax_);
 	DrawFormatString(Application::SCREEN_SIZE_X/2-80, 350, GetColor(200, 0, 0), "守れ!!\n ↓");
 
 	SetFontSize(32);
