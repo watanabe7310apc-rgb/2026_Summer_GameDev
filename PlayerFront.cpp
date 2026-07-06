@@ -408,18 +408,22 @@ void PlayerFront::LoadImages(void)
 	{
 		if (!isAttack_) return;
 
-
-			attackAnim_ += ATTACK_ANIM_SPEED;
+		attackAnim_ += ATTACK_ANIM_SPEED;
 
 			if (dir_ == AsoUtility::DIRECTION::E_DIR_LEFT)
 			{
+
 				apos_.x = pos_.x - (SIZE_X / 2);
+
 				apos_.y = pos_.y;
+
 			}
-			else if(dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT)
+
+			if (dir_ == AsoUtility::DIRECTION::E_DIR_RIGHT)
 			{
-				apos_.x = pos_.x+(SIZE_X/2) ;
-				apos_.y = pos_.y;
+
+					apos_.x = pos_.x + (SIZE_X / 2);
+					apos_.y = pos_.y;
 			}
 
 			if (attackAnim_ >= ATTACK_ALL_NUM)

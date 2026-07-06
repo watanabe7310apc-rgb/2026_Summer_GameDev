@@ -29,9 +29,15 @@ private:
 
 	int imgSelect_;			                // タイトル画像
 
-	int imgHaikei_;                          // スタート画画像
+	int imgHaikei_;                          // スタート画像
+
+	int imgBack_;							//バック画像
+
+	int imgPlayerSelect_;					//プレイヤー人数画像
 
 	int Select_;
+
+	bool Next_;
 
 	bool Slide_;							//カーソルの移動管理フラグ
 

@@ -116,6 +116,7 @@ void GameScene::Update(void)
 			enCounter = 0;
 			clearCounter = 0;
 			nowWave_++;
+			BaseCounter = BASE_HP_MAX;
 		}
 
 
