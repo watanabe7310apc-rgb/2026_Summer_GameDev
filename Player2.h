@@ -8,7 +8,7 @@ public:
 
     Vector2 pos;
 
-    int image;
+    int image[11];
 
     bool isRight;
 
@@ -37,4 +37,10 @@ private:
     static const int SHOT_INTERVAL = 30;
 
     int shotSE;
+
+    int animFrame;
+
+    int animCounter;
+
+    bool isAttack;
 };
