@@ -104,6 +104,13 @@
 			DrawEnemy(imgGoast_[animIdx]);
 		}
 			break;
+		case E_ENEMY_ID::E_TYPE_BOAR:
+		{
+			stepAnim += ANIM_SPEED;
+			int animIdx = AsoUtility::Round(stepAnim) % 3;
+			DrawEnemy(imgBoar_[animIdx]);
+		}
+			break;
 		}
 	}
 
@@ -112,7 +119,9 @@
 	{
 		for (int i = 0; i < 4; i++)
 			if (imgDragon_[i] != -1) DeleteGraph(imgDragon_[i]);
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 3; i++)
+			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
+		for (int i = 0; i < 6; i++)
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 
 	}
@@ -122,6 +131,7 @@
 	{
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
+		for (int i = 0; i < 6; i++) imgGoast_[i] = -1;
 
 		//繝峨Λ繧ｴ繝ｳ
 		LoadDivGraph(
@@ -134,6 +144,13 @@
 		LoadDivGraph(
 			("Image/Enemy/Enemy 15-3.png"),
 			3, 3, 1, size.x, size.y, imgGoast_,
+			false
+		);
+
+		//イノシシの画像のロード
+		LoadDivGraph(
+			("Image/Boar.png"),
+			3, 3, 1, size.x, size.y, imgBoar_,
 			false
 		);
 	}

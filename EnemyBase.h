@@ -15,6 +15,7 @@ public:
 	enum E_ENEMY_ID {
 		E_TYPE_DRAGON,
 		E_TYPE_GOAST,
+		E_TYPE_BOAR,
 		E_TYPE_MAX
 	};
 
@@ -96,6 +97,9 @@ protected:
 
 	//謨ｵ逕ｻ蜒上・繝上Φ繝峨Ν逡ｪ蜿ｷ
 	int imgGoast_[3];
+
+	//イノシシの画像のハンドル番号
+	int imgBoar_[6];
 
 	//謨ｵ陦ｨ遉ｺ蠎ｧ讓・
 	Vector2F pos;

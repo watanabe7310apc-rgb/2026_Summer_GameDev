@@ -1,5 +1,7 @@
 #pragma once
 #include "SceneBase.h"
+class GameScene;
+
 class MenuScene : public SceneBase
 {
 public:
@@ -20,14 +22,18 @@ public:
 	void Release(void) override;				    // 解放処理(最後の１回のみ実行)
 
 
+	int GetLevel(void) { return Select_; }
 
 
 private:
+
 	int imgSelect_;			                // タイトル画像
 
 	int imgHaikei_;                          // スタート画画像
 
 	int Select_;
+
+	bool Slide_;							//カーソルの移動管理フラグ
 
 };
 
