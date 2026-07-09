@@ -44,7 +44,7 @@ void GameScene::SystemInit()
 
 	Clear_ = false;
 
-	SpoanMax_ = Application::Level_ * 10;
+	SpoanMax_ = 30;
 
 	WaveMax_ = Application::Level_;
 
