@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "EnemyBase.h"
 #include "Src/SceneManager.h"
+#include "Src/Application.h"
 
 	
 	EnemyBase::EnemyBase(void)
@@ -85,32 +86,52 @@
 	void EnemyBase::Draw(void)
 	{
 		DrawBox(pos.x - (size.x / 2), pos.y - (size.y / 2), pos.x + (size.x / 2), pos.y + (size.y / 2), GetColor(200, 0, 0), false);
-		DrawBox(pos.x-50, pos.y - 100, pos.x + (hp * 5), pos.y - 70, GetColor(0, 0, 255), true);
+		DrawBox(pos.x - 50, pos.y - 100, pos.x + (hp * 5), pos.y - 70, GetColor(0, 0, 255), true);
 
-		switch (enemyType)
-		{
-		case E_ENEMY_ID::E_TYPE_DRAGON:
-		{
-			stepAnim += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim) % 4;
-			DrawEnemy(imgDragon_[animIdx]);
+		if (Application::Player_ == 1) {
+			switch (enemyType) {
+			case E_ENEMY_ID_1::E_TYPE_GOAST_1:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgGoast_[animIdx]);
+			}
+			break;
+			case E_ENEMY_ID_1::E_TYPE_BOAR_1:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgBoar_[animIdx]);
+			}
+			break;
+			}
+		}
+		else {
+			switch (enemyType)
+			{
+			case E_ENEMY_ID_2::E_TYPE_DRAGON_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgDragon_[animIdx]);
 
-		}
+			}
 			break;
-		case E_ENEMY_ID::E_TYPE_GOAST:
-		{
-			stepAnim += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim) % 3;
-			DrawEnemy(imgGoast_[animIdx]);
-		}
+			case E_ENEMY_ID_2::E_TYPE_GOAST_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgGoast_[animIdx]);
+			}
 			break;
-		case E_ENEMY_ID::E_TYPE_BOAR:
-		{
-			stepAnim += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim) % 3;
-			DrawEnemy(imgBoar_[animIdx]);
-		}
+			case E_ENEMY_ID_2::E_TYPE_BOAR_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgBoar_[animIdx]);
+			}
 			break;
+			}
 		}
 	}
 
@@ -131,7 +152,7 @@
 	{
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
-		for (int i = 0; i < 6; i++) imgGoast_[i] = -1;
+		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
 
 		//ƒhƒ‰ƒSƒ“
 		LoadDivGraph(

@@ -11,6 +11,7 @@ const std::string Application::PATH_IMG_PLAYER1 = PATH_IMAGE + "Player/P1/";
 const std::string Application::PATH_IMG_PLAYER2 = PATH_IMAGE + "Player/P2/";
 
 int Application::Level_ = 0;
+int Application::Player_ = 1;
 
 void Application::CreateInstance(void)
 {

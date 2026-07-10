@@ -96,10 +96,11 @@ void MenuScene::Update(void) {
 			switch (Select_) {
 			case (1):
 				PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
-				//ステージ番号をゲームへ渡す
-				//SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
+
+				//人数選択に進む
 				Next_ = true;
 
+				//Select_の値をレベルに設定する
 				Application::Level_ = Select_;
 
 				Select_ = 1;
@@ -108,10 +109,11 @@ void MenuScene::Update(void) {
 
 			case (2):
 				PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
-				//ステージ番号をゲームへ渡す
-				//SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
+				
+				//人数選択に進む
 				Next_ = true;
 
+				//Select_の値をレベルに設定する
 				Application::Level_ = Select_;
 
 				Select_ = 1;
@@ -120,9 +122,11 @@ void MenuScene::Update(void) {
 
 			case (3):
 				PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
-				//ステージ番号をゲームへ渡す
-				//SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
+				
+				//人数選択に進む
 				Next_ = true;
+
+				//Select_の値をレベルに設定する
 				Application::Level_ = Select_;
 
 				Select_ = 1;
@@ -130,8 +134,13 @@ void MenuScene::Update(void) {
 
 			case(4):
 				PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
-				//back
+
+				//ひとつ前のシーンにもどる
 				SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_TITLE);
+
+				//Select_の値をリセットする
+				Select_ = 1;
+
 				break;
 			}
 		}
@@ -141,6 +150,10 @@ void MenuScene::Update(void) {
 		switch (Select_) {
 		case (1):
 			PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
+
+			//セレクトの値を人数設定に渡す
+			Application::Player_ = Select_;
+
 			//ステージ番号をゲームへ渡す
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
 
@@ -148,24 +161,26 @@ void MenuScene::Update(void) {
 
 		case (2):
 			PlaySoundFile("Image/Sound/SceneChange.mp3", DX_PLAYTYPE_BACK);
+
+			//セレクトの値を人数設定に渡す
+			Application::Player_ = Select_;
+
 			//ステージ番号をゲームへ渡す
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
 
 			break;
 
 		case (3):
+
+			//Select_の値をリセットする
+			Select_ = 1;
+
 			Next_=false;
 
 			break;
 		}
 	}
 	
-	//スペースだと開始できないのでTABキーを押してゲームをスタートしてください
-	if (inputIns.IsTrgDown(KEY_INPUT_TAB)) {
-		SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
-		Application::Level_ = Select_;
-
-	}
 }
 
 void MenuScene::Draw(void)

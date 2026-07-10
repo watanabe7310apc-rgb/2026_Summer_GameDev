@@ -50,6 +50,9 @@ public:
 	//レベル設定
 	static int Level_;
 
+	//人数設定
+	static int Player_;
+
 private:
 
 	//静的インスタンス

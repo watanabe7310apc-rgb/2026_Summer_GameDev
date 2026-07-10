@@ -27,7 +27,8 @@ void GameScene::SystemInit()
 
 	front_ = new PlayerFront();
 	front_->SystemInit();
-	player2_ = new Player2();
+
+	if(Application::Player_==2)player2_ = new Player2();
 
 	img_ = LoadGraph("Image/ゲーム背景(城壁).jpg");
 	imgtower = LoadGraph("Image/Tower.png");
@@ -50,7 +51,7 @@ void GameScene::SystemInit()
 
 	nowWave_ = 1;
 
-	SetMouseDispFlag(FALSE);
+	if (Application::Player_ == 2)SetMouseDispFlag(FALSE);
 
 }
 
@@ -65,7 +66,7 @@ void GameScene::Update(void)
 {
 
 	front_->Update();
-	player2_->Update();
+	if (Application::Player_ == 2)player2_->Update();
 
 	//ヒットスロー
 	if (slowCounter > 0)
@@ -73,10 +74,13 @@ void GameScene::Update(void)
 		slowCounter--;
 	}
 
-		if (spoanCounter_ < SpoanMax_) {
+	if (spoanCounter_ < SpoanMax_) {
+
+		if (Application::Player_ == 1)
+		{
 			//エンカウンター
 			enCounter++;
-			if (enCounter > ENCOUNT) {
+			if (enCounter > ENCOUNT + 20) {
 
 				spoanCounter_++;
 
@@ -84,18 +88,15 @@ void GameScene::Update(void)
 				EnemyBase* e = nullptr;
 
 				//ランダムに種別を決める
-				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID::E_TYPE_MAX) - 1);
-				EnemyBase::E_ENEMY_ID type = static_cast<EnemyBase::E_ENEMY_ID>(rr);
+				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_1::E_TYPE_MAX_1) - 1);
+				EnemyBase::E_ENEMY_ID_1 type = static_cast<EnemyBase::E_ENEMY_ID_1>(rr);
 
 				//種別に対応した派生クラスのインスタンスを生成
 				switch (type) {
-				case EnemyBase::E_ENEMY_ID::E_TYPE_DRAGON:
-					e = new EnemyDragon();
-					break;
-				case EnemyBase::E_ENEMY_ID::E_TYPE_GOAST:
+				case EnemyBase::E_ENEMY_ID_1::E_TYPE_GOAST_1:
 					e = new EnemyGoast();
 					break;
-				case EnemyBase::E_ENEMY_ID::E_TYPE_BOAR:
+				case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
 					e = new Boar();
 					break;
 				}
@@ -110,6 +111,47 @@ void GameScene::Update(void)
 				}
 			}
 		}
+		else
+		{
+			//エンカウンター
+			enCounter++;
+			if (enCounter > ENCOUNT) {
+
+				spoanCounter_++;
+
+				//敵の生成
+				EnemyBase* e = nullptr;
+
+				//ランダムに種別を決める
+				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
+				EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
+
+				//種別に対応した派生クラスのインスタンスを生成
+				switch (type) {
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
+					e = new EnemyDragon();
+					break;
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
+					e = new EnemyGoast();
+					break;
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
+					e = new Boar();
+					break;
+				}
+
+				if (e != nullptr) {
+					e->enemyType = type;
+					e->SystemInit(this);
+					e->GameInit();
+					//可変長配列に要素を追加する
+					enemys.push_back(e);
+					enCounter = 0;           //エンカウンターをリセット
+				}
+			}
+		}
+	}
+
+
 		if (clearCounter >= SpoanMax_)
 		{
 			spoanCounter_ = 0;
@@ -199,7 +241,7 @@ void GameScene::Draw(void)
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 
-	player2_->Draw();
+	if (Application::Player_ == 2)player2_->Draw();
 
 	DrawGraph(Application::SCREEN_SIZE_X / 2- 160 , Application::SCREEN_SIZE_Y - 600, imgtower, true);
 	DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
@@ -229,18 +271,21 @@ void GameScene::Draw(void)
 
 	SetFontSize(25);
 
-	//マウス標準フレーム
-	int mx, my;
-	GetMousePoint(&mx, &my);
+	if (Application::Player_ == 2)
+	{
+		//マウス標準フレーム
+		int mx, my;
+		GetMousePoint(&mx, &my);
 
-	DrawRotaGraph(
-		mx,
-		my,
-		0.3,
-		0.0,
-		scopeImage,
-		TRUE
-	);
+		DrawRotaGraph(
+			mx,
+			my,
+			0.3,
+			0.0,
+			scopeImage,
+			TRUE
+		);
+	}
 }
 
 //解放処理(最後の1回のみ使用)
@@ -251,9 +296,11 @@ void GameScene::Release(void)
 	front_->Release();
 	delete front_;
 
-	player2_->Release();
-	delete player2_;
-	player2_ = nullptr;
+	if (Application::Player_ == 2) {
+		player2_->Release();
+		delete player2_;
+		player2_ = nullptr;
+	}
 
 	EraseEnemys();
 
@@ -347,33 +394,36 @@ void GameScene::CollisionCheck(void)
 		if (!enemys[ii]->GetAlive())continue;
 	}
 
-	Arrow* arrows = player2_->GetArrow();
-
-	for (int i = 0; i < Player2::ARROW_MAX; i++)
+	if (Application::Player_ == 2)
 	{
-		if (!arrows[i].isAlive)
-			continue;
+		Arrow* arrows = player2_->GetArrow();
 
-		Vector2 aPos = arrows[i].GetPos();
-
-		for (auto e : enemys)
+		for (int i = 0; i < Player2::ARROW_MAX; i++)
 		{
-			if (!e->GetAlive())
+			if (!arrows[i].isAlive)
 				continue;
 
-			Vector2 ePos = AsoUtility::Round(e->GetEnemyPos());
-			Vector2 eSize = e->GetEnemySize();
+			Vector2 aPos = arrows[i].GetPos();
 
-			// 当たり判定
-			if (CollisionChackRectCenter(
-				aPos,
-				{ 32,32 },      // 矢の当たり判定サイズ
-				ePos,
-				eSize))
+			for (auto e : enemys)
 			{
-				e->SetDamage(3);      // ダメージ
-				arrows[i].Destroy();  // 矢を消す
-				break;
+				if (!e->GetAlive())
+					continue;
+
+				Vector2 ePos = AsoUtility::Round(e->GetEnemyPos());
+				Vector2 eSize = e->GetEnemySize();
+
+				// 当たり判定
+				if (CollisionChackRectCenter(
+					aPos,
+					{ 32,32 },      // 矢の当たり判定サイズ
+					ePos,
+					eSize))
+				{
+					e->SetDamage(3);      // ダメージ
+					arrows[i].Destroy();  // 矢を消す
+					break;
+				}
 			}
 		}
 	}

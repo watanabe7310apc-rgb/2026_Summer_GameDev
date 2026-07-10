@@ -10,13 +10,20 @@ class GameScene;
 class EnemyBase
 {
 public:
-	
-	//謨ｵ縺ｮ遞ｮ鬘・
-	enum E_ENEMY_ID {
-		E_TYPE_DRAGON,
-		E_TYPE_GOAST,
-		E_TYPE_BOAR,
-		E_TYPE_MAX
+
+	//プレイヤーが1人の時の敵の種類
+	enum E_ENEMY_ID_1 {
+		E_TYPE_GOAST_1,
+		E_TYPE_BOAR_1,
+		E_TYPE_MAX_1
+	};
+
+	//プレイヤーが2人の時の敵の種類
+	enum E_ENEMY_ID_2 {
+		E_TYPE_DRAGON_2,
+		E_TYPE_GOAST_2,
+		E_TYPE_BOAR_2,
+		E_TYPE_MAX_2
 	};
 
 	// 方向ごとのアニメーション数
