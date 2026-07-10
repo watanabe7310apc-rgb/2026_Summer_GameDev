@@ -61,34 +61,36 @@ void MenuScene::Update(void) {
 
 		}
 
-		if (analogKeyY < 0 || analogKeyY > 0 || analogKeyX > 0 || analogKeyX < 0 && !Slide_)
-		{
-			Slide_ = true;
-		}
-
-		else if (analogKeyY == 0 && Slide_)
-		{
-			Slide_ = false;
-		}
 	}
 	else {
 		//左右キーで選択
 		if (inputIns.IsTrgDown(KEY_INPUT_LEFT) || analogKeyX < 0 && !Slide_) {
 			Select_--;
-			if (Select_ < 1)Select_ = 2;
+			if (Select_ < 1)Select_ = 1;
 		}
 		if (inputIns.IsTrgDown(KEY_INPUT_RIGHT) || analogKeyX > 0 && !Slide_) {
 			Select_++;
-			if (Select_ > 2)Select_ = 1;
+			if (Select_ > 2)Select_ = 2;
 		}
-		if (inputIns.IsTrgDown(KEY_INPUT_DOWN) || analogKeyY < 0 && !Slide_) {
+		if (inputIns.IsTrgDown(KEY_INPUT_DOWN) || analogKeyY > 0 && !Slide_) {
 			Select_ = 3;
 		}
-		if (inputIns.IsTrgDown(KEY_INPUT_UP) || analogKeyY > 0 && !Slide_) {
+		if (inputIns.IsTrgDown(KEY_INPUT_UP) || analogKeyY < 0 && !Slide_) {
 			Select_ = 1;
 		}
 
 	}
+
+	if (analogKeyY < 0 || analogKeyY > 0 || analogKeyX > 0 || analogKeyX < 0 && !Slide_)
+	{
+		Slide_ = true;
+	}
+
+	else if (analogKeyY == 0 || analogKeyX == 0 && Slide_)
+	{
+		Slide_ = false;
+	}
+
 
 	if (!Next_) {
 		//決定
