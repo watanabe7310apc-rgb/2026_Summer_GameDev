@@ -131,6 +131,13 @@
 				DrawEnemy(imgBoar_[animIdx]);
 			}
 			break;
+			case E_ENEMY_ID_2::E_TYPE_SHIP_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgShip_[animIdx]);
+			}
+			break;
 			}
 		}
 	}
@@ -144,7 +151,8 @@
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 		for (int i = 0; i < 6; i++)
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
-
+		for (int i = 0; i < 3; i++)
+			if (imgShip_[1] != -1) DeleteGraph(imgShip_[1]);
 	}
 
 	//敵画像のロード
@@ -153,6 +161,7 @@
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
+		for (int i = 0; i < 3; i++) imgShip_[i] = -1;
 
 		//ドラゴン
 		LoadDivGraph(
@@ -172,6 +181,13 @@
 		LoadDivGraph(
 			("Image/Boar.png"),
 			3, 3, 1, size.x, size.y, imgBoar_,
+			false
+		);
+
+		//船の画像のロード
+		LoadDivGraph(
+			("Image/Enemy/pipo-airship01.png"),
+			3, 3, 1, size.x, size.y, imgShip_,
 			false
 		);
 	}

@@ -24,6 +24,7 @@
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
     <ClCompile Include="Boar.cpp" />
+    <ClCompile Include="EnemyShip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
@@ -50,5 +51,6 @@
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
     <ClInclude Include="Boar.h" />
+    <ClInclude Include="EnemyShip.h" />
   </ItemGroup>
 </Project>

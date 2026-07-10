@@ -23,6 +23,7 @@ public:
 		E_TYPE_DRAGON_2,
 		E_TYPE_GOAST_2,
 		E_TYPE_BOAR_2,
+		E_TYPE_SHIP_2,
 		E_TYPE_MAX_2
 	};
 
@@ -105,6 +106,8 @@ protected:
 	//イノシシの画像のハンドル番号
 	int imgBoar_[6];
 
+	//船の画像のハンドル番号
+	int imgShip_[3];
 	//位置
 	Vector2F pos;
 

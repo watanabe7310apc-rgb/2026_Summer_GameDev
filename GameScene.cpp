@@ -6,6 +6,7 @@
 #include "EnemyDragon.h"
 #include "EnemyGoast.h"
 #include "Boar.h"
+#include "EnemyShip.h"
 #include "Src/SceneManager.h"
 #include "MenuScene.h"
 
@@ -118,6 +119,16 @@ void GameScene::Update(void)
 			if (enCounter > ENCOUNT) {
 
 				spoanCounter_++;
+				//ëDÇÃêîÇêîÇ¶ÇÈ
+				int shipCount = 0;
+
+				for (auto enemy : enemys)
+				{
+					if (enemy->enemyType == EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2)
+					{
+						shipCount++;
+					}
+				}
 
 				//ìGÇÃê∂ê¨
 				EnemyBase* e = nullptr;
@@ -136,6 +147,12 @@ void GameScene::Update(void)
 					break;
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
 					e = new Boar();
+					break;
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
+					if (shipCount < 2)
+					{
+						e = new EnemyShip();
+					}
 					break;
 				}
 
