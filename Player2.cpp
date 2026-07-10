@@ -3,15 +3,15 @@
 Player2::Player2() 
 { 
 	// 座標 
-	pos.x = 960; 
+	pos.x = 945; 
 	
 	pos.y = 470; 
 
 	LoadDivGraph(
 		"Image/Archer/Archer_attack.png",
 		11,        // 全11枚
-		15, 1,     // 横11枚、縦1枚
-		61, 47,    // ←1コマのサイズに合わせる
+		11, 1,     // 横11枚、縦1枚
+		64, 47,    // ←1コマのサイズに合わせる
 		image
 	);
 
