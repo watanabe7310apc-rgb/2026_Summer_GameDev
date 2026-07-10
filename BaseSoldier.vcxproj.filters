@@ -24,7 +24,12 @@
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
     <ClCompile Include="Boar.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="EnemyShip.cpp" />
+=======
+    <ClCompile Include="EnemyBat.cpp" />
+    <ClCompile Include="EnemyHone.cpp" />
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
@@ -51,6 +56,11 @@
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
     <ClInclude Include="Boar.h" />
+<<<<<<< HEAD
     <ClInclude Include="EnemyShip.h" />
+=======
+    <ClInclude Include="EnemyBat.h" />
+    <ClInclude Include="EnemyHone.h" />
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
   </ItemGroup>
 </Project>

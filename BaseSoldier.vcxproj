@@ -22,9 +22,14 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Boar.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
+    <ClCompile Include="EnemyBat.cpp" />
     <ClCompile Include="EnemyDragon.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="EnemyShip.cpp" />
+=======
+    <ClCompile Include="EnemyHone.cpp" />
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -48,9 +53,14 @@
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Boar.h" />
     <ClInclude Include="EnemyBase.h" />
+    <ClInclude Include="EnemyBat.h" />
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="EnemyGoast.h" />
+<<<<<<< HEAD
     <ClInclude Include="EnemyShip.h" />
+=======
+    <ClInclude Include="EnemyHone.h" />
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />

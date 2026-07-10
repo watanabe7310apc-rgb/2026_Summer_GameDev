@@ -50,6 +50,9 @@ public:
 	//ノックバック中の減速率
 	static constexpr float KNOCKBACK_DEC = 0.9f;
 
+	//プレイヤーリスポーンまでの時間
+	static constexpr float PLAYER_RESPOAN_TIME = 100.0f;
+
 	//アニメーション状態
 	enum class ANIM_STATE
 	{
@@ -122,6 +125,9 @@ public:
 	//ノックバックのパワーを取得する
 	float GetKnockBackPower()const { return knockBackPower_; }
 
+	//リスポーン処理
+	void FrontRespoan(void);
+
 private:
 
 	int Runimages_[RUN_ALL_NUM];
@@ -177,6 +183,9 @@ private:
 
 	//ノックバックのデフォルト値
 	float knockBackPower_;
+
+	//リスポーンカウンタ
+	float RespoanCounter_;
 
 	//SE
 	int SE_Slash_;

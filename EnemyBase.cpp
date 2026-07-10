@@ -100,8 +100,15 @@
 			case E_ENEMY_ID_1::E_TYPE_BOAR_1:
 			{
 				stepAnim += ANIM_SPEED;
-				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				int animIdx = AsoUtility::Round(stepAnim) % 6;
 				DrawEnemy(imgBoar_[animIdx]);
+			}
+			break;
+			case E_ENEMY_ID_1::E_TYPE_HONE_1:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgHone_[animIdx]);
 			}
 			break;
 			}
@@ -127,15 +134,30 @@
 			case E_ENEMY_ID_2::E_TYPE_BOAR_2:
 			{
 				stepAnim += ANIM_SPEED;
-				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				int animIdx = AsoUtility::Round(stepAnim) % 6;
 				DrawEnemy(imgBoar_[animIdx]);
 			}
 			break;
+<<<<<<< HEAD
 			case E_ENEMY_ID_2::E_TYPE_SHIP_2:
 			{
 				stepAnim += ANIM_SPEED;
 				int animIdx = AsoUtility::Round(stepAnim) % 3;
 				DrawEnemy(imgShip_[animIdx]);
+=======
+			case E_ENEMY_ID_2::E_TYPE_BAT_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgBat_[animIdx]);
+			}
+			break;
+			case E_ENEMY_ID_2::E_TYPE_HONE_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 3;
+				DrawEnemy(imgHone_[animIdx]);
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 			}
 			break;
 			}
@@ -149,10 +171,19 @@
 			if (imgDragon_[i] != -1) DeleteGraph(imgDragon_[i]);
 		for (int i = 0; i < 3; i++)
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
+		for (int i = 0; i < 4; i++)
+			if (imgBat_[i] != -1) DeleteGraph(imgBat_[i]);
 		for (int i = 0; i < 6; i++)
+<<<<<<< HEAD
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 		for (int i = 0; i < 3; i++)
 			if (imgShip_[1] != -1) DeleteGraph(imgShip_[1]);
+=======
+			if (imgBoar_[i] != -1) DeleteGraph(imgBoar_[i]);
+		for (int i = 0; i < 3; i++)
+			if (imgHone_[i] != -1) DeleteGraph(imgHone_[i]);
+
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 	}
 
 	//敵画像のロード
@@ -160,8 +191,14 @@
 	{
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
+<<<<<<< HEAD
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
 		for (int i = 0; i < 3; i++) imgShip_[i] = -1;
+=======
+		for (int i = 0; i < 4; i++) imgBat_[i] = -1;
+		for (int i = 0; i < 6; i++) imgBoar_[i] = -1;
+		for (int i = 0; i < 3; i++) imgHone_[i] = -1;
+>>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 
 		//ドラゴン
 		LoadDivGraph(
@@ -179,8 +216,22 @@
 
 		//イノシシの画像のロード
 		LoadDivGraph(
-			("Image/Boar.png"),
-			3, 3, 1, size.x, size.y, imgBoar_,
+			("Image/Enemy/Boar.png"),
+			6, 6, 1, size.x, size.y, imgBoar_,
+			false
+		);
+
+		//コウモリの画像のロード
+		LoadDivGraph(
+			("Image/Enemy/Bat.png"),
+			4, 4, 1, size.x, size.y, imgBat_,
+			false
+		);
+
+		//ガイコツの画像のロード
+		LoadDivGraph(
+			("Image/Enemy/Hone.png"),
+			3, 3, 1, size.x, size.y, imgHone_,
 			false
 		);
 

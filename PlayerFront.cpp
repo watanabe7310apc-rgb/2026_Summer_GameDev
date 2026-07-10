@@ -61,6 +61,9 @@ void PlayerFront::SystemInit(void)
 	//ノックバックのデフォルト値
 	knockBackPower_ = 20.0f;
 
+	//リスポーンカウンタ
+	RespoanCounter_ = 0.0f;
+
 
 	SE_Slash_ = LoadSoundMem("Image/Sound/Slash.mp3");
 	SE_Strike_ = LoadSoundMem("Image/Sound/Strike.mp3");
@@ -77,77 +80,84 @@ void PlayerFront::GameInit(void)
 //更新処理
 void PlayerFront::Update(void)
 {
-	if (fabs(knockBackSpeed_) > 0.01f)
+	if (aliveFlg)
 	{
-		pos_.x += knockBackSpeed_;
-		knockBackSpeed_ *= KNOCKBACK_DEC;
-
-		//止まったら終了
-		if (fabs(knockBackSpeed_) < 0.1f)
+		if (fabs(knockBackSpeed_) > 0.01f)
 		{
-			knockBackSpeed_ = 0.0f;
+			pos_.x += knockBackSpeed_;
+			knockBackSpeed_ *= KNOCKBACK_DEC;
+
+			//止まったら終了
+			if (fabs(knockBackSpeed_) < 0.1f)
+			{
+				knockBackSpeed_ = 0.0f;
+			}
+			return;
 		}
-		return;
-	}
 
-	//何もしていない時だけIDLEモーション実行
-	if (!isAttack_ &&!isStrikeAttack_&& moveSpeed_ == 0)
+		//何もしていない時だけIDLEモーション実行
+		if (!isAttack_ && !isStrikeAttack_ && moveSpeed_ == 0)
+		{
+			animState_ = ANIM_STATE::IDLE;
+		}
+
+		if (!isAttack_ && !isStrikeAttack_)
+		{
+			//プレイヤーの移動操作
+			ProcessMove();
+
+			//移動(実際の座標移動)
+			Move();
+		}
+		//減速
+		Decelerate(MOVE_DEC);
+
+		//プレイヤーの攻撃操作
+		ProcessAttack();
+
+		//攻撃
+		Attack();
+
+		//突き攻撃
+		StrikeAttack();
+
+		//プレイヤーの左端のチェック
+		if (pos_.x < 0) {
+			pos_.x = 0;
+		}
+
+		//プレイヤーの右端のチェック
+		if (pos_.x >= Application::SCREEN_SIZE_X - SIZE_X) {
+			pos_.x = Application::SCREEN_SIZE_X - SIZE_X;
+		}
+	}
+	else
 	{
-		animState_ = ANIM_STATE::IDLE;
+		//プレイヤーのリスポーン
+		FrontRespoan();
 	}
-
-	if (!isAttack_&&!isStrikeAttack_)
-	{
-		//プレイヤーの移動操作
-		ProcessMove();
-
-		//移動(実際の座標移動)
-		Move();
-	}
-	//減速
-	Decelerate(MOVE_DEC);
-
-	//プレイヤーの攻撃操作
-	ProcessAttack();
-
-	//攻撃
-	Attack();
-
-	//突き攻撃
-	StrikeAttack();
-
-	//プレイヤーの左端のチェック
-	if (pos_.x < 0) {
-		pos_.x = 0;
-	}
-
-	//プレイヤーの右端のチェック
-	if (pos_.x >= Application::SCREEN_SIZE_X - SIZE_X) {
-		pos_.x = Application::SCREEN_SIZE_X - SIZE_X;
-	}
-
-
 }
 
 //描画処理
 void PlayerFront::Draw(void)
 {
-	
-	DrawBox(pos_.x-(SIZE_X/2), pos_.y-(SIZE_Y/2), pos_.x + (SIZE_X/2), pos_.y + (SIZE_Y/2), GetColor(0, 200, 0), false);
-
-	if (isAttack_) {
-		DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-	}
-	else if (isStrikeAttack_) {
-		DrawBox(apos_.x - (ATTACK_RANGE_X ), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X ), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-
-	}
-
-	switch (animState_)
+	if (aliveFlg)
 	{
+		DrawBox(pos_.x - (SIZE_X / 2), pos_.y - (SIZE_Y / 2), pos_.x + (SIZE_X / 2), pos_.y + (SIZE_Y / 2), GetColor(0, 200, 0), false);
+
+		if (isAttack_) {
+			DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+		}
+		else if (isStrikeAttack_) {
+			DrawBox(apos_.x - (ATTACK_RANGE_X), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+
+		}
+
+		switch (animState_)
+		{
 		case ANIM_STATE::IDLE:
 		{
- 			stepAnim_ += ANIM_SPEED;
+			stepAnim_ += ANIM_SPEED;
 			int animIdx = AsoUtility::Round(stepAnim_) % IDLE_ALL_NUM;
 			DrawPlayer(Idleimages_[animIdx]);
 		}
@@ -183,8 +193,8 @@ void PlayerFront::Draw(void)
 			break;
 		}
 
+		}
 	}
-
 }
 
 //解放処理(最後の1回のみ使用)
@@ -487,6 +497,24 @@ void PlayerFront::LoadImages(void)
 
 		attackAnim_ = 0;
 
+	}
+
+	void PlayerFront::FrontRespoan(void)
+	{
+			//プレイヤーが非表示になっているので再表示を行う
+			RespoanCounter_++;
+			if (RespoanCounter_ > PLAYER_RESPOAN_TIME) {
+
+				pos_ = { 800.0f,900.0f };
+
+				hp = FRONT_HP;
+
+				RespoanCounter_ = 0.0f;
+
+				knockBackSpeed_ = 0.0f;
+
+				aliveFlg = true;
+			}
 	}
 
 
