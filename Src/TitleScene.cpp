@@ -70,12 +70,6 @@ void TitleScene::Update(void) {
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_SELECT);
 		}
 	}
-
-	// スペースキーorAボタン
-	//if (inputIns.IsNew(KEY_INPUT_SPACE) || inputIns.IsPadBtnNew(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN)) {
-	//	SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
-	//}
-
 }
 
 void TitleScene::Draw(void) 

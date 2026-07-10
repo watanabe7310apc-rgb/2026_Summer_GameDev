@@ -15,6 +15,7 @@ public:
 	enum E_ENEMY_ID_1 {
 		E_TYPE_GOAST_1,
 		E_TYPE_BOAR_1,
+		E_TYPE_HONE_1,
 		E_TYPE_MAX_1
 	};
 
@@ -23,6 +24,8 @@ public:
 		E_TYPE_DRAGON_2,
 		E_TYPE_GOAST_2,
 		E_TYPE_BOAR_2,
+		E_TYPE_BAT_2,
+		E_TYPE_HONE_2,
 		E_TYPE_MAX_2
 	};
 
@@ -104,6 +107,12 @@ protected:
 
 	//イノシシの画像のハンドル番号
 	int imgBoar_[6];
+
+	//コウモリの画像のハンドル番号
+	int imgBat_[4];
+
+	//ガイコツの画像のハンドル番号
+	int imgHone_[3];
 
 	//位置
 	Vector2F pos;

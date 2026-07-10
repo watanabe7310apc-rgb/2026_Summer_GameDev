@@ -6,6 +6,8 @@
 #include "EnemyDragon.h"
 #include "EnemyGoast.h"
 #include "Boar.h"
+#include "EnemyBat.h"
+#include "EnemyHone.h"
 #include "Src/SceneManager.h"
 #include "MenuScene.h"
 
@@ -66,6 +68,7 @@ void GameScene::Update(void)
 {
 
 	front_->Update();
+
 	if (Application::Player_ == 2)player2_->Update();
 
 	//ヒットスロー
@@ -98,6 +101,9 @@ void GameScene::Update(void)
 					break;
 				case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
 					e = new Boar();
+					break;
+				case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
+					e = new EnemyHone();
 					break;
 				}
 
@@ -136,6 +142,12 @@ void GameScene::Update(void)
 					break;
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
 					e = new Boar();
+					break;
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
+					e = new EnemyBat();
+					break;
+				case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
+					e = new EnemyHone();
 					break;
 				}
 
@@ -176,7 +188,7 @@ void GameScene::Update(void)
 
 		//衝突判定
 		CollisionCheck();
-		if (front_->GetAlive() && BaseCounter > 0&&clearCounter< SpoanMax_) {
+		if (BaseCounter > 0&&clearCounter< SpoanMax_) {
 			//死亡した敵データを消去する
 			size_t size = enemys.size();   //敵のテーブルの要素数を取得
 			std::vector<EnemyBase*>::iterator eitr;
@@ -190,19 +202,18 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		
-		if(BaseCounter <= 0 || nowWave_>WaveMax_)
+		if (BaseCounter <= 0)
 		{
 			EraseEnemys();
 
-			if (!front_->GetAlive() || BaseCounter <= 0)
-			{
-				SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
-			}
-			else
-			{
-				SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
-			}
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+		}
+		
+		if(nowWave_>WaveMax_)
+		{
+			EraseEnemys();
+
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
 		
 		}
 
