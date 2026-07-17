@@ -54,6 +54,12 @@ public:
 
 	bool GetClearFlg(void){ return Clear_; }
 
+	//ポーズメニューの描画
+	void DrawPauseMenu(void);
+
+	//ポーズメニューのアップデート
+	void UpdatePauseMenu(void);
+
 
 private:
 	int img_;   //背景のハンドル番号
@@ -121,5 +127,8 @@ private:
 
 	//今のウェーブ数
 	int nowWave_;
+
+	//ポーズ中判定
+	bool isPause_;
 };
 

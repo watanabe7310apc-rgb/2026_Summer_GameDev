@@ -48,10 +48,13 @@ public:
 	static constexpr int ATTACK_RANGE_Y = 126;
 
 	//ノックバック中の減速率
-	static constexpr float KNOCKBACK_DEC = 0.9f;
+	static constexpr float KNOCKBACK_DEC = 0.8f;
 
 	//プレイヤーリスポーンまでの時間
 	static constexpr float PLAYER_RESPOAN_TIME = 100.0f;
+
+	//無敵時間の最大値
+	static constexpr int NODAMAGE_TIME = 70;
 
 	//アニメーション状態
 	enum class ANIM_STATE
@@ -119,6 +122,9 @@ public:
 	//ノックバック中
 	bool IsKnockBack()const { return knockBackSpeed_ != 0.0f; }
 
+	//無敵時間中
+	bool IsNoDamage()const { return NoDamageFlg_; }
+
 	//ノックバックの威力を設定する
 	void SetKnockBackPower(float p) { knockBackPower_ = p; }
 
@@ -127,6 +133,12 @@ public:
 
 	//リスポーン処理
 	void FrontRespoan(void);
+
+	//無敵時間
+	int NoDamageCounter_;
+
+	//無敵フラグ
+	bool NoDamageFlg_;
 
 private:
 
@@ -186,6 +198,7 @@ private:
 
 	//リスポーンカウンタ
 	float RespoanCounter_;
+
 
 	//SE
 	int SE_Slash_;

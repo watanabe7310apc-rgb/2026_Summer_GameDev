@@ -52,6 +52,8 @@ void GameScene::SystemInit()
 
 	Clear_ = false;
 
+	isPause_ = false;
+
 	if (Application::Player_ == 1)
 	{
 		SpoanMax_ = 10;
@@ -74,64 +76,133 @@ void GameScene::GameInit(void)
 {
 
 }
-
 //更新処理
 void GameScene::Update(void)
 {
-
-	front_->Update();
-
-	fader_->Update();
-
-
-	if (Application::Player_ == 2)player2_->Update();
-
-	//ヒットスロー
-	if (slowCounter > 0)
+	if (isPause_)
 	{
-		slowCounter--;
+		UpdatePauseMenu();
 	}
-
-	if (spoanCounter_ < SpoanMax_) {
-
-		if (Application::Player_ == 1)
+	else
+	{
+		if (CheckHitKey(KEY_INPUT_TAB))
 		{
-			//エンカウンター
-			enCounter++;
-			if (enCounter > ENCOUNT + 20) {
+			isPause_ = true;
+		}
+		front_->Update();
 
-				spoanCounter_++;
+		fader_->Update();
 
-				//敵の生成
-				EnemyBase* e = nullptr;
 
-				//ランダムに種別を決める
-				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_1::E_TYPE_MAX_1) - 1);
-				EnemyBase::E_ENEMY_ID_1 type = static_cast<EnemyBase::E_ENEMY_ID_1>(rr);
+		if (Application::Player_ == 2)player2_->Update();
 
-				//種別に対応した派生クラスのインスタンスを生成
-				switch (type) {
-				case EnemyBase::E_ENEMY_ID_1::E_TYPE_GOAST_1:
-					e = new EnemyGoast();
-					break;
-				case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
-					e = new Boar();
-					break;
-				case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
-					e = new EnemyHone();
-					break;
+		//ヒットスロー
+		if (slowCounter > 0)
+		{
+			slowCounter--;
+		}
+
+		if (spoanCounter_ < SpoanMax_) {
+
+			if (Application::Player_ == 1)
+			{
+				//エンカウンター
+				enCounter++;
+				if (enCounter > ENCOUNT + 20) {
+
+					spoanCounter_++;
+
+					//敵の生成
+					EnemyBase* e = nullptr;
+
+					//ランダムに種別を決める
+					int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_1::E_TYPE_MAX_1) - 1);
+					EnemyBase::E_ENEMY_ID_1 type = static_cast<EnemyBase::E_ENEMY_ID_1>(rr);
+
+					//種別に対応した派生クラスのインスタンスを生成
+					switch (type) {
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_GOAST_1:
+						e = new EnemyGoast();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
+						e = new Boar();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
+						e = new EnemyHone();
+						break;
+					}
+
+					if (e != nullptr) {
+						e->enemyType = type;
+						e->SystemInit(this);
+						e->GameInit();
+						//可変長配列に要素を追加する
+						enemys.push_back(e);
+						enCounter = 0;           //エンカウンターをリセット
+					}
 				}
+			}
+			else
+			{
+				//エンカウンター
+				enCounter++;
+				if (enCounter > ENCOUNT) {
 
-				if (e != nullptr) {
-					e->enemyType = type;
-					e->SystemInit(this);
-					e->GameInit();
-					//可変長配列に要素を追加する
-					enemys.push_back(e);
-					enCounter = 0;           //エンカウンターをリセット
+					spoanCounter_++;
+					//船の数を数える
+					int shipCount = 0;
+
+					for (auto enemy : enemys)
+					{
+						if (enemy->enemyType == EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2)
+						{
+							shipCount++;
+						}
+					}
+
+					//敵の生成
+					EnemyBase* e = nullptr;
+
+					//ランダムに種別を決める
+					int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
+					EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
+
+					//種別に対応した派生クラスのインスタンスを生成
+					switch (type) {
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
+						e = new EnemyDragon();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
+						e = new EnemyGoast();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
+						e = new Boar();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
+						if (shipCount < 2)
+						{
+							e = new EnemyShip();
+						}
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
+						e = new EnemyBat();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
+						e = new EnemyHone();
+						break;
+					}
+
+					if (e != nullptr) {
+						e->enemyType = type;
+						e->SystemInit(this);
+						e->GameInit();
+						//可変長配列に要素を追加する
+						enemys.push_back(e);
+						enCounter = 0;           //エンカウンターをリセット
+					}
 				}
 			}
 		}
+<<<<<<< HEAD
 		else
 		{
 			//エンカウンター
@@ -180,6 +251,8 @@ void GameScene::Update(void)
 			}
 		}
 	}
+=======
+>>>>>>> f538bef42c152c796b7b5781c538222687d8a250
 
 
 		if (clearCounter >= SpoanMax_)
@@ -216,7 +289,7 @@ void GameScene::Update(void)
 
 		//衝突判定
 		CollisionCheck();
-		if (BaseCounter > 0&&clearCounter< SpoanMax_) {
+		if (BaseCounter > 0 && clearCounter < SpoanMax_) {
 			//死亡した敵データを消去する
 			size_t size = enemys.size();   //敵のテーブルの要素数を取得
 			std::vector<EnemyBase*>::iterator eitr;
@@ -230,105 +303,113 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		//if (BaseCounter <= 0)
-		//{
-		//	EraseEnemys();
+		if (BaseCounter <= 0)
+		{
+			EraseEnemys();
 
-		//	SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
-		//}
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+		}
 
-		//if(nowWave_>WaveMax_)
-		//{
-		//	EraseEnemys();
+		if (nowWave_ > WaveMax_)
+		{
+			EraseEnemys();
 
-		//	SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
 
-		//}
-
+		}
+	}
 }
 
 
 //描画処理
 void GameScene::Draw(void)
 {
-	DrawGraph(0,0, img_, false);
-
-	//振動
-	if (slowCounter > 0)
+	if (isPause_)
 	{
-		//描画先スクリーンを再設定
-		SetDrawScreen(DX_SCREEN_BACK);
-		//0or1
-		int shake = (slowCounter / 5) % 2;
-		//0or2
-		shake *= 2;
-		//-1or1
-		shake -= 1;
-		//-5or5
-		shake *= 5;
-
-
-		DrawGraph(shake, shake, tempScreen, true);
-
-		//slowCounterが減るほど薄くなる
-		int alpha = 200 * slowCounter / SLOW_DISP_TIME;
-		if (alpha > 200)alpha = 255;
-		if (alpha < 0)alpha = 0;
-
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
-		DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
-			GetColor(200, 0, 0), true);
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		DrawPauseMenu();
 	}
 
-	if (Application::Player_ == 2)player2_->Draw();
-
-	DrawGraph(Application::SCREEN_SIZE_X / 2- 160 , Application::SCREEN_SIZE_Y - 600, imgtower, true);
-	DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
-
-	front_->Draw();
-
-	for (auto e:enemys) {
-		e->Draw();
-	}
-	int php = front_->GetHp();
-
-	SetFontSize(25);
-
-	DrawBox(250, 10, 250+(php*3), 10+30, GetColor(0, 255, 0), true);
-
-	DrawFormatString(32, 7, GetColor(0, 0, 0), "プレイヤーHP : ");
-
-	SetFontSize(64);
-
-	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 10, GetColor(0, 0, 0), "防衛地点 %d/%d", BaseCounter,BASE_HP_MAX);
-	DrawFormatString(Application::SCREEN_SIZE_X/2-250, 60, GetColor(0, 0, 0), "ウェーブ %d/%d", nowWave_,WaveMax_);
-	DrawFormatString(Application::SCREEN_SIZE_X/2-80, 350, GetColor(200, 0, 0), "守れ!!\n ↓");
-
-	SetFontSize(32);
-
-	DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %d/%d", clearCounter,SpoanMax_);
-
-	SetFontSize(25);
-
-	if (Application::Player_ == 2)
+	else
 	{
-		//マウス標準フレーム
-		int mx, my;
-		GetMousePoint(&mx, &my);
+		DrawGraph(0, 0, img_, false);
 
-		DrawRotaGraph(
-			mx,
-			my,
-			0.3,
-			0.0,
-			scopeImage,
-			TRUE
-		);
+		//振動
+		if (slowCounter > 0)
+		{
+			//描画先スクリーンを再設定
+			SetDrawScreen(DX_SCREEN_BACK);
+			//0or1
+			int shake = (slowCounter / 5) % 2;
+			//0or2
+			shake *= 2;
+			//-1or1
+			shake -= 1;
+			//-5or5
+			shake *= 5;
+
+
+			DrawGraph(shake, shake, tempScreen, true);
+
+			//slowCounterが減るほど薄くなる
+			int alpha = 200 * slowCounter / SLOW_DISP_TIME;
+			if (alpha > 200)alpha = 255;
+			if (alpha < 0)alpha = 0;
+
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
+			DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
+				GetColor(200, 0, 0), true);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
+
+		if (Application::Player_ == 2)player2_->Draw();
+
+		DrawGraph(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, imgtower, true);
+		DrawBox(Application::SCREEN_SIZE_X / 2 - 160, Application::SCREEN_SIZE_Y - 600, (Application::SCREEN_SIZE_X / 2 + 160), (Application::SCREEN_SIZE_Y + 225), GetColor(255, 255, 255), false);
+
+		front_->Draw();
+
+		for (auto e : enemys) {
+			e->Draw();
+		}
+		int php = front_->GetHp();
+
+		SetFontSize(25);
+
+		DrawBox(250, 10, 250 + (php * 3), 10 + 30, GetColor(0, 255, 0), true);
+
+		DrawFormatString(32, 7, GetColor(0, 0, 0), "プレイヤーHP : ");
+
+		SetFontSize(64);
+
+		DrawFormatString(Application::SCREEN_SIZE_X / 2 - 250, 10, GetColor(0, 0, 0), "防衛地点 %d/%d", BaseCounter, BASE_HP_MAX);
+		DrawFormatString(Application::SCREEN_SIZE_X / 2 - 250, 60, GetColor(0, 0, 0), "ウェーブ %d/%d", nowWave_, WaveMax_);
+		DrawFormatString(Application::SCREEN_SIZE_X / 2 - 80, 350, GetColor(200, 0, 0), "守れ!!\n ↓");
+
+		SetFontSize(32);
+
+		DrawFormatString(32, 47, GetColor(0, 0, 0), "Enemy :  %d/%d", clearCounter, SpoanMax_);
+		DrawFormatString(32, 67, GetColor(0, 0, 0), "Enemy :  %d", enCounter);
+
+		SetFontSize(25);
+
+		if (Application::Player_ == 2)
+		{
+			//マウス標準フレーム
+			int mx, my;
+			GetMousePoint(&mx, &my);
+
+			DrawRotaGraph(
+				mx,
+				my,
+				0.3,
+				0.0,
+				scopeImage,
+				TRUE
+			);
+		}
+
+		fader_->Draw();
 	}
-
-	fader_->Draw();
-
 }
 
 //解放処理(最後の1回のみ使用)
@@ -360,6 +441,7 @@ void GameScene::Release(void)
 
 }
 
+
 //当たり判定処理
 void GameScene::CollisionCheck(void)
 {
@@ -379,10 +461,10 @@ void GameScene::CollisionCheck(void)
 
 	//プレイヤーの突きの攻撃範囲
 	Vector2 sPos = AsoUtility::Round(front_->GetFrontAttackPos());
-	Vector2 sSize = { PlayerFront::ATTACK_RANGE_X*2,PlayerFront::ATTACK_RANGE_Y };
+	Vector2 sSize = { PlayerFront::ATTACK_RANGE_X * 2,PlayerFront::ATTACK_RANGE_Y };
 
 	//防衛地点の情報
-	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X/2, Application::SCREEN_SIZE_Y - 380 });
+	Vector2 bPos = AsoUtility::Round({ Application::SCREEN_SIZE_X / 2, Application::SCREEN_SIZE_Y - 380 });
 	Vector2 bSize = { 320, 480 };
 
 
@@ -396,11 +478,11 @@ void GameScene::CollisionCheck(void)
 		Vector2 eSize = enemys[ii]->GetEnemySize();
 
 		//敵とプレイヤーの衝突判定
-		if (CollisionChackRectCenter(pPos, pSize, ePos, eSize)) {
+		if (CollisionChackRectCenter(pPos, pSize, ePos, eSize) && !front_->IsKnockBack() && !front_->IsNoDamage()) {
 			//プレイヤーにダメージを与える
-			front_->SetDamage(10); 
+			front_->SetDamage(10);
 
-			front_->AddKnockBack(15.0f,ePos.x);
+			front_->AddKnockBack(15.0f, ePos.x);
 		}
 		if (!front_->GetAlive()) {
 			break;
@@ -416,11 +498,11 @@ void GameScene::CollisionCheck(void)
 				enemys[ii]->AddKnockBack(front_->GetKnockBackPower());
 
 				enemys[ii]->hitThisAttack_ = true;
-				}
+			}
 		}
 
 		//敵とプレイヤーの突き攻撃の衝突判定
-		if (front_->GetStrikeFlg()&&!front_->GetAttackHit()) {
+		if (front_->GetStrikeFlg() && !front_->GetAttackHit()) {
 			//攻撃している
 			if (CollisionChackRectCenter(sPos, sSize, ePos, eSize)) {
 				enemys[ii]->SetDamage(3);   //敵にダメージを与える
@@ -429,7 +511,7 @@ void GameScene::CollisionCheck(void)
 				enemys[ii]->AddKnockBack(front_->GetKnockBackPower());
 
 				front_->SetAttackHit(true);
-				}
+			}
 		}
 
 		//敵と防衛地点の当たり判定
@@ -437,7 +519,7 @@ void GameScene::CollisionCheck(void)
 			BaseCounter--;
 			enemys[ii]->SetDamage(10);   //敵にダメージを与える
 			slowCounter = SLOW_DISP_TIME;
-			PlaySoundMem(SE_BaseDamage_, DX_PLAYTYPE_BACK,true);
+			PlaySoundMem(SE_BaseDamage_, DX_PLAYTYPE_BACK, true);
 
 		}
 
@@ -533,4 +615,19 @@ void GameScene::EraseEnemys(void)
 		delete enemys[ii - 1];
 	}
 	enemys.clear();   //可変長配列を空にする(サイズを0にする)
+}
+
+void GameScene::DrawPauseMenu(void)
+{
+	DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
+		GetColor(100, 100, 100), true);
+
+}
+
+void GameScene::UpdatePauseMenu(void)
+{
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		isPause_ = false;
+	}
 }
