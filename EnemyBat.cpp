@@ -5,7 +5,7 @@
 void EnemyBat::SetEnemyParam(void)
 {
 	//敵の画像サイズ
-	size = { 40,38 };
+	size = { 77,73 };
 	//初期位置
 	enemySpoanPoint = GetRand(1);
 
