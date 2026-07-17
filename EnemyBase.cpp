@@ -113,7 +113,8 @@
 			break;
 			}
 		}
-		else {
+		else
+		{
 			switch (enemyType)
 			{
 			case E_ENEMY_ID_2::E_TYPE_DRAGON_2:
@@ -138,13 +139,13 @@
 				DrawEnemy(imgBoar_[animIdx]);
 			}
 			break;
-<<<<<<< HEAD
 			case E_ENEMY_ID_2::E_TYPE_SHIP_2:
 			{
 				stepAnim += ANIM_SPEED;
 				int animIdx = AsoUtility::Round(stepAnim) % 3;
 				DrawEnemy(imgShip_[animIdx]);
-=======
+			}
+			break;
 			case E_ENEMY_ID_2::E_TYPE_BAT_2:
 			{
 				stepAnim += ANIM_SPEED;
@@ -157,7 +158,6 @@
 				stepAnim += ANIM_SPEED;
 				int animIdx = AsoUtility::Round(stepAnim) % 3;
 				DrawEnemy(imgHone_[animIdx]);
->>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 			}
 			break;
 			}
@@ -174,16 +174,13 @@
 		for (int i = 0; i < 4; i++)
 			if (imgBat_[i] != -1) DeleteGraph(imgBat_[i]);
 		for (int i = 0; i < 6; i++)
-<<<<<<< HEAD
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 		for (int i = 0; i < 3; i++)
 			if (imgShip_[1] != -1) DeleteGraph(imgShip_[1]);
-=======
+		for (int i = 0; i < 6; i++)
 			if (imgBoar_[i] != -1) DeleteGraph(imgBoar_[i]);
 		for (int i = 0; i < 3; i++)
 			if (imgHone_[i] != -1) DeleteGraph(imgHone_[i]);
-
->>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 	}
 
 	//“G‰æ‘œ‚Ìƒ[ƒh
@@ -191,14 +188,11 @@
 	{
 		for (int i = 0; i < 4; i++) imgDragon_[i] = -1;
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
-<<<<<<< HEAD
 		for (int i = 0; i < 3; i++) imgGoast_[i] = -1;
 		for (int i = 0; i < 3; i++) imgShip_[i] = -1;
-=======
 		for (int i = 0; i < 4; i++) imgBat_[i] = -1;
 		for (int i = 0; i < 6; i++) imgBoar_[i] = -1;
 		for (int i = 0; i < 3; i++) imgHone_[i] = -1;
->>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 
 		//ƒhƒ‰ƒSƒ“
 		LoadDivGraph(
