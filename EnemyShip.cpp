@@ -20,7 +20,10 @@ void EnemyShip::SetEnemyParam(void)
 	//敵の移動速度
 	speed = 0.5f;
 	//ヒットポイント
-	hp = hpMax = 10;
+	hp = hpMax = 20;
+
+	// 爆弾の発射間隔
+	bombTimer = 120;
 }
 
 void EnemyShip::Update()
@@ -40,10 +43,43 @@ void EnemyShip::Update()
 
 	EnemyBase::Update();
 
+	// 爆弾タイマー
+	bombTimer--;
+
+	if (bombTimer <= 0)
+	{
+		bombTimer = 120;
+
+		for (int i = 0; i < BOMB_MAX; i++)
+		{
+			if (!bomb[i].GetAlive())
+			{
+				bool left = (enemySpoanPoint == 1);
+				bomb[i].Shot(pos.x, pos.y + size.y / 2,left);
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < BOMB_MAX; i++)
+	{
+		bomb[i].Update();
+	}
+
 	if (pos.x < -size.x ||
 		pos.x > Application::SCREEN_SIZE_X + size.x)
 	{
 		waiting = true;
 		respawnTimer = 100;
+	}
+}
+
+void EnemyShip::Draw()
+{
+	EnemyBase::Draw();
+
+	for (int i = 0; i < BOMB_MAX; i++)
+	{
+		bomb[i].Draw();
 	}
 }

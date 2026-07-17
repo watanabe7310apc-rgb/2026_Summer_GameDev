@@ -176,7 +176,7 @@
 		for (int i = 0; i < 6; i++)
 			if (imgGoast_[i] != -1) DeleteGraph(imgGoast_[i]);
 		for (int i = 0; i < 3; i++)
-			if (imgShip_[1] != -1) DeleteGraph(imgShip_[1]);
+			if (imgShip_[1] != -1) DeleteGraph(imgShip_[i]);
 		for (int i = 0; i < 6; i++)
 			if (imgBoar_[i] != -1) DeleteGraph(imgBoar_[i]);
 		for (int i = 0; i < 3; i++)

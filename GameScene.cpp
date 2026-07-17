@@ -139,16 +139,6 @@ void GameScene::Update(void)
 			if (enCounter > ENCOUNT) {
 
 				spoanCounter_++;
-				//ëDÇÃêîÇêîÇ¶ÇÈ
-				int shipCount = 0;
-
-				for (auto enemy : enemys)
-				{
-					if (enemy->enemyType == EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2)
-					{
-						shipCount++;
-					}
-				}
 
 				//ìGÇÃê∂ê¨
 				EnemyBase* e = nullptr;
@@ -169,10 +159,8 @@ void GameScene::Update(void)
 					e = new Boar();
 					break;
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
-					if (shipCount < 2)
-					{
-						e = new EnemyShip();
-					}
+					e = new EnemyShip();
+					break;
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
 					e = new EnemyBat();
 					break;
