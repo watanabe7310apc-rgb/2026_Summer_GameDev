@@ -64,6 +64,12 @@ void PlayerFront::SystemInit(void)
 	//リスポーンカウンタ
 	RespoanCounter_ = 0.0f;
 
+	//無敵時間
+	NoDamageCounter_ = 0.0f;
+
+	//無敵フラグ
+	NoDamageFlg_ = false;
+
 
 	SE_Slash_ = LoadSoundMem("Image/Sound/Slash.mp3");
 	SE_Strike_ = LoadSoundMem("Image/Sound/Strike.mp3");
@@ -80,6 +86,18 @@ void PlayerFront::GameInit(void)
 //更新処理
 void PlayerFront::Update(void)
 {
+	if (NoDamageFlg_)
+	{
+		if (NoDamageCounter_ >= 0.0f)
+		{
+			NoDamageCounter_ --;
+		}
+		else
+		{
+			NoDamageFlg_ = false;
+		}
+	}
+
 	if (aliveFlg)
 	{
 		if (fabs(knockBackSpeed_) > 0.01f)
@@ -91,6 +109,9 @@ void PlayerFront::Update(void)
 			if (fabs(knockBackSpeed_) < 0.1f)
 			{
 				knockBackSpeed_ = 0.0f;
+				NoDamageFlg_ = true;
+				NoDamageCounter_ = NODAMAGE_TIME;
+
 			}
 			return;
 		}
@@ -143,58 +164,68 @@ void PlayerFront::Draw(void)
 {
 	if (aliveFlg)
 	{
-		DrawBox(pos_.x - (SIZE_X / 2), pos_.y - (SIZE_Y / 2), pos_.x + (SIZE_X / 2), pos_.y + (SIZE_Y / 2), GetColor(0, 200, 0), false);
-
-		if (isAttack_) {
-			DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-		}
-		else if (isStrikeAttack_) {
-			DrawBox(apos_.x - (ATTACK_RANGE_X), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-
-		}
-
-		switch (animState_)
+		if ((NoDamageCounter_ % 2) == 0 || !NoDamageFlg_)
 		{
-		case ANIM_STATE::IDLE:
-		{
-			stepAnim_ += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % IDLE_ALL_NUM;
-			DrawPlayer(Idleimages_[animIdx]);
-		}
-		break;
+			DrawBox(pos_.x - (SIZE_X / 2), pos_.y - (SIZE_Y / 2), pos_.x + (SIZE_X / 2), pos_.y + (SIZE_Y / 2), GetColor(0, 200, 0), false);
 
-		case ANIM_STATE::RUN:
-		{
-			stepAnim_ += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % RUN_ALL_NUM;
-			DrawPlayer(Runimages_[animIdx]);
+			if (isAttack_) {
+				DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+			}
+			else if (isStrikeAttack_) {
+				DrawBox(apos_.x - (ATTACK_RANGE_X), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
+
+			}
+
+			switch (animState_)
+			{
+			case ANIM_STATE::IDLE:
+			{
+				stepAnim_ += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim_) % IDLE_ALL_NUM;
+				DrawPlayer(Idleimages_[animIdx]);
+			}
 			break;
-		}
 
-		case ANIM_STATE::DAMAGED:
-		{
-			stepAnim_ += ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % DAMAGE_ALL_NUM;
-			DrawPlayer(Damageimages_[animIdx]);
-			break;
-		}
-		case ANIM_STATE::ATTACK:
-		{
-			stepAnim_ += ATTACK_ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
-			DrawPlayer(Attackimages_[animIdx]);
-			break;
-		}
-		case ANIM_STATE::RUN_ATTACK:
-		{
-			stepAnim_ += ATTACK_ANIM_SPEED;
-			int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
-			DrawPlayer(RunAttackimages_[animIdx]);
-			break;
-		}
+			case ANIM_STATE::RUN:
+			{
+				stepAnim_ += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim_) % RUN_ALL_NUM;
+				DrawPlayer(Runimages_[animIdx]);
+				break;
+			}
 
+			case ANIM_STATE::DAMAGED:
+			{
+				stepAnim_ += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim_) % DAMAGE_ALL_NUM;
+				DrawPlayer(Damageimages_[animIdx]);
+				break;
+			}
+			case ANIM_STATE::ATTACK:
+			{
+				stepAnim_ += ATTACK_ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
+				DrawPlayer(Attackimages_[animIdx]);
+				break;
+			}
+			case ANIM_STATE::RUN_ATTACK:
+			{
+				stepAnim_ += ATTACK_ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim_) % ATTACK_ALL_NUM;
+				DrawPlayer(RunAttackimages_[animIdx]);
+				break;
+			}
+
+			}
+		}
+		else
+		{
+			//描画しない
 		}
 	}
+
+	DrawFormatString(32, 87, GetColor(0, 0, 0), "無敵 :  %d", NoDamageFlg_);
+
 }
 
 //解放処理(最後の1回のみ使用)
@@ -477,12 +508,14 @@ void PlayerFront::LoadImages(void)
 		hp -= dp;
 		PlaySoundMem(SE_Damage_, DX_PLAYTYPE_BACK, true);
 
+
 		if (hp <= 0)
 		{
 			hp = 0;
 			aliveFlg = false;
 		}
 	}
+	
 
 	//ノックバック中
 	void PlayerFront::AddKnockBack(float power,float enemyX)
