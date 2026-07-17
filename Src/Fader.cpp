@@ -33,31 +33,7 @@ void Fader::GameInit(void)
 void Fader::Update(void)
 {
 	if (endFlg)return;
-
-	switch (stat) {
-	case E_STAT_FADE_NON:
-			return;
-		case E_STAT_FADE_OUT:
-			alpha += FADE_SPEED_ALPHA;
-			if (alpha > 255.0f) {
-				//フェードアウト終了
-				alpha = 255.0f;
-				endFlg = true;
-				stat = E_STAT_FADE_NON;
-			}
-			break;
-		case E_STAT_FADE_IN:
-			alpha -= FADE_SPEED_ALPHA;
-			if (alpha < 0) {
-				//フェードイン終了
-				alpha = 0.0f;
-				endFlg = true;
-				stat = E_STAT_FADE_NON;
-			}
-			break;
-		default:
-			return;
-	}
+	NomalFade();
 }
 //描画処理
 void Fader::Draw(void)
@@ -89,4 +65,33 @@ void Fader::SetFade(E_FADE_STAT_ID id)
 	if (stat != E_STAT_FADE_NON) {
 	endFlg = false;
 	}
+}
+
+void Fader::NomalFade(void)
+{
+	switch (stat) {
+	case E_STAT_FADE_NON:
+		return;
+	case E_STAT_FADE_OUT:
+		alpha += FADE_SPEED_ALPHA;
+		if (alpha > 255.0f) {
+			//フェードアウト終了
+			alpha = 255.0f;
+			endFlg = true;
+			stat = E_STAT_FADE_NON;
+		}
+		break;
+	case E_STAT_FADE_IN:
+		alpha -= FADE_SPEED_ALPHA;
+		if (alpha < 0) {
+			//フェードイン終了
+			alpha = 0.0f;
+			endFlg = true;
+			stat = E_STAT_FADE_NON;
+		}
+		break;
+	default:
+		return;
+	}
+
 }

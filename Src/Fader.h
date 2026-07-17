@@ -21,6 +21,8 @@ public:
 	bool IsEnd(void) { return endFlg; }
 	void SetFade(E_FADE_STAT_ID id);
 
+	void NomalFade(void);
+
 private:
 	E_FADE_STAT_ID stat;     //ステータス
 	float alpha;             //アルファ値用の変数

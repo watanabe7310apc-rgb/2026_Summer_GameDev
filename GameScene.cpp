@@ -6,14 +6,12 @@
 #include "EnemyDragon.h"
 #include "EnemyGoast.h"
 #include "Boar.h"
-<<<<<<< HEAD
 #include "EnemyShip.h"
-=======
 #include "EnemyBat.h"
 #include "EnemyHone.h"
->>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 #include "Src/SceneManager.h"
 #include "MenuScene.h"
+#include "Src/Fader.h"
 
 //コンストラクタ
 GameScene::GameScene(void)
@@ -36,6 +34,9 @@ void GameScene::SystemInit()
 
 	if(Application::Player_==2)player2_ = new Player2();
 
+	fader_ = new Fader();
+
+
 	img_ = LoadGraph("Image/ゲーム背景(城壁).jpg");
 	imgtower = LoadGraph("Image/Tower.png");
 	SE_BaseDamage_ = LoadSoundMem("Image/Sound/BaseDamage.mp3");
@@ -51,7 +52,14 @@ void GameScene::SystemInit()
 
 	Clear_ = false;
 
-	SpoanMax_ = 30;
+	if (Application::Player_ == 1)
+	{
+		SpoanMax_ = 10;
+	}
+	else
+	{
+		SpoanMax_ = 30;
+	}
 
 	WaveMax_ = Application::Level_;
 
@@ -72,6 +80,9 @@ void GameScene::Update(void)
 {
 
 	front_->Update();
+
+	fader_->Update();
+
 
 	if (Application::Player_ == 2)player2_->Update();
 
@@ -157,19 +168,16 @@ void GameScene::Update(void)
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
 					e = new Boar();
 					break;
-<<<<<<< HEAD
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
 					if (shipCount < 2)
 					{
 						e = new EnemyShip();
 					}
-=======
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
 					e = new EnemyBat();
 					break;
 				case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
 					e = new EnemyHone();
->>>>>>> 72fc13481b22efa4d8dddad4b2e5e004ffb08946
 					break;
 				}
 
@@ -193,6 +201,16 @@ void GameScene::Update(void)
 			clearCounter = 0;
 			nowWave_++;
 			BaseCounter = BASE_HP_MAX;
+			fader_->SetFade(E_STAT_FADE_OUT);
+		}
+
+		if (fader_->IsEnd())
+		{
+			fader_->SetFade(E_STAT_FADE_IN);
+		}
+		else
+		{
+			enCounter = 0;
 		}
 
 
@@ -224,20 +242,20 @@ void GameScene::Update(void)
 				}
 			}
 		}
-		if (BaseCounter <= 0)
-		{
-			EraseEnemys();
+		//if (BaseCounter <= 0)
+		//{
+		//	EraseEnemys();
 
-			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
-		}
-		
-		if(nowWave_>WaveMax_)
-		{
-			EraseEnemys();
+		//	SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAMEOVER);
+		//}
 
-			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
-		
-		}
+		//if(nowWave_>WaveMax_)
+		//{
+		//	EraseEnemys();
+
+		//	SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
+
+		//}
 
 }
 
@@ -246,6 +264,7 @@ void GameScene::Update(void)
 void GameScene::Draw(void)
 {
 	DrawGraph(0,0, img_, false);
+
 	//振動
 	if (slowCounter > 0)
 	{
@@ -319,6 +338,9 @@ void GameScene::Draw(void)
 			TRUE
 		);
 	}
+
+	fader_->Draw();
+
 }
 
 //解放処理(最後の1回のみ使用)
@@ -340,6 +362,13 @@ void GameScene::Release(void)
 	DeleteSoundMem(SE_BaseDamage_);
 
 	DeleteGraph(scopeImage);
+
+	//フェード機能の開放
+	if (fader_) {
+		fader_->Release();
+		delete fader_;
+		fader_ = nullptr;
+	}
 
 }
 

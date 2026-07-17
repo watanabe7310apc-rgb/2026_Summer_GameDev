@@ -7,6 +7,7 @@
 #include "EnemyBase.h"
 
 class MenuScene;
+class Fader;
 
 class GameScene :
     public SceneBase
@@ -65,6 +66,8 @@ private:
 	EnemyBase* enemy_;
 
 	MenuScene* menu_;
+
+	Fader* fader_;
 
 	//Enemyクラスのインスタンスのポインタの可変長テーブル
 	//複数の敵を動的に管理する
