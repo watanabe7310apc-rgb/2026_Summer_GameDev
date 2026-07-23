@@ -85,7 +85,6 @@
 	//•`‰æ
 	void EnemyBase::Draw(void)
 	{
-		DrawBox(pos.x - (size.x / 2), pos.y - (size.y / 2), pos.x + (size.x / 2), pos.y + (size.y / 2), GetColor(200, 0, 0), false);
 		DrawBox(pos.x - 50, pos.y - 100, pos.x + (hp * 5), pos.y - 70, GetColor(0, 0, 255), true);
 
 		if (Application::Player_ == 1) {

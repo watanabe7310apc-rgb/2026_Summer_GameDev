@@ -18,7 +18,7 @@ void EnemySlime::SetEnemyParam(void)
 		break;
 	}
 	//敵の移動速度
-	speed = 0.2f;
+	speed = 0.4f;
 
 	//ヒットポイント
 	hp = hpMax = 15;
