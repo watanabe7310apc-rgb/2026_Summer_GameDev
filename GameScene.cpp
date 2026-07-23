@@ -202,7 +202,6 @@ void GameScene::Update(void)
 				}
 			}
 		}
-<<<<<<< HEAD
 		else
 		{
 			//エンカウンター
@@ -251,8 +250,6 @@ void GameScene::Update(void)
 			}
 		}
 	}
-=======
->>>>>>> f538bef42c152c796b7b5781c538222687d8a250
 
 
 		if (clearCounter >= SpoanMax_)

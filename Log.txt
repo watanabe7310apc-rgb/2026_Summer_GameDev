@@ -1,379 +1,351 @@
 ﻿0:ChangeWindowMode実行 
-0:ウインドウモードフラグが立てられました
-<<<<<<< HEAD
-2:ＤＸライブラリの初期化処理開始
-3:	システムの情報を出力します
-4:		ＤＸライブラリ Ver3.24b
-4:		論理プロセッサの数 : 16
-4:		ＯＳ  Windows11 ( Build 26200  )
-105:		現時点のＣＰＵ動作速度：大体2.91GHz
-105:		ＭＭＸ命令を使用します
-105:		ＳＳＥ命令が使用可能です
-106:		ＳＳＥ２命令が使用可能です
-106:		ＣＰＵベンダ：GenuineIntel
-108:		ＣＰＵ名：13th Gen Intel(R) Core(TM) i7-13620H
-108:	ＣＯＭの初期化... 成功
-113:	非同期読み込み処理の初期化...成功
-113:	ファイルアクセス処理の初期化...成功
-117:	メモリ総量:16087.52MB  空きメモリ領域:2328.67MB 
-117:	タイマーの精度を検査します
-117:	精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
-118:	 パフォーマンスカウンターを使用します タイマー精度 : 10000.000000 KHz 
-118:	 
-118:	ソフトの二重起動検査... 二重起動はされていませんでした
-119:	ウインドウクラスを登録します... 登録に成功しました
-120:	ウインドウモード起動用のウインドウを作成します
-120:	ディスプレイ情報のセットアップ開始
-121:		モニターの数：1  ディスプレイデバイスの数：8
-121:		No.0  モニター名：\\.\DISPLAY1　1920x1080　32bit　144Hz  96x96dpi
-126:	ディスプレイ情報のセットアップ完了
-126:	ウインドウ矩形 ( -16, -50 )-( 1920, 1069 )
-130:	ウインドウの作成に成功しました
-130:	ウインドウを表示します
-158:	ＩＭＥを無効にしました
-160:	ウインドウスタイルをウインドウモード用に変更します... 完了
-196:	XInput DLL の読み込み中... 成功
-201:	DirectInput関係初期化処理
-202:		DirectInput8 の取得を試みます...成功
-227:			引き続き初期化処理... 初期化成功
-229:		ジョイパッドの初期化... 
-230:			XInput 対応コントローラーのチェックを開始します
-230:				XInput 対応コントローラー No.0 をチェック
-231:				XInput 対応コントローラー No.0 の接続は確認できませんでした
-231:				XInput 対応コントローラー No.1 をチェック
-232:				XInput 対応コントローラー No.1 の接続は確認できませんでした
-232:				XInput 対応コントローラー No.2 をチェック
-232:				XInput 対応コントローラー No.2 の接続は確認できませんでした
-233:				XInput 対応コントローラー No.3 をチェック
-233:				XInput 対応コントローラー No.3 の接続は確認できませんでした
-234:			XInput 対応コントローラーのチェック完了
-234:			DirectInput 対応ジョイパッドの列挙を開始します
-258:			DirectInput 対応ジョイパッドの列挙終了
-259:		ジョイパッドの初期化は正常に終了しました
-259:		マウスデバイスの初期化... 初期化成功
-260:		キーボードデバイスの初期化... 初期化成功
-263:	DirectInput 関連の初期化は正常に終了しました
-266:	WASAPI の初期化を行います
-275:		デバイス名 : スピーカー (Realtek(R) Audio)
-398:		デフォルト遅延時間 : 10.000 ms
-432:		最小遅延時間       : 3.000 ms
-432:		遅延時間           : 10.000 ms
-433:		チャンネル数  　   : 2 ch
-434:		量子化ビット深度   : 32 bit
-434:		有効ビット深度　   : 32 bit
-435:		サンプリングレート : 48000 Hz
-435:		データ形式         : 浮動小数点型
-814:		動作モード         : 共有モード
-814:	WASAPI の初期化は正常に終了しました
-818:	d3d11.dll の読み込み.... 成功
-821:	dxgi.dll の読み込み.... 成功
-822:	API CreateDXGIFactory2 のアドレスを取得します.... 成功
-822:	IDXGIFactory2 を作成します.... 成功
-842:	API CreateDXGIFactory6 のアドレスを取得します.... 成功
-843:	IDXGIAdapter を列挙
-843:		Adapter No.0 Desc:NVIDIA GeForce RTX 4050 Laptop GPU  VRAM:5921MB
-845:		Adapter No.1 Desc:Intel(R) UHD Graphics  VRAM:128MB
-845:			Output Device No.0 Name:\\.\DISPLAY1 ( 0, 0 )-( 1920, 1080 )
-846:		Adapter No.2 Desc:Microsoft Basic Render Driver  VRAM:0MB
-846:	API D3D11CreateDevice のアドレスを取得します.... 成功
-847:	IDXGIAdapter を取得します.... 成功
-848:	IDXGIAdapter1 を取得します.... 成功
-848:	IDXGIAdapter2 を取得します.... 成功
-849:	IDXGIAdapter3 を取得します.... 成功
-850:	IDXGIAdapter4 を取得します.... 成功
-850:	Direct3D 11 FeatureLevel 11_0 以上を対象とします
-850:	ID3D11Device オブジェクトを取得します.... 成功
-901:	IDXGIDevice1 を取得します.... 成功
-902:	IDXGIDevice1->SetMaximunFrameLatency( 1 ); を実行しました
-902:	[ウインドウモード 1920x1080 ( 0, 0 )-( 1920, 1080 )]
-902:	IDXGISwapChain2 を作成します.... 成功
-905:	IDXGIFactory2->CreateSwapChainForHwnd の戻り値：0x00000000
-905:	IDXGIOutput を取得します.... 成功
-906:	Graphics Device:Intel(R) UHD Graphics
-906:	画面のフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-907:	16bit Zバッファフォーマットは DXGI_FORMAT_D16_UNORM です
-907:	24bit Zバッファフォーマットは DXGI_FORMAT_D24_UNORM_S8_UINT です
-908:	32bit Zバッファフォーマットは DXGI_FORMAT_D32_FLOAT です
-908:	16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-908:	32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-908:	アルファ付き 16bit カラーフォーマットは DXGI_FORMAT_B4G4R4A4_UNORM です
-909:	アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-909:	アルファテスト用 16bit カラーフォーマットは DXGI_FORMAT_B5G5R5A1_UNORM です
-909:	アルファテスト用 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-910:	ＤＸＴ１テクスチャフォーマットは DXGI_FORMAT_BC1_UNORM です
-910:	ＤＸＴ２テクスチャフォーマットは使えません
-910:	ＤＸＴ３テクスチャフォーマットは DXGI_FORMAT_BC2_UNORM です
-910:	ＤＸＴ４テクスチャフォーマットは使えません
-912:	ＤＸＴ５テクスチャフォーマットは DXGI_FORMAT_BC3_UNORM です
-912:	BC7_UNORM テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM です
-912:	BC7_UNORM_SRGB テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM_SRGB です
-912:	ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-913:	ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-913:	ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-913:	１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-914:	１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-914:	１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-914:	１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-915:	２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-915:	２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-915:	２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-916:	２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-916:	描画用 16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-916:	描画用 32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-916:	描画用アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-917:	描画用 ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-917:	描画用 ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-917:	描画用 ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-918:	描画用１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-918:	描画用１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-918:	描画用１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-918:	描画用１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-918:	描画用２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-920:	描画用２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-920:	描画用２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-920:	描画用２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-921:	使用する機能レベル:D3D_FEATURE_LEVEL_11_1
-921:	同時にレンダリングできるバッファの数:8
-921:	最大テクスチャサイズ　幅:16384 高さ:16384
-922:	標準描画用の頂点バッファの作成.... 成功
-923:	シェーダーコード関係の初期化.... 成功
-941:	各種シェーダー用定数バッファの作成.... 成功
-943:	各種 ID3D11InputLayout の作成.... 成功
-961:	画像の単純転送処理の初期化... 成功
-962:	深度バッファを作成します.... 成功
-964:	フォントの初期化を行います
-966:	フォントの初期化は正常に終了しました
-1004:	文字コードバッファの初期化を行います... 完了しました
-1013:ＤＸライブラリの初期化処理終了
-18889:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-18889:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-18891:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-18891:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
-18893:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-18894:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-18895:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-18895:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-23431:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-23432:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-23436:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-23436:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
-23437:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-23438:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-23439:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-23439:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-27760:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-27761:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-27762:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-27762:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-29930:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-29931:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-29933:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-29933:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
-29935:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-29935:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-29937:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-29937:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-32095:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-32096:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-32098:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-32098:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
-32100:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-32100:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-32102:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-32102:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-34260:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-34261:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-34262:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-34263:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
-34265:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-34265:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-34266:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-34267:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-36420:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-36421:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
-36423:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-36423:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
-36424:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-36425:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
-36425:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
-36426:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
-37006:フォントの初期化を行います
-37007:フォントの初期化は正常に終了しました
-37105:d3d11.dll の解放 1
-37105:dxgi.dll の解放 1
-37106:Direct3D11 のオブジェクト数を出力
-37107:Direct3D11 のオブジェクト合計数 : 0
-37107:DirectInput 関連の終了処理... 完了
-37107:サウンド関連の終了処理... 完了
-37126:ウィンドウ関連の終了処理... ウインドウを閉じようとしています
-37132:ウインドウが破棄されようとしています
-37133:ソフトを終了する準備が整いました
-37214:完了
-37215:ＣＯＭを終了... 完了
-37216:
-37217:Alloc memory dump
-37217:	Total size:0(0.000kb)  Alloc num:0
-37217:
-=======
-4:ＤＸライブラリの初期化処理開始
-5:	システムの情報を出力します
-6:		ＤＸライブラリ Ver3.24b
-6:		論理プロセッサの数 : 16
-7:		ＯＳ  Windows11 ( Build 26200  )
-110:		現時点のＣＰＵ動作速度：大体2.91GHz
-110:		ＭＭＸ命令を使用します
-111:		ＳＳＥ命令が使用可能です
-111:		ＳＳＥ２命令が使用可能です
-112:		ＣＰＵベンダ：GenuineIntel
-114:		ＣＰＵ名：13th Gen Intel(R) Core(TM) i7-13620H
-114:	ＣＯＭの初期化... 成功
-122:	非同期読み込み処理の初期化...成功
-123:	ファイルアクセス処理の初期化...成功
-126:	メモリ総量:16087.52MB  空きメモリ領域:2596.32MB 
-126:	タイマーの精度を検査します
-127:	精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
-127:	 パフォーマンスカウンターを使用します タイマー精度 : 10000.000000 KHz 
-128:	 
-128:	ソフトの二重起動検査... 二重起動はされていませんでした
-129:	ウインドウクラスを登録します... 登録に成功しました
-131:	ウインドウモード起動用のウインドウを作成します
-131:	ディスプレイ情報のセットアップ開始
-132:		モニターの数：1  ディスプレイデバイスの数：8
-133:		No.0  モニター名：\\.\DISPLAY1　1920x1080　32bit　144Hz  96x96dpi
-149:	ディスプレイ情報のセットアップ完了
-149:	ウインドウ矩形 ( -16, -50 )-( 1920, 1069 )
-156:	ウインドウの作成に成功しました
-156:	ウインドウを表示します
-193:	ＩＭＥを無効にしました
-196:	ウインドウスタイルをウインドウモード用に変更します... 完了
-247:	XInput DLL の読み込み中... 成功
-264:	DirectInput関係初期化処理
-266:		DirectInput8 の取得を試みます...成功
-318:			引き続き初期化処理... 初期化成功
-321:		ジョイパッドの初期化... 
-322:			XInput 対応コントローラーのチェックを開始します
-322:				XInput 対応コントローラー No.0 をチェック
-323:				XInput 対応コントローラー No.0 の接続は確認できませんでした
-323:				XInput 対応コントローラー No.1 をチェック
-324:				XInput 対応コントローラー No.1 の接続は確認できませんでした
-324:				XInput 対応コントローラー No.2 をチェック
-324:				XInput 対応コントローラー No.2 の接続は確認できませんでした
-325:				XInput 対応コントローラー No.3 をチェック
-325:				XInput 対応コントローラー No.3 の接続は確認できませんでした
-326:			XInput 対応コントローラーのチェック完了
-326:			DirectInput 対応ジョイパッドの列挙を開始します
-391:			DirectInput 対応ジョイパッドの列挙終了
-391:		ジョイパッドの初期化は正常に終了しました
-392:		マウスデバイスの初期化... 初期化成功
-393:		キーボードデバイスの初期化... 初期化成功
-401:	DirectInput 関連の初期化は正常に終了しました
-407:	WASAPI の初期化を行います
-416:		デバイス名 : スピーカー (Realtek(R) Audio)
-478:		デフォルト遅延時間 : 10.000 ms
-479:		最小遅延時間       : 3.000 ms
-480:		遅延時間           : 10.000 ms
-480:		チャンネル数  　   : 2 ch
-481:		量子化ビット深度   : 32 bit
-481:		有効ビット深度　   : 32 bit
-481:		サンプリングレート : 48000 Hz
-482:		データ形式         : 浮動小数点型
-1029:		動作モード         : 共有モード
-1029:	WASAPI の初期化は正常に終了しました
-1033:	d3d11.dll の読み込み.... 成功
-1038:	dxgi.dll の読み込み.... 成功
-1038:	API CreateDXGIFactory2 のアドレスを取得します.... 成功
-1039:	IDXGIFactory2 を作成します.... 成功
-1082:	API CreateDXGIFactory6 のアドレスを取得します.... 成功
-1083:	IDXGIAdapter を列挙
-1083:		Adapter No.0 Desc:NVIDIA GeForce RTX 4050 Laptop GPU  VRAM:5921MB
-1083:		Adapter No.1 Desc:Intel(R) UHD Graphics  VRAM:128MB
-1087:			Output Device No.0 Name:\\.\DISPLAY1 ( 0, 0 )-( 1920, 1080 )
-1088:		Adapter No.2 Desc:Microsoft Basic Render Driver  VRAM:0MB
-1088:	API D3D11CreateDevice のアドレスを取得します.... 成功
-1089:	IDXGIAdapter を取得します.... 成功
-1090:	IDXGIAdapter1 を取得します.... 成功
-1090:	IDXGIAdapter2 を取得します.... 成功
-1091:	IDXGIAdapter3 を取得します.... 成功
-1092:	IDXGIAdapter4 を取得します.... 成功
-1092:	Direct3D 11 FeatureLevel 11_0 以上を対象とします
-1093:	ID3D11Device オブジェクトを取得します.... 成功
-1145:	IDXGIDevice1 を取得します.... 成功
-1145:	IDXGIDevice1->SetMaximunFrameLatency( 1 ); を実行しました
-1146:	[ウインドウモード 1920x1080 ( 0, 0 )-( 1920, 1080 )]
-1146:	IDXGISwapChain2 を作成します.... 成功
-1149:	IDXGIFactory2->CreateSwapChainForHwnd の戻り値：0x00000000
-1149:	IDXGIOutput を取得します.... 成功
-1150:	Graphics Device:Intel(R) UHD Graphics
-1150:	画面のフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-1150:	16bit Zバッファフォーマットは DXGI_FORMAT_D16_UNORM です
-1151:	24bit Zバッファフォーマットは DXGI_FORMAT_D24_UNORM_S8_UINT です
-1151:	32bit Zバッファフォーマットは DXGI_FORMAT_D32_FLOAT です
-1151:	16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-1151:	32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-1152:	アルファ付き 16bit カラーフォーマットは DXGI_FORMAT_B4G4R4A4_UNORM です
-1152:	アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-1152:	アルファテスト用 16bit カラーフォーマットは DXGI_FORMAT_B5G5R5A1_UNORM です
-1153:	アルファテスト用 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-1153:	ＤＸＴ１テクスチャフォーマットは DXGI_FORMAT_BC1_UNORM です
-1153:	ＤＸＴ２テクスチャフォーマットは使えません
-1153:	ＤＸＴ３テクスチャフォーマットは DXGI_FORMAT_BC2_UNORM です
-1154:	ＤＸＴ４テクスチャフォーマットは使えません
-1155:	ＤＸＴ５テクスチャフォーマットは DXGI_FORMAT_BC3_UNORM です
-1155:	BC7_UNORM テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM です
-1155:	BC7_UNORM_SRGB テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM_SRGB です
-1155:	ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-1156:	ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-1156:	ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-1156:	１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-1157:	１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-1157:	１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-1157:	１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-1157:	２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-1158:	２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-1158:	２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-1158:	２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-1159:	描画用 16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-1159:	描画用 32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-1159:	描画用アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-1160:	描画用 ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-1160:	描画用 ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-1160:	描画用 ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-1161:	描画用１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-1161:	描画用１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-1161:	描画用１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-1162:	描画用１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-1162:	描画用２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-1162:	描画用２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-1163:	描画用２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-1163:	描画用２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-1163:	使用する機能レベル:D3D_FEATURE_LEVEL_11_1
-1164:	同時にレンダリングできるバッファの数:8
-1164:	最大テクスチャサイズ　幅:16384 高さ:16384
-1164:	標準描画用の頂点バッファの作成.... 成功
-1165:	シェーダーコード関係の初期化.... 成功
-1183:	各種シェーダー用定数バッファの作成.... 成功
-1186:	各種 ID3D11InputLayout の作成.... 成功
-1200:	画像の単純転送処理の初期化... 成功
-1201:	深度バッファを作成します.... 成功
-1203:	フォントの初期化を行います
-1206:	フォントの初期化は正常に終了しました
-1245:	文字コードバッファの初期化を行います... 完了しました
-1252:ＤＸライブラリの初期化処理終了
-14970:フォントの初期化を行います
-14970:フォントの初期化は正常に終了しました
-15064:d3d11.dll の解放 1
-15065:dxgi.dll の解放 1
-15065:Direct3D11 のオブジェクト数を出力
-15065:Direct3D11 のオブジェクト合計数 : 0
-15068:DirectInput 関連の終了処理... 完了
-15068:サウンド関連の終了処理... 完了
-15082:ウィンドウ関連の終了処理... ウインドウを閉じようとしています
-15089:ウインドウが破棄されようとしています
-15089:ソフトを終了する準備が整いました
-15166:完了
-15167:ＣＯＭを終了... 完了
-15167:
-15168:Alloc memory dump
-15168:	Total size:0(0.000kb)  Alloc num:0
-15169:
->>>>>>> f538bef42c152c796b7b5781c538222687d8a250
+2:ウインドウモードフラグが立てられました
+9:ＤＸライブラリの初期化処理開始
+13:	システムの情報を出力します
+15:		ＤＸライブラリ Ver3.24b
+15:		論理プロセッサの数 : 16
+16:		ＯＳ  Windows11 ( Build 26200  )
+119:		現時点のＣＰＵ動作速度：大体2.86GHz
+119:		ＭＭＸ命令を使用します
+120:		ＳＳＥ命令が使用可能です
+120:		ＳＳＥ２命令が使用可能です
+121:		ＣＰＵベンダ：GenuineIntel
+124:		ＣＰＵ名：13th Gen Intel(R) Core(TM) i7-13620H
+124:	ＣＯＭの初期化... 成功
+133:	非同期読み込み処理の初期化...成功
+135:	ファイルアクセス処理の初期化...成功
+140:	メモリ総量:16087.52MB  空きメモリ領域:3300.21MB 
+140:	タイマーの精度を検査します
+141:	精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
+141:	 パフォーマンスカウンターを使用します タイマー精度 : 10000.000000 KHz 
+143:	 
+143:	ソフトの二重起動検査... 二重起動はされていませんでした
+144:	ウインドウクラスを登録します... 登録に成功しました
+145:	ウインドウモード起動用のウインドウを作成します
+146:	ディスプレイ情報のセットアップ開始
+147:		モニターの数：1  ディスプレイデバイスの数：8
+147:		No.0  モニター名：\\.\DISPLAY1　1920x1080　32bit　144Hz  96x96dpi
+154:	ディスプレイ情報のセットアップ完了
+154:	ウインドウ矩形 ( -16, -50 )-( 1920, 1069 )
+160:	ウインドウの作成に成功しました
+161:	ウインドウを表示します
+196:	ＩＭＥを無効にしました
+199:	ウインドウスタイルをウインドウモード用に変更します... 完了
+250:	XInput DLL の読み込み中... 成功
+256:	DirectInput関係初期化処理
+257:		DirectInput8 の取得を試みます...成功
+282:			引き続き初期化処理... 初期化成功
+286:		ジョイパッドの初期化... 
+287:			XInput 対応コントローラーのチェックを開始します
+287:				XInput 対応コントローラー No.0 をチェック
+288:				XInput 対応コントローラー No.0 の接続は確認できませんでした
+289:				XInput 対応コントローラー No.1 をチェック
+290:				XInput 対応コントローラー No.1 の接続は確認できませんでした
+290:				XInput 対応コントローラー No.2 をチェック
+291:				XInput 対応コントローラー No.2 の接続は確認できませんでした
+291:				XInput 対応コントローラー No.3 をチェック
+292:				XInput 対応コントローラー No.3 の接続は確認できませんでした
+292:			XInput 対応コントローラーのチェック完了
+293:			DirectInput 対応ジョイパッドの列挙を開始します
+323:			DirectInput 対応ジョイパッドの列挙終了
+324:		ジョイパッドの初期化は正常に終了しました
+324:		マウスデバイスの初期化... 初期化成功
+325:		キーボードデバイスの初期化... 初期化成功
+330:	DirectInput 関連の初期化は正常に終了しました
+334:	WASAPI の初期化を行います
+342:		デバイス名 : ヘッドホン (final_TONALITE)
+350:		デフォルト遅延時間 : 10.000 ms
+351:		最小遅延時間       : 3.000 ms
+351:		遅延時間           : 10.000 ms
+352:		チャンネル数  　   : 2 ch
+353:		量子化ビット深度   : 32 bit
+353:		有効ビット深度　   : 32 bit
+354:		サンプリングレート : 48000 Hz
+354:		データ形式         : 浮動小数点型
+370:		動作モード         : 共有モード
+370:	WASAPI の初期化は正常に終了しました
+377:	d3d11.dll の読み込み.... 成功
+381:	dxgi.dll の読み込み.... 成功
+382:	API CreateDXGIFactory2 のアドレスを取得します.... 成功
+383:	IDXGIFactory2 を作成します.... 成功
+415:	API CreateDXGIFactory6 のアドレスを取得します.... 成功
+416:	IDXGIAdapter を列挙
+416:		Adapter No.0 Desc:NVIDIA GeForce RTX 4050 Laptop GPU  VRAM:5921MB
+417:		Adapter No.1 Desc:Intel(R) UHD Graphics  VRAM:128MB
+417:			Output Device No.0 Name:\\.\DISPLAY1 ( 0, 0 )-( 1920, 1080 )
+417:		Adapter No.2 Desc:Microsoft Basic Render Driver  VRAM:0MB
+418:	API D3D11CreateDevice のアドレスを取得します.... 成功
+418:	IDXGIAdapter を取得します.... 成功
+419:	IDXGIAdapter1 を取得します.... 成功
+421:	IDXGIAdapter2 を取得します.... 成功
+422:	IDXGIAdapter3 を取得します.... 成功
+423:	IDXGIAdapter4 を取得します.... 成功
+424:	Direct3D 11 FeatureLevel 11_0 以上を対象とします
+424:	ID3D11Device オブジェクトを取得します.... 成功
+499:	IDXGIDevice1 を取得します.... 成功
+500:	IDXGIDevice1->SetMaximunFrameLatency( 1 ); を実行しました
+500:	[ウインドウモード 1920x1080 ( 0, 0 )-( 1920, 1080 )]
+500:	IDXGISwapChain2 を作成します.... 成功
+505:	IDXGIFactory2->CreateSwapChainForHwnd の戻り値：0x00000000
+505:	IDXGIOutput を取得します.... 成功
+506:	Graphics Device:Intel(R) UHD Graphics
+507:	画面のフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+507:	16bit Zバッファフォーマットは DXGI_FORMAT_D16_UNORM です
+507:	24bit Zバッファフォーマットは DXGI_FORMAT_D24_UNORM_S8_UINT です
+507:	32bit Zバッファフォーマットは DXGI_FORMAT_D32_FLOAT です
+508:	16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
+508:	32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
+508:	アルファ付き 16bit カラーフォーマットは DXGI_FORMAT_B4G4R4A4_UNORM です
+509:	アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+509:	アルファテスト用 16bit カラーフォーマットは DXGI_FORMAT_B5G5R5A1_UNORM です
+509:	アルファテスト用 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+510:	ＤＸＴ１テクスチャフォーマットは DXGI_FORMAT_BC1_UNORM です
+510:	ＤＸＴ２テクスチャフォーマットは使えません
+510:	ＤＸＴ３テクスチャフォーマットは DXGI_FORMAT_BC2_UNORM です
+511:	ＤＸＴ４テクスチャフォーマットは使えません
+511:	ＤＸＴ５テクスチャフォーマットは DXGI_FORMAT_BC3_UNORM です
+511:	BC7_UNORM テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM です
+512:	BC7_UNORM_SRGB テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM_SRGB です
+512:	ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
+513:	ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
+513:	ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
+514:	１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
+515:	１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
+515:	１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
+516:	１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
+516:	２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
+516:	２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
+517:	２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
+517:	２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
+517:	描画用 16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
+517:	描画用 32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
+518:	描画用アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+518:	描画用 ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
+519:	描画用 ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
+519:	描画用 ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
+519:	描画用１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
+520:	描画用１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
+520:	描画用１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
+521:	描画用１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
+521:	描画用２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
+521:	描画用２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
+522:	描画用２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
+523:	描画用２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
+523:	使用する機能レベル:D3D_FEATURE_LEVEL_11_1
+523:	同時にレンダリングできるバッファの数:8
+524:	最大テクスチャサイズ　幅:16384 高さ:16384
+524:	標準描画用の頂点バッファの作成.... 成功
+526:	シェーダーコード関係の初期化.... 成功
+552:	各種シェーダー用定数バッファの作成.... 成功
+555:	各種 ID3D11InputLayout の作成.... 成功
+579:	画像の単純転送処理の初期化... 成功
+580:	深度バッファを作成します.... 成功
+582:	フォントの初期化を行います
+585:	フォントの初期化は正常に終了しました
+634:	文字コードバッファの初期化を行います... 完了しました
+648:ＤＸライブラリの初期化処理終了
+36939:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+36941:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+36971:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+36971:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+36995:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+36996:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+37005:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+37006:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+39581:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+39582:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+39586:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+39589:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+39597:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+39600:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+39606:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+39609:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+42606:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+42607:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+42613:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+42614:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+45557:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+45559:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+45561:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+45561:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+45562:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+45563:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+45564:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+45564:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+48213:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+48215:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+48221:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+48221:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+48228:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+48229:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+48230:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+48230:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+50775:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+50776:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+50777:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+50779:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+56370:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+56372:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+56377:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+56379:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+56385:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+56389:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+56394:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+56396:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+56403:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+56405:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+59187:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+59191:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+59201:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+59203:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+61665:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+61666:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+61668:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+61669:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+61672:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+61673:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+61676:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+61677:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+64069:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+64070:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+64085:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+64087:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+64092:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+64093:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+64096:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+64096:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+69231:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+69232:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+69234:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+69235:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+69236:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+69237:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+69240:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+69240:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+69243:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+69244:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+71737:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+71737:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+71740:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+71741:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+71744:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+71745:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+71747:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+71747:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+74215:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+74216:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+74226:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+74227:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+74234:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+74236:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+74241:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+74242:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+76669:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+76670:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+76676:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+76679:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+76689:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+76691:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+76700:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+76703:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+76711:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+76714:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+82451:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+82452:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+82456:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+82456:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+82461:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+82461:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+82465:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+82467:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+82472:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+82473:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+84885:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+84887:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+84902:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+84906:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+84915:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+84919:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+84928:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+84931:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+87547:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+87548:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+87552:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+87553:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+87558:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+87561:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+87569:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+87571:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+87579:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+87582:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+90079:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+90080:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+90086:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+90087:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+90092:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+90093:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+90099:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+90101:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+92457:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+92457:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+92462:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+92463:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+92471:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+92472:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+92477:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+92479:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+95097:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+95100:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+95103:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+95103:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+95105:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+95106:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+95107:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+95109:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+100357:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+100361:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+100371:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+100375:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+100389:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+100393:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+100401:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+100405:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+106141:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+106142:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+106144:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+106144:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+108951:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+108951:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+108953:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+108954:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Boar.png の分割読み込みに失敗しました
+108957:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+108960:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+108966:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+108969:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+108976:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+108979:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+114483:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+114484:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Enemy 15-3.png の分割読み込みに失敗しました
+114487:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+114489:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Bat.png の分割読み込みに失敗しました
+114490:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+114491:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\Hone.png の分割読み込みに失敗しました
+114493:グラフィックの分割に失敗しました。分割後の総サイズが分割元の画像よりも大きい指定になってしまっています。 in CreateDivGraphFromGraphImage
+114493:画像ファイル C:\Users\松下大雅\OneDrive - 学校法人 麻生塾\デスクトップ\新しいフォルダー (2)\Image\Enemy\pipo-airship01.png の分割読み込みに失敗しました
+122984:フォントの初期化を行います
+122988:フォントの初期化は正常に終了しました
+123157:d3d11.dll の解放 1
+123157:dxgi.dll の解放 1
+123160:Direct3D11 のオブジェクト数を出力
+123161:Direct3D11 のオブジェクト合計数 : 0
+123163:DirectInput 関連の終了処理... 完了
+123164:サウンド関連の終了処理... 完了
+123184:ウィンドウ関連の終了処理... ウインドウを閉じようとしています
+123195:ウインドウが破棄されようとしています
+123197:ソフトを終了する準備が整いました
+123283:完了
+123285:ＣＯＭを終了... 完了
+123285:
+123286:Alloc memory dump
+123289:	Total size:0(0.000kb)  Alloc num:0
+123289:
