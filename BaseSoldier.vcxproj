@@ -26,8 +26,10 @@
     <ClCompile Include="EnemyBat.cpp" />
     <ClCompile Include="EnemyDragon.cpp" />
     <ClCompile Include="EnemyGoast.cpp" />
+    <ClCompile Include="EnemyLizard1.cpp" />
     <ClCompile Include="EnemyShip.cpp" />
     <ClCompile Include="EnemyHone.cpp" />
+    <ClCompile Include="EnemySlime.cpp" />
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -55,8 +57,10 @@
     <ClInclude Include="EnemyBat.h" />
     <ClInclude Include="EnemyDragon.h" />
     <ClInclude Include="EnemyGoast.h" />
+    <ClInclude Include="EnemyLizard1.h" />
     <ClInclude Include="EnemyShip.h" />
     <ClInclude Include="EnemyHone.h" />
+    <ClInclude Include="EnemySlime.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />

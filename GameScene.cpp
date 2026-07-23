@@ -9,6 +9,8 @@
 #include "EnemyShip.h"
 #include "EnemyBat.h"
 #include "EnemyHone.h"
+#include "EnemySlime.h"
+#include "EnemyLizard1.h"
 #include "Src/SceneManager.h"
 #include "MenuScene.h"
 #include "Src/Fader.h"
@@ -79,13 +81,20 @@ void GameScene::GameInit(void)
 //更新処理
 void GameScene::Update(void)
 {
+	InputManager& inputIns = InputManager::GetInstance();
+	Application::GetInstance();
+
+	InputManager::JOYPAD_IN_STATE state =
+		inputIns.GetJPadInputState(InputManager::JOYPAD_NO::PAD1);
+
+
 	if (isPause_)
 	{
 		UpdatePauseMenu();
 	}
 	else
 	{
-		if (CheckHitKey(KEY_INPUT_TAB))
+		if (inputIns.IsTrgDown(KEY_INPUT_TAB))
 		{
 			isPause_ = true;
 		}
@@ -102,7 +111,8 @@ void GameScene::Update(void)
 			slowCounter--;
 		}
 
-		if (spoanCounter_ < SpoanMax_) {
+		if (spoanCounter_ < SpoanMax_)
+		{
 
 			if (Application::Player_ == 1)
 			{
@@ -129,6 +139,12 @@ void GameScene::Update(void)
 						break;
 					case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
 						e = new EnemyHone();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_SLIME_1:
+						e = new EnemySlime();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_LIZARD1_1:
+						e = new EnemyLizard1();
 						break;
 					}
 
@@ -189,6 +205,13 @@ void GameScene::Update(void)
 					case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
 						e = new EnemyHone();
 						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_SLIME_2:
+						e = new EnemySlime();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_LIZARD1_2:
+						e = new EnemyLizard1();
+						break;
+
 					}
 
 					if (e != nullptr) {
@@ -202,57 +225,8 @@ void GameScene::Update(void)
 				}
 			}
 		}
-<<<<<<< HEAD
-		else
-		{
-			//エンカウンター
-			enCounter++;
-			if (enCounter > ENCOUNT) {
-
-				spoanCounter_++;
-
-				//敵の生成
-				EnemyBase* e = nullptr;
-
-				//ランダムに種別を決める
-				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
-				EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
-
-				//種別に対応した派生クラスのインスタンスを生成
-				switch (type) {
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
-					e = new EnemyDragon();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
-					e = new EnemyGoast();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
-					e = new Boar();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
-					e = new EnemyShip();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
-					e = new EnemyBat();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
-					e = new EnemyHone();
-					break;
-				}
-
-				if (e != nullptr) {
-					e->enemyType = type;
-					e->SystemInit(this);
-					e->GameInit();
-					//可変長配列に要素を追加する
-					enemys.push_back(e);
-					enCounter = 0;           //エンカウンターをリセット
-				}
-			}
-		}
 	}
-=======
->>>>>>> f538bef42c152c796b7b5781c538222687d8a250
+
 
 
 		if (clearCounter >= SpoanMax_)
@@ -317,7 +291,6 @@ void GameScene::Update(void)
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
 
 		}
-	}
 }
 
 
@@ -619,15 +592,83 @@ void GameScene::EraseEnemys(void)
 
 void GameScene::DrawPauseMenu(void)
 {
-	DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y,
-		GetColor(100, 100, 100), true);
+	// 黒半透明オーバーレイ
+	const int overlayAlpha = 160;
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, overlayAlpha);
+	DrawBox(0, 0, Application::SCREEN_SIZE_X, Application::SCREEN_SIZE_Y, GetColor(0, 0, 0), true);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	// メニュー基本位置（左揃え）
+	const int baseX = 80;
+	const int baseY = 120;
+	const int lineHeight = 40;
+
+	// 項目テキスト（日本語 + 英語）
+	const char* menuItems[3] = {
+		"再開 resume",
+		"やり直す restart",
+		"タイトルに戻る back to title"
+	};
+
+	// 描画：選択マークとテキスト
+	for (int i = 0; i < 3; ++i)
+	{
+		int y = baseY + i * lineHeight;
+		if (i == PauseNumber_)
+		{
+			// 選択マーカー（ASCII の '>'）を左に表示
+			DrawString(baseX - 24, y, ">", GetColor(255, 200, 0));
+			// 選択中テキストは白
+			DrawString(baseX, y, menuItems[i], GetColor(255, 255, 255));
+		}
+		else
+		{
+			// 非選択テキストは薄めのグレー
+			DrawString(baseX, y, menuItems[i], GetColor(200, 200, 200));
+		}
+	}
 
 }
 
 void GameScene::UpdatePauseMenu(void)
 {
-	if (CheckHitKey(KEY_INPUT_SPACE))
-	{
-		isPause_ = false;
+	InputManager& inputIns = InputManager::GetInstance();
+
+	InputManager::JOYPAD_IN_STATE state =
+		inputIns.GetJPadInputState(InputManager::JOYPAD_NO::PAD1);
+
+	int analogKeyY = state.AKeyLY;
+	int analogKeyX = state.AKeyLX;
+
+
+	// メニュー項目数
+	const int menuCount = 3;
+
+	//上下キーで選択
+	if (inputIns.IsTrgDown(KEY_INPUT_UP) || analogKeyY < 0 && !Slide_) {
+		PauseNumber_--;
+		if (PauseNumber_ < 1)PauseNumber_ = 3;
 	}
+	if (inputIns.IsTrgDown(KEY_INPUT_DOWN) || analogKeyY > 0 && !Slide_) {
+		PauseNumber_++;
+		if (PauseNumber_ > 4)PauseNumber_ = 4;
+	}
+
+	// 決定（Enter / Space）
+	if (inputIns.IsTrgDown(KEY_INPUT_SPACE)|| inputIns.IsPadBtnTrgDown(InputManager::JOYPAD_NO::PAD1, InputManager::JOYPAD_BTN::DOWN))
+	{
+		switch (PauseNumber_)
+		{
+		case 0: // 再開 resume
+			isPause_ = false;
+			break;
+		case 1: // やり直す start over（現在のステージを再読み込み）
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_GAME);
+			break;
+		case 2: // タイトルに戻る back to title
+			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_TITLE);
+			break;
+		}
+	}
+
 }

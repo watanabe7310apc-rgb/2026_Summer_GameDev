@@ -28,6 +28,8 @@
     <ClCompile Include="Src\Vector2.cpp" />
     <ClCompile Include="Src\Vector2F.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="EnemySlime.cpp" />
+    <ClCompile Include="EnemyLizard1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
@@ -58,5 +60,7 @@
     <ClInclude Include="Src\Vector2F.h" />
     <ClInclude Include="StDefine.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="EnemySlime.h" />
+    <ClInclude Include="EnemyLizard1.h" />
   </ItemGroup>
 </Project>

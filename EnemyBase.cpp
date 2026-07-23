@@ -111,6 +111,20 @@
 				DrawEnemy(imgHone_[animIdx]);
 			}
 			break;
+			case E_ENEMY_ID_1::E_TYPE_SLIME_1:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgSlime_[animIdx]);
+			}
+			break;
+			case E_ENEMY_ID_1::E_TYPE_LIZARD1_1:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgLizard1_[animIdx]);
+			}
+			break;
 			}
 		}
 		else
@@ -160,6 +174,21 @@
 				DrawEnemy(imgHone_[animIdx]);
 			}
 			break;
+			case E_ENEMY_ID_2::E_TYPE_SLIME_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgSlime_[animIdx]);
+			}
+			break;
+			case E_ENEMY_ID_2::E_TYPE_LIZARD1_2:
+			{
+				stepAnim += ANIM_SPEED;
+				int animIdx = AsoUtility::Round(stepAnim) % 4;
+				DrawEnemy(imgLizard1_[animIdx]);
+			}
+			break;
+
 			}
 		}
 	}
@@ -181,6 +210,10 @@
 			if (imgBoar_[i] != -1) DeleteGraph(imgBoar_[i]);
 		for (int i = 0; i < 3; i++)
 			if (imgHone_[i] != -1) DeleteGraph(imgHone_[i]);
+		for (int i = 0; i < 4; i++)
+			if (imgSlime_[i] != -1) DeleteGraph(imgSlime_[i]);
+		for (int i = 0; i < 4; i++)
+			if (imgLizard1_[i] != -1) DeleteGraph(imgSlime_[i]);
 	}
 
 	//敵画像のロード
@@ -193,6 +226,7 @@
 		for (int i = 0; i < 4; i++) imgBat_[i] = -1;
 		for (int i = 0; i < 6; i++) imgBoar_[i] = -1;
 		for (int i = 0; i < 3; i++) imgHone_[i] = -1;
+		for (int i = 0; i < 4; i++) imgSlime_[i] = -1;
 
 		//ドラゴン
 		LoadDivGraph(
@@ -233,6 +267,19 @@
 		LoadDivGraph(
 			("Image/Enemy/pipo-airship01.png"),
 			3, 3, 1, size.x, size.y, imgShip_,
+			false
+		);
+
+		//スライムの画像のロード
+		LoadDivGraph(
+			("Image/Enemy/Slime.png"),
+			4, 4, 1, size.x, size.y, imgSlime_,
+			false
+		);
+		//スライムの画像のロード
+		LoadDivGraph(
+			("Image/Enemy/Enemy3.png"),
+			4, 4, 1, size.x, size.y, imgLizard1_,
 			false
 		);
 	}

@@ -16,6 +16,8 @@ public:
 		E_TYPE_GOAST_1,
 		E_TYPE_BOAR_1,
 		E_TYPE_HONE_1,
+		E_TYPE_SLIME_1,
+		E_TYPE_LIZARD1_1,
 		E_TYPE_MAX_1
 	};
 
@@ -27,6 +29,8 @@ public:
 		E_TYPE_SHIP_2,
 		E_TYPE_BAT_2,
 		E_TYPE_HONE_2,
+		E_TYPE_SLIME_2,
+		E_TYPE_LIZARD1_2,
 		E_TYPE_MAX_2
 	};
 
@@ -111,8 +115,15 @@ protected:
 
 	//船の画像のハンドル番号
 	int imgShip_[3];
+
 	//コウモリの画像のハンドル番号
 	int imgBat_[4];
+
+	//リザード1の画像のハンドル番号
+	int imgLizard1_[4];
+
+	//スライムの画像のハンドル番号
+	int imgSlime_[4];
 
 	//ガイコツの画像のハンドル番号
 	int imgHone_[3];
