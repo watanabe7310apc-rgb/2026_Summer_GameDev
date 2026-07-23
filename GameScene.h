@@ -118,6 +118,8 @@ private:
 	//マウス標準
 	int scopeImage;
 
+	//ポーズメニューの選択
+	int PauseNumber_;
 
 	//敵の出現量
 	int SpoanMax_;
@@ -130,5 +132,9 @@ private:
 
 	//ポーズ中判定
 	bool isPause_;
+
+	//カーソルの移動管理フラグ
+	bool Slide_;
+
 };
 

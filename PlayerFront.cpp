@@ -166,15 +166,6 @@ void PlayerFront::Draw(void)
 	{
 		if ((NoDamageCounter_ % 2) == 0 || !NoDamageFlg_)
 		{
-			DrawBox(pos_.x - (SIZE_X / 2), pos_.y - (SIZE_Y / 2), pos_.x + (SIZE_X / 2), pos_.y + (SIZE_Y / 2), GetColor(0, 200, 0), false);
-
-			if (isAttack_) {
-				DrawBox(apos_.x - (ATTACK_RANGE_X / 2), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X / 2), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-			}
-			else if (isStrikeAttack_) {
-				DrawBox(apos_.x - (ATTACK_RANGE_X), apos_.y - (ATTACK_RANGE_Y / 2), apos_.x + (ATTACK_RANGE_X), apos_.y + (ATTACK_RANGE_Y / 2), GetColor(200, 0, 0), false);
-
-			}
 
 			switch (animState_)
 			{

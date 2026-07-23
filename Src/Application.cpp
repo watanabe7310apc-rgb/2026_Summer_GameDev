@@ -84,7 +84,6 @@ void Application :: Run(void)
 		sceneManager.Draw();
 
 		fps_->CalcFrameRate();   //フレームレート計算
-		fps_->DrawFrameRate();   //フレームレート描画
 
 		ScreenFlip();
 	}
