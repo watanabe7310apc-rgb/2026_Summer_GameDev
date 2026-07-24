@@ -105,178 +105,127 @@ void GameScene::Update(void)
 		}
 
 
-			if (Application::Player_ == 1)
+		if (Application::Player_ == 1)
+		{
+			if (spoanCounter_ < SpoanMax_)
 			{
-				if (spoanCounter_ < SpoanMax_)
-				{
 
-					//エンカウンター
-					enCounter++;
-					if (enCounter > ENCOUNT + 20) {
+				//エンカウンター
+				enCounter++;
+				if (enCounter > ENCOUNT + 20) {
 
-						spoanCounter_++;
+					spoanCounter_++;
 
-						//敵の生成
-						EnemyBase* e = nullptr;
+					//敵の生成
+					EnemyBase* e = nullptr;
 
-						//ランダムに種別を決める
-						int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_1::E_TYPE_MAX_1) - 1);
-						EnemyBase::E_ENEMY_ID_1 type = static_cast<EnemyBase::E_ENEMY_ID_1>(rr);
+					//ランダムに種別を決める
+					int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_1::E_TYPE_MAX_1) - 1);
+					EnemyBase::E_ENEMY_ID_1 type = static_cast<EnemyBase::E_ENEMY_ID_1>(rr);
 
-						//種別に対応した派生クラスのインスタンスを生成
-						switch (type) {
-						case EnemyBase::E_ENEMY_ID_1::E_TYPE_GOAST_1:
-							e = new EnemyGoast();
-							break;
-						case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
-							e = new Boar();
-							break;
-						case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
-							e = new EnemyHone();
-							break;
-						case EnemyBase::E_ENEMY_ID_1::E_TYPE_SLIME_1:
-							e = new EnemySlime();
-							break;
-						case EnemyBase::E_ENEMY_ID_1::E_TYPE_LIZARD1_1:
-							e = new EnemyLizard1();
-							break;
-						}
+					//種別に対応した派生クラスのインスタンスを生成
+					switch (type) {
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_GOAST_1:
+						e = new EnemyGoast();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_BOAR_1:
+						e = new Boar();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_HONE_1:
+						e = new EnemyHone();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_SLIME_1:
+						e = new EnemySlime();
+						break;
+					case EnemyBase::E_ENEMY_ID_1::E_TYPE_LIZARD1_1:
+						e = new EnemyLizard1();
+						break;
+					}
 
-						if (e != nullptr) {
-							e->enemyType = type;
-							e->SystemInit(this);
-							e->GameInit();
-							//可変長配列に要素を追加する
-							enemys.push_back(e);
-							enCounter = 0;           //エンカウンターをリセット
-						}
+					if (e != nullptr) {
+						e->enemyType = type;
+						e->SystemInit(this);
+						e->GameInit();
+						//可変長配列に要素を追加する
+						enemys.push_back(e);
+						enCounter = 0;           //エンカウンターをリセット
 					}
 				}
 			}
-			else
-			{
-				if (spoanCounter_ < SpoanMax_)
-				{
-
-					//エンカウンター
-					enCounter++;
-					if (enCounter > ENCOUNT) {
-
-						spoanCounter_++;
-						//船の数を数える
-						int shipCount = 0;
-
-						for (auto enemy : enemys)
-						{
-							if (enemy->enemyType == EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2)
-							{
-								shipCount++;
-							}
-						}
-
-						//敵の生成
-						EnemyBase* e = nullptr;
-
-						//ランダムに種別を決める
-						int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
-						EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
-
-						//種別に対応した派生クラスのインスタンスを生成
-						switch (type) {
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
-							e = new EnemyDragon();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
-							e = new EnemyGoast();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
-							e = new Boar();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
-							if (shipCount < 2)
-							{
-								e = new EnemyShip();
-							}
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
-							e = new EnemyBat();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
-							e = new EnemyHone();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_SLIME_2:
-							e = new EnemySlime();
-							break;
-						case EnemyBase::E_ENEMY_ID_2::E_TYPE_LIZARD1_2:
-							e = new EnemyLizard1();
-							break;
-
-						}
-
-						if (e != nullptr) {
-							e->enemyType = type;
-							e->SystemInit(this);
-							e->GameInit();
-							//可変長配列に要素を追加する
-							enemys.push_back(e);
-							enCounter = 0;           //エンカウンターをリセット
-						}
-					}
-				}
-			}
-<<<<<<< HEAD
 		}
 		else
 		{
-			//エンカウンター
-			enCounter++;
-			if (enCounter > ENCOUNT) {
+			if (spoanCounter_ < SpoanMax_)
+			{
 
-				spoanCounter_++;
+				//エンカウンター
+				enCounter++;
+				if (enCounter > ENCOUNT) {
 
-				//敵の生成
-				EnemyBase* e = nullptr;
+					spoanCounter_++;
+					//船の数を数える
+					int shipCount = 0;
 
-				//ランダムに種別を決める
-				int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
-				EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
+					for (auto enemy : enemys)
+					{
+						if (enemy->enemyType == EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2)
+						{
+							shipCount++;
+						}
+					}
 
-				//種別に対応した派生クラスのインスタンスを生成
-				switch (type) {
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
-					e = new EnemyDragon();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
-					e = new EnemyGoast();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
-					e = new Boar();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
-					e = new EnemyShip();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
-					e = new EnemyBat();
-					break;
-				case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
-					e = new EnemyHone();
-					break;
-				}
+					//敵の生成
+					EnemyBase* e = nullptr;
 
-				if (e != nullptr) {
-					e->enemyType = type;
-					e->SystemInit(this);
-					e->GameInit();
-					//可変長配列に要素を追加する
-					enemys.push_back(e);
-					enCounter = 0;           //エンカウンターをリセット
+					//ランダムに種別を決める
+					int rr = GetRand(static_cast<int>(EnemyBase::E_ENEMY_ID_2::E_TYPE_MAX_2) - 1);
+					EnemyBase::E_ENEMY_ID_2 type = static_cast<EnemyBase::E_ENEMY_ID_2>(rr);
+
+					//種別に対応した派生クラスのインスタンスを生成
+					switch (type) {
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_DRAGON_2:
+						e = new EnemyDragon();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_GOAST_2:
+						e = new EnemyGoast();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_BOAR_2:
+						e = new Boar();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_SHIP_2:
+						if (shipCount < 2)
+						{
+							e = new EnemyShip();
+						}
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_BAT_2:
+						e = new EnemyBat();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_HONE_2:
+						e = new EnemyHone();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_SLIME_2:
+						e = new EnemySlime();
+						break;
+					case EnemyBase::E_ENEMY_ID_2::E_TYPE_LIZARD1_2:
+						e = new EnemyLizard1();
+						break;
+
+					}
+
+					if (e != nullptr) {
+						e->enemyType = type;
+						e->SystemInit(this);
+						e->GameInit();
+						//可変長配列に要素を追加する
+						enemys.push_back(e);
+						enCounter = 0;           //エンカウンターをリセット
+					}
 				}
 			}
 		}
-	}
-=======
-	}
 
->>>>>>> 2bc04a9f59721de09ddbd46699ed6cc904a6d37c
+
 
 
 		if (clearCounter >= SpoanMax_)
@@ -286,7 +235,7 @@ void GameScene::Update(void)
 			clearCounter = 0;
 			nowWave_ += 1;
 			BaseCounter = BASE_HP_MAX;
-			SpoanMax_ = nowWave_*10;
+			SpoanMax_ = nowWave_ * 10;
 			fader_->SetFade(E_STAT_FADE_OUT);
 		}
 
@@ -342,6 +291,7 @@ void GameScene::Update(void)
 			SceneManager::GetInstance().ChangeScene(E_SCENE_ID::E_SCENE_CLEAR);
 
 		}
+	}
 }
 
 
@@ -495,6 +445,36 @@ void GameScene::CollisionCheck(void)
 	for (int ii = 0; ii < size; ii++) {
 		Pos = enemys[ii]->GetEnemyPos();
 		if (!enemys[ii]->GetAlive())continue;
+
+		EnemyShip* ship = dynamic_cast<EnemyShip*>(enemys[ii]);
+
+		if (ship)
+		{
+			Bomb* bombs = ship->GetBomb();
+
+			for (int j = 0; j < ship->GetBombMax(); j++)
+			{
+				if (bombs[j].HitCheck(
+					pPos.x,
+					pPos.y,
+					pSize.x,
+					pSize.y))
+				{
+					// プレイヤーにダメージ
+					front_->SetDamage(50);
+				}
+
+				// 拠点との当たり判定
+				if (bombs[j].HitCheck(
+					bPos.x,
+					bPos.y,
+					bSize.x,
+					bSize.y))
+				{
+					BaseCounter--;   // 拠点のHPを減らす
+				}
+			}
+		}
 
 		Vector2 ePos = AsoUtility::Round(Pos);
 		Vector2 eSize = enemys[ii]->GetEnemySize();

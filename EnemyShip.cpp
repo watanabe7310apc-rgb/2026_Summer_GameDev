@@ -6,6 +6,8 @@ void EnemyShip::SetEnemyParam(void)
 {
 	//敵の画像サイズ
 	size = { 64,62 };
+
+	enemyType = E_ENEMY_ID_2::E_TYPE_SHIP_2;
 	//初期位置
 	enemySpoanPoint = GetRand(1);
 
@@ -23,7 +25,7 @@ void EnemyShip::SetEnemyParam(void)
 	hp = hpMax = 20;
 
 	// 爆弾の発射間隔
-	bombTimer = 120;
+	bombTimer = 150;
 }
 
 void EnemyShip::Update()
@@ -48,7 +50,7 @@ void EnemyShip::Update()
 
 	if (bombTimer <= 0)
 	{
-		bombTimer = 120;
+		bombTimer = 150;
 
 		for (int i = 0; i < BOMB_MAX; i++)
 		{

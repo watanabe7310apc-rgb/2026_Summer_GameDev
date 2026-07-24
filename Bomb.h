@@ -17,11 +17,13 @@ private:
     VECTOR pos;
     float speed;
     bool isAlive;
-
+    bool isExplosion;
     bool isLeftDir;
 
     // アニメーション
-    static const int ANIM_MAX = 10;
+    static const int ANIM_MAX = 9;
+    static const int EXP_ANIM_MAX = 12;
     int image[ANIM_MAX];
+    int explosionImage[EXP_ANIM_MAX];
     float anim;
 };

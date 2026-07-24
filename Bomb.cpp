@@ -22,6 +22,18 @@ Bomb::Bomb()
         40,
         image
     );
+
+    isExplosion = false;
+
+    LoadDivGraph(
+        "Image/Explosion.png",
+        EXP_ANIM_MAX,
+        EXP_ANIM_MAX,
+        1,
+        128,
+        128,
+        explosionImage
+    );
 }
 
 void Bomb::Shot(float x, float y,bool left)
@@ -30,6 +42,7 @@ void Bomb::Shot(float x, float y,bool left)
     pos.y = y;
 
     isAlive = true;
+    isExplosion = false;
 
     anim = 0;
 
@@ -38,7 +51,7 @@ void Bomb::Shot(float x, float y,bool left)
 
 bool Bomb::HitCheck(float playerX, float playerY, float playerW, float playerH)
 {
-    if (!isAlive) return false;
+    if (!isAlive || isExplosion) return false;
 
     float bombLeft = pos.x - 24;
     float bombRight = pos.x + 24;
@@ -55,7 +68,8 @@ bool Bomb::HitCheck(float playerX, float playerY, float playerW, float playerH)
         bombBottom > playerTop &&
         bombTop < playerBottom)
     {
-        isAlive = false;
+        isExplosion = true;
+        anim = 0;
         return true;
     }
 
@@ -66,13 +80,24 @@ void Bomb::Update()
 {
     if (!isAlive) return;
 
-    pos.y += speed;
-
-    anim += 0.2f;
-
-    if (anim >= ANIM_MAX)
+    if (!isExplosion)
     {
-        anim = 0;
+        pos.y += speed;
+
+        anim += 0.2f;
+
+        if (anim >= ANIM_MAX)
+            anim = 0;
+    }
+    else
+    {
+        anim += 0.3f;
+
+        if (anim >= EXP_ANIM_MAX)
+        {
+            isAlive = false;
+            isExplosion = false;
+        }
     }
 }
 
@@ -80,13 +105,27 @@ void Bomb::Draw()
 {
     if (!isAlive) return;
 
-    DrawRotaGraph(
-        (int)pos.x,
-        (int)pos.y,
-        1.5,
-        0.0,
-        image[(int)anim],
-        TRUE,
-        isLeftDir
-    );
+    if (isExplosion)
+    {
+        DrawRotaGraph(
+            (int)pos.x,
+            (int)pos.y,
+            1.5,
+            0.0,
+            explosionImage[(int)anim],
+            TRUE
+        );
+    }
+    else
+    {
+        DrawRotaGraph(
+            (int)pos.x,
+            (int)pos.y,
+            1.5,
+            0.0,
+            image[(int)anim],
+            TRUE,
+            isLeftDir
+        );
+    }
 }
