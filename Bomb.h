@@ -13,6 +13,10 @@ public:
     bool GetAlive() { return isAlive; }
 
     bool HitCheck(float playerX, float playerY, float playerW, float playerH);
+
+    //画像の読み込み
+   static void LoadGraph(void);
+
 private:
     VECTOR pos;
     float speed;
@@ -23,7 +27,7 @@ private:
     // アニメーション
     static const int ANIM_MAX = 9;
     static const int EXP_ANIM_MAX = 12;
-    int image[ANIM_MAX];
-    int explosionImage[EXP_ANIM_MAX];
+    static int image[ANIM_MAX];
+    static int explosionImage[EXP_ANIM_MAX];
     float anim;
 };

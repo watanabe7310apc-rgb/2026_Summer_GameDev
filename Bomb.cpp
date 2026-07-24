@@ -1,6 +1,9 @@
 #include "Bomb.h"
 #include "Src/Application.h"
 
+int Bomb::image[ANIM_MAX] = { 0 };
+int Bomb::explosionImage[EXP_ANIM_MAX] = { 0 };
+
 Bomb::Bomb()
 {
     isAlive = false;
@@ -8,32 +11,8 @@ Bomb::Bomb()
 
     anim = 0;
 
-    for (int i = 0; i < ANIM_MAX; i++)
-    {
-        image[i] = -1;
-    }
-
-    LoadDivGraph(
-        "Image/Bomb.png",
-        ANIM_MAX,
-        ANIM_MAX,
-        1,
-        48,
-        40,
-        image
-    );
-
     isExplosion = false;
 
-    LoadDivGraph(
-        "Image/Explosion.png",
-        EXP_ANIM_MAX,
-        EXP_ANIM_MAX,
-        1,
-        128,
-        128,
-        explosionImage
-    );
 }
 
 void Bomb::Shot(float x, float y,bool left)
@@ -74,6 +53,34 @@ bool Bomb::HitCheck(float playerX, float playerY, float playerW, float playerH)
     }
 
     return false;
+}
+
+void Bomb::LoadGraph(void)
+{
+    if (image[0] == 0 && explosionImage[0] == 0)
+    {
+        LoadDivGraph(
+            "Image/Bomb.png",
+            ANIM_MAX,
+            ANIM_MAX,
+            1,
+            48,
+            40,
+            image
+        );
+
+
+        LoadDivGraph(
+            "Image/Explosion.png",
+            EXP_ANIM_MAX,
+            EXP_ANIM_MAX,
+            1,
+            128,
+            128,
+            explosionImage
+        );
+    }
+
 }
 
 void Bomb::Update()
